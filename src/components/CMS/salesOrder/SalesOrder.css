@@ -1,0 +1,324 @@
+.salesOrder-container {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  overflow-x: auto; /* Add horizontal scrollbar if content overflows */
+  /* Ensure that the container has a defined width or max-width if necessary */
+  width: 100%; /* For example, make the container full width of its parent */
+  }
+  
+  /* Header row styles */
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Heading styles */
+  .header-row h1 {
+    font-size: 24px;
+    color: rgb(248, 130, 46);
+  }
+
+  /* Create button styles */
+  .header-row button {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .header-row button:hover {
+    background-color: #e66d00;
+  }
+      
+  /* Heading styles */
+  .salesOrder-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: rgb(248, 130, 46);
+    }
+  
+  /* Search container styles */
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(248, 130, 46);
+    margin-right: 10px;
+    width: 150px;
+    font-size: 14px; 
+  }
+  
+  .search-container button {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px; 
+  }
+  
+  .search-container button:hover {
+    background-color: #e66d00;
+  }
+  
+  /* .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+    width: 200px;
+  }
+  
+  .search-container button {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-container button:hover {
+    background-color: #e66d00;
+  } */
+  
+  /* Table styles */
+  .salesOrder-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+/* Table header styles */
+.salesOrder-table thead {
+  background-color: #ee822e; /* Main orange color for the table header */
+  color: #fff;
+}
+
+.salesOrder-table thead tr th {
+  padding: 10px;
+  text-align: center; /* Align text to the left or center as per your design */
+  font-weight: bold;
+  border-bottom: 2px solid #fff; /* Add a bottom border to separate header row */
+}
+
+/* Add a bottom border for body rows !!!!!!!!!!!!!!!*/
+.salesOrder-table tbody tr td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd; 
+}
+
+/* Alternate row background color for better readability !!!!!!!!!!!!!!!!!!!*/
+.salesOrder-table tbody tr:nth-child(even) {
+  background-color: #fbf0dd; 
+  /* fbf0dd  f2f2f2 f9e8e8*/
+}
+
+/* Hover effect for table rows !!!!!!!!!!!!!!!!!!!!*/
+.salesOrder-table tbody tr:hover {
+  background-color: #f2f2f2; 
+  cursor: pointer;
+}
+
+.salesOrder-table th {
+  background-color: rgb(248, 130, 46);
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+}
+
+  /* .salesOrder-table td {
+    border: 1px solid rgb(248, 130, 46);
+    padding: 10px;
+    text-align: center;
+  } */
+  
+  /* Edit and Delete button styles */
+  .button-secondary,
+  .button-danger {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+  }
+  
+  .button-secondary:hover,
+  .button-danger:hover {
+    background-color: #e66d00;
+  }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    user-select: none; /* Prevent text selection */
+  }
+  
+  .pagination {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .page-link {
+    padding: 8px 16px;
+    margin: 0 5px; /* Add some space between page links */
+    border-radius: 20px; /* Rounded edges for pill-like shapes */
+    border: 1px solid #EE822E; /* Orange border */
+    color: #EE822E; /* Orange text */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold; /* Make the text bold */
+    background-color: #fff; /* White background */
+  }
+  
+  .page-link:hover,
+  .page-link:focus {
+    background-color: #EE822E; /* Orange background on hover/focus */
+    color: #fff; /* White text on hover/focus */
+    outline: none; /* Remove focus outline */
+  }
+  
+  .page-link-disabled {
+    color: #ccc; /* Grey text for disabled */
+    cursor: not-allowed;
+    background-color: #f9f9f9; /* Light background for disabled */
+    border-color: #ccc; /* Grey border for disabled */
+  }
+  
+  .page-link-active {
+    background-color: #EE822E; /* Orange background for the active page */
+    color: #fff; /* White text for the active page */
+    pointer-events: none; /* Disable pointer events for the active page */
+  }
+  
+  /* Custom styling for the Previous and Next buttons */
+  .page-link-previous,
+  .page-link-next {
+    background-color: transparent;
+    color: #EE822E;
+    transition: all 0.3s ease;
+  }
+  
+  .page-link-previous:hover,
+  .page-link-next:hover {
+    background-color: #fff;
+    color: #EE822E;
+    border-color: #EE822E;
+  }
+  
+  /* Adjustments for mobile screens */
+  @media (max-width: 768px) {
+    .page-link {
+      padding: 8px 12px; /* Smaller padding on mobile */
+    }
+  }
+    
+  .create-salesOrder-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* Increased width for more content */
+    background-color: #fff;
+    padding: 30px; /* Increased padding for more space */
+    border-radius: 10px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure modal is above other content */
+    border: 1px solid #EE822E; /* Main orange color for border */
+  }
+  
+  /* The background overlay */
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Darker semi-transparent backdrop */
+    z-index: 999; /* Behind the modal, but above other content */
+  }
+  
+  /* Style for buttons inside the modal */
+  .create-salesOrder-modal button {
+    margin-top: 15px;
+    padding: 10px 20px; /* Larger padding for bigger buttons */
+    border: none;
+    border-radius: 5px;
+    background-color: #EE822E; /* Main orange color for buttons */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px; /* Space between buttons */
+  }
+  
+  .create-salesOrder-modal button:hover {
+    background-color: #d67620; /* Slightly darker orange on hover */
+  }
+  
+  /* Cancel button with a style that distinguishes it from the Create button */
+  .create-salesOrder-modal button.cancel-button {
+    background-color: #fff;
+    color: #EE822E; /* Main orange color for text */
+    border: 1px solid #EE822E; /* Main orange color for border */
+  }
+  
+  .create-salesOrder-modal button.cancel-button:hover {
+    background-color: #f2f2f2; /* Light grey for hover */
+  }
+  
+  /* Hide scrollbar when modal is open and prevent background scrolling */
+  body.modal-open {
+    overflow: hidden;
+  }
+  
+  /* Input field styles */
+  .create-salesOrder-modal input[type="text"] {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px; /* Space between input field and buttons */
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+  }
+  
+  .create-salesOrder-modal input[type="text"]:focus {
+    border-color: #EE822E; /* Main orange color for input focus */
+    outline: none; /* Remove the default focus outline */
+  }
+    
+  .td-button {
+    white-space: nowrap; /* Prevents wrapping of contents */
+  }
+  

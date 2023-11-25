@@ -1,0 +1,37 @@
+.product-main-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2px;
+  margin-bottom: 40px; /* Add margin at the bottom to create a gap */
+}
+
+.load-more-btn {
+  padding: 10px 20px;
+  background-color: #f0f0f0; /* Light grey background */
+  color: #333; /* Dark text color for contrast */
+  font-weight: bold;
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.load-more-btn:hover {
+  background-color: #e0e0e0; /* Slightly darker on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+.load-more-btn:active {
+  transform: translateY(2px); /* Slight push effect when clicked */
+}

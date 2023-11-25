@@ -1,0 +1,265 @@
+.supplier-container {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #000;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Header row styles */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Heading styles */
+  .header-row h1 {
+    font-size: 24px;
+    color: rgb(248, 130, 46);
+  }
+  
+  /* Create button styles */
+  .header-row button {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .header-row button:hover {
+    background-color: #e66d00;
+  }
+  
+  /* Heading styles */
+  .supplier-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: rgb(248, 130, 46);
+  }
+  
+  /* Search container styles */
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(248, 130, 46);
+    margin-right: 10px;
+    width: 150px;
+    font-size: 14px; 
+  }
+  
+  .search-container button {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px; 
+  }
+  
+  .search-container button:hover {
+    background-color: #e66d00;
+  }
+  
+  /* .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+    width: 200px;
+  }
+  
+  .search-container button {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-container button:hover {
+    background-color: #e66d00;
+  } */
+  
+  /* Table styles */
+  .supplier-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .supplier-table th {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+  }
+  
+  /* .supplier-table td {
+    border: 1px solid rgb(248, 130, 46);
+    padding: 10px;
+    text-align: center;
+  } */
+  
+  /* Edit and Delete button styles */
+  .button-secondary,
+  .button-danger {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+  }
+  
+  .button-secondary:hover,
+  .button-danger:hover {
+    background-color: #e66d00;
+  }
+  
+  /* Pagination container styles */
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Pagination styles */
+  .pagination {
+    display: flex;
+    list-style: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .page-item {
+    margin: 0;
+  }
+  
+  .page-link {
+    color: rgb(248, 130, 46);
+    border: 1px solid rgb(248, 130, 46);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 0 3px;
+  }
+  
+  .page-link:hover {
+    background-color: rgb(248, 130, 46);
+    color: white;
+  }
+  
+  .page-link-active {
+    background-color: rgb(248, 130, 46);
+    color: white;
+    border: 1px solid rgb(248, 130, 46);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 0 3px;
+  }
+  
+  .page-link-disabled {
+    color: lightgray;
+    cursor: not-allowed;
+  }
+  
+  .create-supplier-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* Increased width for more content */
+    background-color: #fff;
+    padding: 30px; /* Increased padding for more space */
+    border-radius: 10px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure modal is above other content */
+    border: 1px solid #EE822E; /* Main orange color for border */
+  }
+  
+  /* The background overlay */
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Darker semi-transparent backdrop */
+    z-index: 999; /* Behind the modal, but above other content */
+  }
+  
+  /* Style for buttons inside the modal */
+  .create-supplier-modal button {
+    margin-top: 15px;
+    padding: 10px 20px; /* Larger padding for bigger buttons */
+    border: none;
+    border-radius: 5px;
+    background-color: #EE822E; /* Main orange color for buttons */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px; /* Space between buttons */
+  }
+  
+  .create-supplier-modal button:hover {
+    background-color: #d67620; /* Slightly darker orange on hover */
+  }
+  
+  /* Cancel button with a style that distinguishes it from the Create button */
+  .create-supplier-modal button.cancel-button {
+    background-color: #fff;
+    color: #EE822E; /* Main orange color for text */
+    border: 1px solid #EE822E; /* Main orange color for border */
+  }
+  
+  .create-supplier-modal button.cancel-button:hover {
+    background-color: #f2f2f2; /* Light grey for hover */
+  }
+  
+  /* Hide scrollbar when modal is open and prevent background scrolling */
+  body.modal-open {
+    overflow: hidden;
+  }
+  
+  /* Input field styles */
+  .create-supplier-modal input[type="text"] {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px; /* Space between input field and buttons */
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+  }
+  
+  .create-supplier-modal input[type="text"]:focus {
+    border-color: #EE822E; /* Main orange color for input focus */
+    outline: none; /* Remove the default focus outline */
+  }
+  
+  

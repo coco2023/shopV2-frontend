@@ -1,0 +1,121 @@
+/* body {
+  text-align: center;
+  padding: 40px 0;
+  background: #ebf0f5;
+} */
+
+.successPage_a {
+  color: rgb(250, 135, 145);
+}
+
+.successPage_h1 {
+  color: rgb(250, 135, 145);
+  font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.successPage_p {
+  color: #333;
+  line-height: 1.6;
+  font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  margin: 0;
+}
+i {
+  color: #9abc66;
+  font-size: 100px;
+  line-height: 200px;
+  margin-left: -15px;
+} 
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 60%;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.checkmark {
+  display: block;
+  font-size: 100px;
+  margin: 20px auto;
+  color: rgb(250, 135, 145);
+}
+
+#checkout-details {
+  display: flex;
+  justify-content: center; /* This will center horizontally */
+  align-items: center; /* This will center vertically */
+  width: 100%; /* Take full width */
+  height: 100%; /* Take full height */
+}
+
+.session-details {
+  width: 70%; /* Adjust as needed */
+  border: 2px solid #d1d1d1;
+  padding: 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  background-color: #fff; /* Ensure the background is white or any color of your preference */
+}
+
+.session-details h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1px;
+  padding: 1px 0;
+}
+
+.detail-item-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1px;
+  padding: 1px 0;
+  border-bottom: 2px solid #d1d1d1;
+}
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.description {
+  font-weight: bold;
+  font-size: 18px; /* Adjust to the font size you prefer */
+  color: #333;
+}
+
+.value {
+  color: #555;
+  word-wrap: break-word;
+  font-size: 17px; /* Adjust to the font size you prefer */
+  overflow-wrap: break-word;
+  max-width: 230px; /* Set an appropriate max-width for your layout. Adjust as needed. */
+  text-align: right;
+}
+.id-value {
+  font-size: 17px; /* Adjust this value as per your requirement */
+}
+
+.download-btn {
+  background-color: rgb(250, 135, 145); /* Main color as per your preference */
+  color: #fff; /* Text color */
+  border: none; /* Removing default border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding inside the button */
+  font-size: 1.2em; /* Text size */
+  cursor: pointer; /* Hand cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
+
+#download-btn:hover {
+  background-color: rgb(230, 115, 125);
+}

@@ -1,0 +1,89 @@
+.product-card {
+  width: 300px; /* Adjust width as needed */
+  height: auto; /* Height is adjusted based on content */
+  border: 1px solid #eee;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.product-image {
+  width: 100%; /* Set image width */
+  height: auto; /* Set image height */
+  object-fit: cover; /* This will ensure the image covers the area without stretching */
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  font-size: 0.9em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 8px; /* Add margin if needed */
+  /* Set a width or max-width if you want to limit the element's width */
+  width: 100%; /* It will occupy the full width of the card */
+}
+
+.product-pricing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.product-price {
+  font-weight: bold;
+  color: #333;
+}
+
+.product-discount {
+  color: #d9534f;
+}
+
+.product-sales {
+  font-size: 0.8em;
+}
+
+/* .product-add-to-cart {
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+} */
+
+.product-meta {
+  font-size: 0.8em;
+  margin: 8px 0;
+}
+
+.product-rating {
+  font-size: 0.9em;
+  margin: 8px 0;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px; /* Decrease gap between buttons here */
+}
+
+.product-add-to-cart {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0; /* Ensure there's no additional margin */
+}
+
+.cart-icon {
+  width: 24px;
+  height: 24px;
+}

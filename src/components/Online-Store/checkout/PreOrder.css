@@ -1,0 +1,327 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 0;
+  }
+  
+  .pre-order-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    padding: 1rem 0;
+  }
+  
+  .order-summary {
+    margin-bottom: 2rem;
+  }
+  
+  .order-summary table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+  }
+  
+  .order-summary th, .order-summary td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .order-summary th {
+    background-color: #fafafa;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+  }
+  
+  .product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .order-total {
+    padding: 10px 0;
+  }
+  
+  .order-total p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .pre-order-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .pre-order-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+  .place-order-button {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .place-order-button button {
+    padding: 1rem 2rem;
+    background-color: #ffa500; /* Orange color */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+  }
+  
+  .place-order-button button:hover {
+    background-color: #e69500; /* Darker shade of orange */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .pre-order-container {
+      width: calc(100% - 2rem);
+    }
+  
+    .pre-order-form {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .order-summary {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .order-summary h3 {
+    text-align: left;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .coupon-code {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .coupon-code input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 70%;
+  }
+  
+  .coupon-code button {
+    padding: 10px 20px;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .summary-details {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+  }
+  
+  .detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .detail span {
+    font-size: 14px;
+  }
+  
+  .total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .plant-tree {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .plant-tree input {
+    margin-right: 10px;
+  }
+  
+  .submit-order-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: white;
+    margin-top: 20px;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .submit-order-btn:hover {
+    background-color: #e69500;
+  }
+  
+  .checkout-page {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1700px;
+    margin: auto;
+  }
+  
+  .product-info-edit {
+    flex: 1;
+    margin-right: 20px; /* Spacing between columns */
+  }
+  
+  .product-item {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+  
+  .product-item img {
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+  }
+  
+  .product-details p {
+    margin: 0;
+    padding: 5px 0;
+  }
+  
+  .product-details select {
+    padding: 5px;
+    margin-top: 10px;
+  }
+  
+  .order-summary {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .checkout-page {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .left-basic-info {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .info-section {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .info-section h3 {
+    margin-bottom: 10px;
+  }
+  
+  .info-section p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .info-section button {
+    background: none;
+    border: none;
+    color: #007bff;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .product-info-edit {
+    /* Styles for product info section */
+  }
+  
+  .right-product-info {
+    flex: 1;
+  }
+  
+  .order-summary {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  /* Rest of your order summary CSS */
+  /* ... */
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .checkout-page {
+      flex-direction: column;
+    }
+  
+    .left-basic-info,
+    .right-product-info {
+      width: 100%;
+    }
+  
+    .left-basic-info {
+      margin-bottom: 20px;
+    }
+  }
+  
