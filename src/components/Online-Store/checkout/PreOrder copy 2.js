@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { createSalesOrder } from "./CheckoutUtils.js";
 import { processPaymentWithStripe } from "./CheckoutUtils.js";
-import { processPaymentWithPayPal } from "./CheckoutUtils.js";
 import "./PreOrder.css";
 import { useRef } from "react";
 import { loadStripe } from "@stripe/stripe-js";
@@ -36,7 +35,7 @@ const PreOrder = () => {
     shippingAddress: "1010 W Green St",
     billingAddress: "1010 W Green St",
     orderStatus: "PROCESSING",
-    paymentMethod: "PayPal",
+    paymentMethod: "Stripe",
     customerName: "tester12",
     customerEmail: "test@gmail.com",
     paymentProcessed: true,
@@ -129,123 +128,75 @@ const PreOrder = () => {
     }
   }, [productInfo]);
 
-  // // Function to create a SalesOrder and SalesOrderDetail based on productInfo
-  // const handlePlaceOrder = async () => {
-  //   // const stripe = await stripePromise;
-  //   if (!stripe || !elements) {
-  //     // Stripe.js has not loaded yet. Make sure to disable form submission until Stripe.js has loaded.
-  //     return;
-  //   }
-
-  //   const cardElement = elements.getElement(CardElement);
-  //   const { error, token } = await stripe.createToken(cardElement);
-
-  //   if (error) {
-  //     console.log("Error:", error);
-  //     return;
-  //   }
-
-  //   // create SalesOrder
-  //   const salesOrder = createSalesOrder(preOrderData, preOrderDetailData);
-  //   console.log("salesOrder: ", salesOrder);
-  //   console.log("SalesOrder and SalesOrderDetail created successfully.");
-
-  //   // Stripe Payment
-  //   await processPaymentWithStripe(token.id, salesOrder);
-  //   console.log("Payment Success!");
-  // };
-
   const StripeCheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
 
     // Function to create a SalesOrder and SalesOrderDetail based on productInfo
     const handlePlaceOrder = async () => {
-      if (preOrderData.paymentMethod === "Stripe") {
-        if (!stripe || !elements) {
-          return;
-        }
-
-        const cardElement = elements.getElement(CardElement);
-        const { error, token } = await stripe.createToken(cardElement);
-
-        if (error) {
-          console.log("Error:", error);
-          return;
-        }
-
-        // create SalesOrder
-        const salesOrderResponse = createSalesOrder(
-          preOrderData,
-          preOrderDetailData
-        );
-        console.log("salesOrder: ", salesOrderResponse);
-        console.log("SalesOrder and SalesOrderDetail created successfully.");
-
-        let finalSalesDetailData;
-        salesOrderResponse
-          .then(({ salesOrderData, salesOrderDetailData }) => {
-            console.log("finalSalesOrder: ", salesOrderData);
-            console.log("finalSalesOrderDetail: ", salesOrderDetailData);
-            finalSalesDetailData = salesOrderDetailData;
-            // Process payment with Stripe using finalSalesOrder
-            return processPaymentWithStripe(token.id, salesOrderData);
-          })
-          .then(({ responseData, salesOrder }) => {
-            console.log(
-              "Payment processed successfully:",
-              responseData,
-              salesOrder
-            );
-            navigate("/payment-success", {
-              state: {
-                paymentInfo: responseData,
-                orderInfo: salesOrder,
-                orderDetailInfo: finalSalesDetailData,
-              },
-            });
-          })
-          .catch((error) => {
-            console.error("An error occurred:", error);
-          });
-      } else if (preOrderData.paymentMethod === "PayPal") {
-        console.log("payPal:")
-        // create SalesOrder
-        const salesOrderResponse = createSalesOrder(
-          preOrderData,
-          preOrderDetailData
-        );
-        console.log("salesOrder: ", salesOrderResponse);
-        console.log("SalesOrder and SalesOrderDetail created successfully.");
-
-        let finalSalesDetailData;
-        salesOrderResponse
-          .then(async ({ salesOrderData, salesOrderDetailData }) => {
-            console.log("finalSalesOrder: ", salesOrderData);
-            console.log("finalSalesOrderDetail: ", salesOrderDetailData);
-            finalSalesDetailData = salesOrderDetailData;
-            // Process payment with Stripe using finalSalesOrder
-            // return processPaymentWithPayPal(salesOrderData);
-            const redirectUrl = await processPaymentWithPayPal(salesOrderData);
-            console.log("PayPal responseData: " + redirectUrl);
-            window.location.href = redirectUrl; // Redirect to PayPal
-
-          })
-          // .then(() => {
-          //   console.log("PayPal Payment processed successfully:");
-          // })
-          .catch((error) => {
-            console.error("An error occurred:", error);
-          });
+      if (!stripe || !elements) {
+        return;
       }
+
+      const cardElement = elements.getElement(CardElement);
+      const { error, token } = await stripe.createToken(cardElement);
+
+      if (error) {
+        console.log("Error:", error);
+        return;
+      }
+
+      // create SalesOrder
+      const salesOrderResponse = createSalesOrder(
+        preOrderData,
+        preOrderDetailData
+      );
+      console.log("salesOrder: ", salesOrderResponse);
+      console.log("SalesOrder and SalesOrderDetail created successfully.");
+
+      let finalSalesDetailData;
+      salesOrderResponse
+        .then(({ salesOrderData, salesOrderDetailData }) => {
+          console.log("finalSalesOrder: ", salesOrderData);
+          console.log("finalSalesOrderDetail: ", salesOrderDetailData);
+          finalSalesDetailData = salesOrderDetailData;
+          // Process payment with Stripe using finalSalesOrder
+          return processPaymentWithStripe(token.id, salesOrderData);
+        })
+        .then(({responseData, salesOrder}) => {
+          console.log("Payment processed successfully:", responseData, salesOrder);
+          navigate('/payment-success', {
+            state: {
+              paymentInfo: responseData ,
+              orderInfo: salesOrder,
+              orderDetailInfo: finalSalesDetailData,
+            }
+          });
+        })
+        .catch((error) => {
+          console.error("An error occurred:", error);
+        });
+
     };
 
     return (
       <div className="info-section">
         {preOrderData.paymentMethod === "Stripe" && <CardElement />}
+
         <button onClick={handlePlaceOrder}>Place Order</button>
       </div>
     );
+  };
+
+  const CheckoutComponent = () => {
+    // ... existing state and functions ...
+
+    const handlePayment = () => {
+      if (preOrderData.paymentMethod === "PayPal") {
+        initiatePayPalPayment(preOrderData);
+      }
+      // Handle other payment methods...
+    };
   };
 
   return (
@@ -429,6 +380,9 @@ const PreOrder = () => {
         {/* <button className="submit-order-btn" onClick={() => handlePlaceOrder()}>
           Submit order
         </button> */}
+        <button onClick={handlePayment}>
+          {preOrderData.paymentMethod === "PayPal" ? "Pay with PayPal" : "Pay"}
+        </button>
 
         {/* <Elements stripe={stripePromise}>
           <div className="info-section">
