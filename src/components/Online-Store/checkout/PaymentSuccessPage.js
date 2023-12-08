@@ -1,11 +1,17 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import "./PaymentSuccessPage.css";
 
 const PaymentSuccessPage = () => {
-  const location = useLocation();
-  const { paymentInfo, orderInfo, orderDetailInfo } = location.state || {};
-  console.log("paymentInfo: ", paymentInfo, orderDetailInfo, orderInfo);
+  const paymentData = JSON.parse(sessionStorage.getItem("paymentData"));
+  const { paymentInfo, orderInfo, orderDetailInfo } = paymentData;
+
+  console.log(
+    "***successPage: paymentInfo: ",
+    paymentInfo,
+    orderDetailInfo,
+    orderInfo
+  );
 
   return (
     <div className="payment-success-container">
@@ -78,7 +84,7 @@ const PaymentSuccessPage = () => {
 
         <div className="payment-method">
           <h2>Payment method</h2>
-          <p>{paymentInfo.paymentMethod}</p>
+          <p>{paymentInfo.method}</p>
           <h2>Transaction Id</h2>
           <p>{paymentInfo.transactionId}</p>
         </div>

@@ -32,7 +32,7 @@ const PreOrder = () => {
     salesOrderSn: "",
     customerId: "12",
     orderDate: new Date().toISOString(),
-    totalAmount: 0,
+    totalAmount: null,
     shippingAddress: "1010 W Green St",
     billingAddress: "1010 W Green St",
     orderStatus: "PROCESSING",
@@ -129,32 +129,6 @@ const PreOrder = () => {
     }
   }, [productInfo]);
 
-  // // Function to create a SalesOrder and SalesOrderDetail based on productInfo
-  // const handlePlaceOrder = async () => {
-  //   // const stripe = await stripePromise;
-  //   if (!stripe || !elements) {
-  //     // Stripe.js has not loaded yet. Make sure to disable form submission until Stripe.js has loaded.
-  //     return;
-  //   }
-
-  //   const cardElement = elements.getElement(CardElement);
-  //   const { error, token } = await stripe.createToken(cardElement);
-
-  //   if (error) {
-  //     console.log("Error:", error);
-  //     return;
-  //   }
-
-  //   // create SalesOrder
-  //   const salesOrder = createSalesOrder(preOrderData, preOrderDetailData);
-  //   console.log("salesOrder: ", salesOrder);
-  //   console.log("SalesOrder and SalesOrderDetail created successfully.");
-
-  //   // Stripe Payment
-  //   await processPaymentWithStripe(token.id, salesOrder);
-  //   console.log("Payment Success!");
-  // };
-
   const StripeCheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
@@ -189,21 +163,15 @@ const PreOrder = () => {
             console.log("finalSalesOrderDetail: ", salesOrderDetailData);
             finalSalesDetailData = salesOrderDetailData;
             // Process payment with Stripe using finalSalesOrder
-            return processPaymentWithStripe(token.id, salesOrderData);
+            processPaymentWithStripe(token.id, salesOrderData, salesOrderDetailData);
           })
           .then(({ responseData, salesOrder }) => {
-            console.log(
-              "Payment processed successfully:",
-              responseData,
-              salesOrder
-            );
-            navigate("/payment-success", {
-              state: {
-                paymentInfo: responseData,
-                orderInfo: salesOrder,
-                orderDetailInfo: finalSalesDetailData,
-              },
-            });
+            sessionStorage.setItem('paymentData', JSON.stringify({
+              paymentInfo: responseData,
+              orderInfo: salesOrder,
+              orderDetailInfo: finalSalesDetailData,
+            }));            
+            navigate("/payment-success");
           })
           .catch((error) => {
             console.error("An error occurred:", error);
@@ -218,22 +186,16 @@ const PreOrder = () => {
         console.log("salesOrder: ", salesOrderResponse);
         console.log("SalesOrder and SalesOrderDetail created successfully.");
 
-        let finalSalesDetailData;
         salesOrderResponse
           .then(async ({ salesOrderData, salesOrderDetailData }) => {
-            console.log("finalSalesOrder: ", salesOrderData);
-            console.log("finalSalesOrderDetail: ", salesOrderDetailData);
-            finalSalesDetailData = salesOrderDetailData;
-            // Process payment with Stripe using finalSalesOrder
-            // return processPaymentWithPayPal(salesOrderData);
+            // Store data in session storage
+            sessionStorage.setItem('salesOrderData', JSON.stringify(salesOrderData));
+            sessionStorage.setItem('salesOrderDetailData', JSON.stringify(salesOrderDetailData));
+
             const redirectUrl = await processPaymentWithPayPal(salesOrderData);
-            console.log("PayPal responseData: " + redirectUrl);
             window.location.href = redirectUrl; // Redirect to PayPal
 
           })
-          // .then(() => {
-          //   console.log("PayPal Payment processed successfully:");
-          // })
           .catch((error) => {
             console.error("An error occurred:", error);
           });
@@ -292,34 +254,6 @@ const PreOrder = () => {
                     )
                   )}
                 </select>
-                {/* <input
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  list="quantity-options"
-                  value={preOrderDetailData.quantity}
-                  onChange={handleInputPreOrderDetailChange}
-                  min="1"
-                  max={Math.min(productInfo.stockQuantity, 100)}
-                />
-
-                <datalist id="quantity-options">
-                  {Array.from(
-                    { length: Math.min(productInfo.stockQuantity, 100) },
-                    (_, index) => (
-                      <option key={index + 1} value={index + 1}>
-                        {index + 1}
-                      </option>
-                    )
-                  )}
-                </datalist> */}
-                {/* <input
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  value={preOrderDetailData.quantity}
-                  onChange={handleInputPreOrderDetailChange}
-                /> */}
               </div>
             </div>
           )}
@@ -426,17 +360,6 @@ const PreOrder = () => {
             We invite you to plant a tree for $0.25
           </label>
         </div>
-        {/* <button className="submit-order-btn" onClick={() => handlePlaceOrder()}>
-          Submit order
-        </button> */}
-
-        {/* <Elements stripe={stripePromise}>
-          <div className="info-section">
-            Card Details:
-            <CardElement />
-            <button onClick={handlePlaceOrder}>Place Order</button>
-          </div>
-        </Elements> */}
         <Elements stripe={stripePromise}>
           <StripeCheckoutForm />
         </Elements>

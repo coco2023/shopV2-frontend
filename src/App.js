@@ -30,7 +30,7 @@ import PreOrder from "./components/Online-Store/checkout/PreOrder";
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import PaymentSuccessPage from "./components/Online-Store/checkout/PaymentSuccessPage";
-import PayPalSuccess from "./components/Online-Store/checkout/PayPalSuccess";
+import PayPalCompletePayment from "./components/Online-Store/checkout/PayPalCompletePayment";
 
 
 // Initialize Stripe outside of the component
@@ -56,7 +56,7 @@ function App() {
           </Elements>
         } />
         <Route path="/payment-success" element={<PaymentSuccessPage />} />
-        <Route path="/paypal-success" element={<PayPalSuccess />} />
+        <Route path="/paypal-success" element={<PayPalCompletePayment />} />
       </Routes>
 
       {/* IMS */}
