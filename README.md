@@ -1,8 +1,4 @@
-# UmiUni-Shop | Umi Store
-
-A Shop that sells UmiUni items
-
-# before
+# QuickStore
 
 > npx create-react-app frontend
 
