@@ -31,7 +31,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import PaymentSuccessPage from "./components/Online-Store/checkout/PaymentSuccessPage";
 import PayPalCompletePayment from "./components/Online-Store/checkout/PayPalCompletePayment";
-
+import PayPalReturnPage from "./components/Online-Store/checkout/PayPalReturnPage";
 
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
@@ -57,6 +57,7 @@ function App() {
         } />
         <Route path="/payment-success" element={<PaymentSuccessPage />} />
         <Route path="/paypal-success" element={<PayPalCompletePayment />} />
+        <Route path="/paypal-return" element={<PayPalReturnPage />} />
       </Routes>
 
       {/* IMS */}

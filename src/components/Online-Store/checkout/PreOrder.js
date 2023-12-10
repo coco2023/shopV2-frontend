@@ -12,10 +12,8 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { useNavigate } from "react-router-dom";
 
 const PreOrder = () => {
-  const navigate = useNavigate();
 
   const { productSkuCode } = useParams();
   const [productInfo, setProductInfo] = useState(null);
@@ -49,6 +47,7 @@ const PreOrder = () => {
     quantity: 1,
     unitPrice: 0.0,
     lineTotal: 0.0,
+    discount: 0.0,
   };
 
   // Create state for preOrder data
@@ -162,16 +161,9 @@ const PreOrder = () => {
             console.log("finalSalesOrder: ", salesOrderData);
             console.log("finalSalesOrderDetail: ", salesOrderDetailData);
             finalSalesDetailData = salesOrderDetailData;
+
             // Process payment with Stripe using finalSalesOrder
             processPaymentWithStripe(token.id, salesOrderData, salesOrderDetailData);
-          })
-          .then(({ responseData, salesOrder }) => {
-            sessionStorage.setItem('paymentData', JSON.stringify({
-              paymentInfo: responseData,
-              orderInfo: salesOrder,
-              orderDetailInfo: finalSalesDetailData,
-            }));            
-            navigate("/payment-success");
           })
           .catch((error) => {
             console.error("An error occurred:", error);
@@ -320,21 +312,15 @@ const PreOrder = () => {
         <div className="summary-details">
           <div className="detail">
             <span>Item(s) total:</span>
-            <span>${preOrderDetailData.lineTotal}</span>
+            <span>${preOrderDetailData.unitPrice}</span>
           </div>
           <div className="detail">
             <span>Item(s) discount:</span>
-            <span>
-              -$
-              {(
-                preOrderDetailData.unitPrice * preOrderDetailData.quantity -
-                preOrderDetailData.lineTotal
-              ).toFixed(2)}
-            </span>
+            <span>-${preOrderDetailData.discount.toFixed(2)}</span>
           </div>
           <div className="detail">
             <span>Subtotal:</span>
-            <span>${preOrderDetailData.lineTotal}</span>
+            <span>${preOrderDetailData.unitPrice * preOrderDetailData.quantity}</span>
           </div>
           <div className="detail">
             <span>Shipping:</span>
@@ -344,14 +330,15 @@ const PreOrder = () => {
             <span>Sales tax:</span>
             <span>
               $
-              {(
-                preOrderData.totalAmount - preOrderDetailData.lineTotal
+              {( // preOrderData.totalAmount - preOrderData.lineTotal
+                preOrderDetailData.unitPrice * preOrderDetailData.quantity - preOrderDetailData.unitPrice * preOrderDetailData.quantity
               ).toFixed(2)}
             </span>
           </div>
           <div className="total">
             <span>Order total</span>
-            <span>${preOrderData.totalAmount}</span>
+            {/* <span>${preOrderData.totalAmount}</span> */}
+            <span>${preOrderDetailData.unitPrice * preOrderDetailData.quantity}</span>
           </div>
         </div>
         <div className="plant-tree">
