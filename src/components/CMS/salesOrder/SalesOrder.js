@@ -61,7 +61,7 @@ const SalesOrderPage = () => {
   const fetchBrands = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9001/api/v1/salesOrders/all"
+        "${process.env.REACT_APP_API_URL}/api/v1/salesOrders/all"
       );
       setSalesOrders(response.data);
     } catch (error) {
@@ -95,7 +95,7 @@ const SalesOrderPage = () => {
   const handleEditBrand = async () => {
     try {
       await axios.put(
-        `http://localhost:9001/api/v1/salesOrders/${selectedSalesOrder.salesOrderId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/salesOrders/${selectedSalesOrder.salesOrderId}`,
         salesOrder
       );
       fetchBrands();
@@ -108,7 +108,7 @@ const SalesOrderPage = () => {
 
   const handleDeleteSalesOrder = async (id) => {
     try {
-      await axios.delete(`http://localhost:9001/api/v1/salesOrders/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/salesOrders/${id}`);
       fetchBrands();
     } catch (error) {
       console.error("Error deleting SalesOrder:", error);
@@ -127,7 +127,7 @@ const SalesOrderPage = () => {
 
   const handleCreateBrand = async () => {
     try {
-      await axios.post("http://localhost:9001/api/v1/salesOrders", salesOrder);
+      await axios.post("${process.env.REACT_APP_API_URL}/api/v1/salesOrders", salesOrder);
       fetchBrands();
       setSalesOrder();
       handleCloseCreateModal();
@@ -140,7 +140,7 @@ const SalesOrderPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/salesOrders/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/salesOrders/${searchId}`
       );
       const foundSalesOrder = response.data;
 

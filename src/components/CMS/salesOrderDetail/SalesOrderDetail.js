@@ -60,7 +60,7 @@ const SalesOrderDetailPage = () => {
   const fetchSalesOrderDetails = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9001/api/v1/salesOrderDetails/all"
+        "${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails/all"
       );
       setSalesOrderDetails(response.data);
     } catch (error) {
@@ -95,7 +95,7 @@ const SalesOrderDetailPage = () => {
     console.log("***Update: ", selectedSalesOrderDetail)
     try {
       await axios.put(
-        `http://localhost:9001/api/v1/salesOrderDetails/${selectedSalesOrderDetail.salesOrderDetailId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails/${selectedSalesOrderDetail.salesOrderDetailId}`,
         salesOrderDetail
       );
       fetchSalesOrderDetails();
@@ -109,7 +109,7 @@ const SalesOrderDetailPage = () => {
   const handleDeleteSalesOrderDetail = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:9001/api/v1/salesOrderDetails/${id}`
+        `${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails/${id}`
       );
       fetchSalesOrderDetails();
     } catch (error) {
@@ -130,7 +130,7 @@ const SalesOrderDetailPage = () => {
   const handleCreateSalesOrderDetail = async () => {
     try {
       await axios.post(
-        "http://localhost:9001/api/v1/salesOrderDetails",
+        "${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails",
         salesOrderDetail
       );
       fetchSalesOrderDetails();
@@ -145,7 +145,7 @@ const SalesOrderDetailPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/salesOrderDetails/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails/${searchId}`
       );
       const foundSalesOrderDetail = response.data;
 

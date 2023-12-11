@@ -48,7 +48,7 @@ const PaymentPage = () => {
   const fetchPayments = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9001/api/v1/payments/all"
+        "${process.env.REACT_APP_API_URL}/api/v1/payments/all"
       );
       setBrands(response.data);
     } catch (error) {
@@ -82,7 +82,7 @@ const PaymentPage = () => {
   const handleEditPayment = async () => {
     try {
       await axios.put(
-        `http://localhost:9001/api/v1/payments/${selectedPayment.paymentId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/payments/${selectedPayment.paymentId}`,
         payment
       );
       fetchPayments();
@@ -95,7 +95,7 @@ const PaymentPage = () => {
 
   const handleDeletePayment = async (id) => {
     try {
-      await axios.delete(`http://localhost:9001/api/v1/payments/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/payments/${id}`);
       fetchPayments();
     } catch (error) {
       console.error("Error deleting brand:", error);
@@ -114,7 +114,7 @@ const PaymentPage = () => {
 
   const handleCreateBrand = async () => {
     try {
-      await axios.post("http://localhost:9001/api/v1/payments", payment);
+      await axios.post("${process.env.REACT_APP_API_URL}/api/v1/payments", payment);
       fetchPayments();
       setPayment([]);
       handleCloseCreateModal();
@@ -127,7 +127,7 @@ const PaymentPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/payments/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/payments/${searchId}`
       );
       const foundPayment = response.data;
 

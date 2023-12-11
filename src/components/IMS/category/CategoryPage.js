@@ -32,7 +32,7 @@ const CategoryPage = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9001/api/v1/categories/all"
+        `${process.env.REACT_APP_API_URL}/api/v1/categories/all`
       );
       setCategories(response.data);
     } catch (error) {
@@ -62,7 +62,7 @@ const CategoryPage = () => {
   const handleEditCategory = async () => {
     try {
       await axios.put(
-        `http://localhost:9001/api/v1/categories/${selectedCategory.categoryId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/categories/${selectedCategory.categoryId}`,
         { categoryName: category.name }
       );
       fetchCategories();
@@ -75,7 +75,7 @@ const CategoryPage = () => {
 
   const handleDeleteCategory = async (id) => {
     try {
-      await axios.delete(`http://localhost:9001/api/v1/categories/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/categories/${id}`);
       fetchCategories();
     } catch (error) {
       console.error("Error deleting categories:", error);
@@ -93,7 +93,7 @@ const CategoryPage = () => {
 
   const handleCreateCategory = async () => {
     try {
-      await axios.post("http://localhost:9001/api/v1/categories", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/categories`, {
         categoryName: category.name,
       });
       fetchCategories();
@@ -108,7 +108,7 @@ const CategoryPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/categories/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/categories/${searchId}`
       );
       const foundCategory = response.data;
 

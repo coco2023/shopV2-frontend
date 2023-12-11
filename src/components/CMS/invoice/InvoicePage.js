@@ -51,7 +51,7 @@ const InvoicePage = () => {
   const fetchInvoices = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9001/api/v1/invoices/all"
+        "${process.env.REACT_APP_API_URL}/api/v1/invoices/all"
       );
       setInvoices(response.data);
     } catch (error) {
@@ -85,7 +85,7 @@ const InvoicePage = () => {
   const handleEditInvoice = async () => {
     try {
       await axios.put(
-        `http://localhost:9001/api/v1/invoices/${selectedInvoice.invoiceId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/invoices/${selectedInvoice.invoiceId}`,
         invoice
       );
       fetchInvoices();
@@ -98,7 +98,7 @@ const InvoicePage = () => {
 
   const handleDeleteInvoice = async (id) => {
     try {
-      await axios.delete(`http://localhost:9001/api/v1/invoices/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/invoices/${id}`);
       fetchInvoices();
     } catch (error) {
       console.error("Error deleting Invoice:", error);
@@ -118,7 +118,7 @@ const InvoicePage = () => {
   const handleCreateInvoice = async () => {
     console.log("***Create:", invoice);
     try {
-      await axios.post("http://localhost:9001/api/v1/invoices", invoice);
+      await axios.post("${process.env.REACT_APP_API_URL}/api/v1/invoices", invoice);
       fetchInvoices();
       setInvoice([]);
       handleCloseCreateModal();
@@ -131,7 +131,7 @@ const InvoicePage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/invoices/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/invoices/${searchId}`
       );
       const foundInvoice = response.data;
 

@@ -88,7 +88,7 @@ const PreOrder = () => {
     const fetchProductInfo = async () => {
       try {
         const response = await fetch(
-          `http://localhost:9001/api/v1/products/product/${productSkuCode}`
+          `${process.env.REACT_APP_API_URL}/api/v1/products/product/${productSkuCode}`
         );
         if (response.ok) {
           const productData = await response.json();

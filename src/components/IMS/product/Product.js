@@ -83,7 +83,7 @@ const ProductPage = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9001/api/v1/products/all"
+        `${process.env.REACT_APP_API_URL}/api/v1/products/all`
       );
       setProducts(response.data);
     } catch (error) {
@@ -105,7 +105,7 @@ const ProductPage = () => {
     console.log("***update: ", product);
     try {
       await axios.put(
-        `http://localhost:9001/api/v1/products/${selectedProduct.productId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/products/${selectedProduct.productId}`,
         product
       );
       fetchProducts();
@@ -118,7 +118,7 @@ const ProductPage = () => {
 
   const handleDeleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:9001/api/v1/products/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/products/${id}`);
       fetchProducts();
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -139,7 +139,7 @@ const ProductPage = () => {
   const handleCreateProduct = async () => {
     console.log("***Create product: ", product);
     try {
-      await axios.post("http://localhost:9001/api/v1/products", product);
+      await axios.post('${process.env.REACT_APP_API_URL}/api/v1/products', product);
       fetchProducts();
       setProduct({});
       handleCloseCreateModal();
@@ -152,7 +152,7 @@ const ProductPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/products/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/products/${searchId}`
       );
       const foundProduct = response.data;
 
@@ -176,7 +176,7 @@ const ProductPage = () => {
   const fetchAttributes = async (productId) => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/productAttributes/${productId}/attributes`
+        `${process.env.REACT_APP_API_URL}/api/v1/productAttributes/${productId}/attributes`
       );
       return response.data; // assuming this endpoint returns the attributes
     } catch (error) {
@@ -219,7 +219,7 @@ const ProductPage = () => {
   const handleCreateProductAttribute = async () => {
     console.log("***Create: ", productAttribute)
     try {
-      await axios.post("http://localhost:9001/api/v1/productAttributes", productAttribute);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/productAttributes`, productAttribute);
       setProductAttribute();
       handleCloseCreateModal();
       fetchProducts();
