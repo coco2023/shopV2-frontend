@@ -33,7 +33,7 @@ const PreOrder = () => {
     totalAmount: null,
     shippingAddress: "1010 W Green St",
     billingAddress: "1010 W Green St",
-    orderStatus: "PROCESSING",
+    orderStatus: "PENDING",
     paymentMethod: "PayPal",
     customerName: "tester12",
     customerEmail: "test@gmail.com",
