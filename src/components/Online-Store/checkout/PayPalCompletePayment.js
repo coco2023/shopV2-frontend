@@ -34,7 +34,7 @@ const PayPalCompletePayment = () => {
             orderInfo: salesOrderData,
             orderDetailInfo: salesOrderDetailData,
           }));            
-          navigate("/payment-success");
+          window.location.href = "/payment-success";
         } catch (error) {
           // Handle the case where the parameters are not available
           console.error("Payment failed: Missing paymentId or PayerID");

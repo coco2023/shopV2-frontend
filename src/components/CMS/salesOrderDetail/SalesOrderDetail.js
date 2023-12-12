@@ -60,7 +60,7 @@ const SalesOrderDetailPage = () => {
   const fetchSalesOrderDetails = async () => {
     try {
       const response = await axios.get(
-        "${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails/all"
+        `${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails/all`
       );
       setSalesOrderDetails(response.data);
     } catch (error) {
