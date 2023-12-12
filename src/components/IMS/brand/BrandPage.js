@@ -32,7 +32,7 @@ const BrandPage = () => {
   const fetchBrands = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9001/api/v1/brands/all"
+        `${process.env.REACT_APP_API_URL}/api/v1/brands/all`
       );
       setBrands(response.data);
     } catch (error) {
@@ -59,7 +59,7 @@ const BrandPage = () => {
   const handleEditBrand = async () => {
     try {
       await axios.put(
-        `http://localhost:9001/api/v1/brands/${selectedBrand.brandId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/brands/${selectedBrand.brandId}`,
         { brandName: brand.name }
       );
       fetchBrands();
@@ -72,7 +72,7 @@ const BrandPage = () => {
 
   const handleDeleteBrand = async (id) => {
     try {
-      await axios.delete(`http://localhost:9001/api/v1/brands/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/brands/${id}`);
       fetchBrands();
     } catch (error) {
       console.error("Error deleting brand:", error);
@@ -90,7 +90,7 @@ const BrandPage = () => {
 
   const handleCreateBrand = async () => {
     try {
-      await axios.post("http://localhost:9001/api/v1/brands", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/brands`, {
         brandName: brand.name,
       });
       fetchBrands();
@@ -105,7 +105,7 @@ const BrandPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/brands/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/brands/${searchId}`
       );
       const foundBrand = response.data;
 

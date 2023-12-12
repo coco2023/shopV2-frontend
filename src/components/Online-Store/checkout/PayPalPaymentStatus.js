@@ -7,7 +7,7 @@ const PayPalPaymentStatus = ({ token }) => {
     useEffect(() => {
         const checkPaymentStatus = async () => {
             try {
-                const response = await axios.get(`/check-payment-status?token=${token}`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/check-payment-status?token=${token}`);
                 const status = response.data.status;
 
                 // Handle payment statuses

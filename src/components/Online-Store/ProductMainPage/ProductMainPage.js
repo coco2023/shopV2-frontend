@@ -13,7 +13,7 @@ const ProductMainPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:9001/api/v1/products/all"
+          `${process.env.REACT_APP_API_URL}/api/v1/products/all`
         );
         setProducts(response.data);
         setVisibleProducts(response.data.slice(0, productsPerPage));

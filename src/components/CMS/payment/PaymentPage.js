@@ -48,7 +48,7 @@ const PaymentPage = () => {
   const fetchPayments = async () => {
     try {
       const response = await axios.get(
-        "${process.env.REACT_APP_API_URL}/api/v1/payments/all"
+        `${process.env.REACT_APP_API_URL}/api/v1/payments/all`
       );
       setBrands(response.data);
     } catch (error) {
@@ -114,7 +114,7 @@ const PaymentPage = () => {
 
   const handleCreateBrand = async () => {
     try {
-      await axios.post("${process.env.REACT_APP_API_URL}/api/v1/payments", payment);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/payments`, payment);
       fetchPayments();
       setPayment([]);
       handleCloseCreateModal();

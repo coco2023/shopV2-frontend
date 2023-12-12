@@ -51,7 +51,7 @@ const ProductAttributePage = () => {
   const fetchProductAttributes = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9001/api/v1/productAttributes/all"
+        `${process.env.REACT_APP_API_URL}/api/v1/productAttributes/all`
       );
       setProductAttributes(response.data);
     } catch (error) {
@@ -82,7 +82,7 @@ const ProductAttributePage = () => {
   const handleEditProductAttribute = async () => {
     try {
       await axios.put(
-        `http://localhost:9001/api/v1/productAttributes/${selectedProductAttribute.attributeId}`, productAttribute
+        `${process.env.REACT_APP_API_URL}/api/v1/productAttributes/${selectedProductAttribute.attributeId}`, productAttribute
       );
       fetchProductAttributes();
       setSelectedProductAttribute(null);
@@ -95,7 +95,7 @@ const ProductAttributePage = () => {
   const handleDeleteProductAttribute = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:9001/api/v1/productAttributes/${id}`
+        `${process.env.REACT_APP_API_URL}/api/v1/productAttributes/${id}`
       );
       fetchProductAttributes();
     } catch (error) {
@@ -116,7 +116,7 @@ const ProductAttributePage = () => {
   const handleCreateProductAttribute = async () => {
     console.log("***Create: ", productAttribute)
     try {
-      await axios.post("http://localhost:9001/api/v1/productAttributes", productAttribute);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/productAttributes`, productAttribute);
       fetchProductAttributes();
       setProductAttribute();
       handleCloseCreateModal();
@@ -129,7 +129,7 @@ const ProductAttributePage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/productAttributes/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/productAttributes/${searchId}`
       );
       const foundProductAttribute = response.data;
       console.log("***searchByAttributeId: " + foundProductAttribute)
@@ -152,7 +152,7 @@ const ProductAttributePage = () => {
     const handleSearchbyProductId = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9001/api/v1/productAttributes/${searchId2}/attributes`
+          `${process.env.REACT_APP_API_URL}/api/v1/productAttributes/${searchId2}/attributes`
         );
         const foundProductAttribute = response.data;
         console.log("***searchByProductId: " + foundProductAttribute)

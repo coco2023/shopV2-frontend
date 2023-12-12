@@ -44,7 +44,7 @@ const SupplierPage = () => {
   const fetchSuppliers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9001/api/v1/suppliers/all"
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/all`
       );
       setSuppliers(response.data);
     } catch (error) {
@@ -79,7 +79,7 @@ const SupplierPage = () => {
     console.log("***Edit supplier: ", supplier);
     try {
       await axios.put(
-        `http://localhost:9001/api/v1/suppliers/${selectedSupplier.supplierId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${selectedSupplier.supplierId}`,
         supplier
       );
       fetchSuppliers();
@@ -92,7 +92,7 @@ const SupplierPage = () => {
 
   const handleDeleteSupplier = async (id) => {
     try {
-      await axios.delete(`http://localhost:9001/api/v1/suppliers/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/suppliers/${id}`);
       fetchSuppliers();
     } catch (error) {
       console.error("Error deleting supplier:", error);
@@ -110,7 +110,7 @@ const SupplierPage = () => {
 
   const handleCreateSupplier = async () => {
     try {
-      await axios.post("http://localhost:9001/api/v1/suppliers", supplier);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/suppliers`, supplier);
       fetchSuppliers();
       handleCloseCreateModal();
     } catch (error) {
@@ -122,7 +122,7 @@ const SupplierPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9001/api/v1/suppliers/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${searchId}`
       );
       const foundSupplier = response.data;
 

@@ -139,7 +139,7 @@ const ProductPage = () => {
   const handleCreateProduct = async () => {
     console.log("***Create product: ", product);
     try {
-      await axios.post('${process.env.REACT_APP_API_URL}/api/v1/products', product);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/products`, product);
       fetchProducts();
       setProduct({});
       handleCloseCreateModal();

@@ -8,7 +8,7 @@ const PayPalReturnPage = () => {
     // Make a request to your backend to check the payment status based on the token in the URL
     const token = new URLSearchParams(window.location.search).get('token');
     console.log("token: " + token)
-    axios.get(`http://localhost:9001/api/v1/payments/paypal/check-payment-status?token=${token}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/v1/payments/paypal/check-payment-status?token=${token}`)
       .then((response) => {
         setPaymentStatus(response.data.status);
         console.log("Status response: " + response)

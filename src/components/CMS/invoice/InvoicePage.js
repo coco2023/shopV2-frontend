@@ -51,7 +51,7 @@ const InvoicePage = () => {
   const fetchInvoices = async () => {
     try {
       const response = await axios.get(
-        "${process.env.REACT_APP_API_URL}/api/v1/invoices/all"
+        `${process.env.REACT_APP_API_URL}/api/v1/invoices/all`
       );
       setInvoices(response.data);
     } catch (error) {
@@ -118,7 +118,7 @@ const InvoicePage = () => {
   const handleCreateInvoice = async () => {
     console.log("***Create:", invoice);
     try {
-      await axios.post("${process.env.REACT_APP_API_URL}/api/v1/invoices", invoice);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/invoices`, invoice);
       fetchInvoices();
       setInvoice([]);
       handleCloseCreateModal();

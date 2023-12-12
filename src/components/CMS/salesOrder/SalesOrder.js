@@ -61,7 +61,7 @@ const SalesOrderPage = () => {
   const fetchBrands = async () => {
     try {
       const response = await axios.get(
-        "${process.env.REACT_APP_API_URL}/api/v1/salesOrders/all"
+        `${process.env.REACT_APP_API_URL}/api/v1/salesOrders/all`
       );
       setSalesOrders(response.data);
     } catch (error) {
@@ -127,7 +127,7 @@ const SalesOrderPage = () => {
 
   const handleCreateBrand = async () => {
     try {
-      await axios.post("${process.env.REACT_APP_API_URL}/api/v1/salesOrders", salesOrder);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/salesOrders`, salesOrder);
       fetchBrands();
       setSalesOrder();
       handleCloseCreateModal();

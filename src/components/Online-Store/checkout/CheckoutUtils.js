@@ -17,7 +17,7 @@ export const createSalesOrder = async (preOrderData, preOrderDetailData) => {
 
   // Step 1: Create the SalesOrder
   const salesOrderResponse = await fetch(
-    "http://localhost:9001/api/v1/salesOrders",
+    `${process.env.REACT_APP_API_URL}/api/v1/salesOrders`,
     {
       method: "POST",
       headers: {
@@ -61,7 +61,7 @@ export const processPaymentWithStripe = async (stripeToken, salesOrder, salesOrd
     console.log("salesOrder:", salesOrder);
 
     const response = await fetch(
-      "http://localhost:9001/api/v1/payments/stripe/charge",
+      `${process.env.REACT_APP_API_URL}/api/v1/payments/stripe/charge`,
       {
         method: "POST",
         headers: {
@@ -102,7 +102,7 @@ export const processPaymentWithStripe = async (stripeToken, salesOrder, salesOrd
 export const processPaymentWithPayPal = async (salesOrder) => {
   try {
     const response = await fetch(
-      "http://localhost:9001/api/v1/payments/paypal/create",
+      `${process.env.REACT_APP_API_URL}/api/v1/payments/paypal/create`,
       {
         method: "POST",
         headers: {
@@ -132,7 +132,7 @@ export const processPaymentWithPayPal = async (salesOrder) => {
 export const completePayPalPayment = async (paymentId, payerId) => {
   try {
     const response = await fetch(
-      `http://localhost:9001/api/v1/payments/paypal/complete?paymentId=${paymentId}&PayerID=${payerId}`,
+      `${process.env.REACT_APP_API_URL}/api/v1/payments/paypal/complete?paymentId=${paymentId}&PayerID=${payerId}`,
       {
         method: "POST",
       }

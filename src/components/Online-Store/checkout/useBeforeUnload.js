@@ -47,7 +47,7 @@ const useBeforeUnload = () => {
     const handleBeforeUnload = (e) => {
       if (!notificationSent) {
         // Send a notification to the server when the user is leaving the page
-        fetch('http://localhost:9001/api/v1/payments/notify-exit', {
+        fetch(`${process.env.REACT_APP_API_URL}/api/v1/payments/notify-exit`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

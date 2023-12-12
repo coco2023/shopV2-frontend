@@ -12,7 +12,7 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         const productRes = await axios.get(
-          `http://localhost:9001/api/v1/products/${productId}`
+          `${process.env.REACT_APP_API_URL}/api/v1/products/${productId}`
         );
         setProduct(productRes.data);
         console.log("***Product: " + productRes);
@@ -25,7 +25,7 @@ const ProductDetails = () => {
     const fetchProductAttributes = async () => {
       try {
         const attributesRes = await axios.get(
-          `http://localhost:9001/api/v1/productAttributes/${productId}/attributes`
+          `${process.env.REACT_APP_API_URL}/api/v1/productAttributes/${productId}/attributes`
         );
         setProductAttributes(attributesRes.data);
         console.log("***Attributes: " + productAttributes);
@@ -55,7 +55,7 @@ const ProductDetails = () => {
     event.stopPropagation(); // Prevent the click event from bubbling up to the parent div
     try {
       // Replace 'your-api-url' with the actual URL of your API
-      const response = await axios.get(`http://localhost:9001/api/v1/products/product/${product.skuCode}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/products/product/${product.skuCode}`);
       
       if (response.status === 200) {
         const productDetails = response.data;

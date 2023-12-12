@@ -130,7 +130,7 @@ const SalesOrderDetailPage = () => {
   const handleCreateSalesOrderDetail = async () => {
     try {
       await axios.post(
-        "${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails",
+        `${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails`,
         salesOrderDetail
       );
       fetchSalesOrderDetails();
