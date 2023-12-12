@@ -34,7 +34,7 @@ export const createSalesOrder = async (preOrderData, preOrderDetailData) => {
 
   // Step 2: Create the SalesOrderDetail
   const salesOrderDetailResponse = await fetch(
-    "http://localhost:9001/api/v1/salesOrderDetails",
+    `${process.env.REACT_APP_API_URL}/api/v1/salesOrderDetails`,
     {
       method: "POST",
       headers: {
