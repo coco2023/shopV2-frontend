@@ -220,6 +220,8 @@ const ProductPage = () => {
     console.log("***Create: ", productAttribute)
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/productAttributes`, productAttribute);
+
+      console.log("url: " + process.env.REACT_APP_API_URL)
       setProductAttribute();
       handleCloseCreateModal();
       fetchProducts();

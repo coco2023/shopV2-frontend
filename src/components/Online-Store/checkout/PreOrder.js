@@ -17,7 +17,6 @@ const PreOrder = () => {
 
   const { productSkuCode } = useParams();
   const [productInfo, setProductInfo] = useState(null);
-  const [orderTotal, setOrderTotal] = useState(0);
 
   // Stripe
   const stripePromise = loadStripe("pk_test_R59H51fw2NragH95O9OatOgT");
@@ -109,18 +108,17 @@ const PreOrder = () => {
 
   useEffect(() => {
     if (productInfo) {
-      setOrderTotal(productInfo.price * preOrderDetailData.quantity);
 
       const updatedPreOrderData = {
         ...initialPreOrderData,
-        totalAmount: orderTotal,
+        totalAmount: productInfo.price * preOrderDetailData.quantity,
       };
 
       const updatedSalesOrderDetailData = {
         ...initialSalesOrderDetailData,
         skuCode: productInfo.skuCode,
         unitPrice: productInfo.price,
-        lineTotal: orderTotal,
+        lineTotal: productInfo.price * preOrderDetailData.quantity,
       };
 
       setPreOrderData(updatedPreOrderData);
@@ -320,7 +318,7 @@ const PreOrder = () => {
           </div>
           <div className="detail">
             <span>Subtotal:</span>
-            <span>${preOrderDetailData.unitPrice * preOrderDetailData.quantity}</span>
+            <span>${preOrderData.totalAmount}</span>
           </div>
           <div className="detail">
             <span>Shipping:</span>
@@ -331,14 +329,14 @@ const PreOrder = () => {
             <span>
               $
               {( // preOrderData.totalAmount - preOrderData.lineTotal
-                preOrderDetailData.unitPrice * preOrderDetailData.quantity - preOrderDetailData.unitPrice * preOrderDetailData.quantity
+                0
               ).toFixed(2)}
             </span>
           </div>
           <div className="total">
             <span>Order total</span>
             {/* <span>${preOrderData.totalAmount}</span> */}
-            <span>${preOrderDetailData.unitPrice * preOrderDetailData.quantity}</span>
+            <span>${preOrderData.totalAmount}</span>
           </div>
         </div>
         <div className="plant-tree">
