@@ -1,15 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { completePayPalPayment } from "./CheckoutUtils";
-// Import the custom useBeforeUnload hook
-import useBeforeUnload from './useBeforeUnload';
 
 const PayPalCompletePayment = () => {
 
-  // Use the useBeforeUnload component to handle beforeunload events
-  useBeforeUnload();
-
-  const navigate = useNavigate();
   const salesOrderData = JSON.parse(sessionStorage.getItem("salesOrderData"));
   const salesOrderDetailData = JSON.parse(
     sessionStorage.getItem("salesOrderDetailData")

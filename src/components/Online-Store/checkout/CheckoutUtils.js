@@ -27,6 +27,9 @@ export const createSalesOrder = async (preOrderData, preOrderDetailData) => {
     }
   );
 
+  console.log("salesOrderResponse: " + JSON.stringify(salesOrderResponse.salesOrder));
+
+
   if (!salesOrderResponse.ok) {
     console.error("Failed to create SalesOrder.");
     return;

@@ -53,7 +53,11 @@ const CategoryPage = () => {
     offset + itemsPerPage
   );
 
-  // edit & delete`
+  // edit & delete
+  const handleCloseEditModal = () => {
+    setSelectedCategory(false);
+  };
+
   const handleCategoryClick = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
     setCategory({ name: selectedCategory.categoryName }); // Initialize the input with the selected category's name
@@ -204,6 +208,7 @@ const CategoryPage = () => {
             onChange={(e) => setCategory({ name: e.target.value })}
           />
           <button onClick={handleEditCategory}>Update</button>
+          <button onClick={handleCloseEditModal}>Cancel</button>
         </div>
       )}
 

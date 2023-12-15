@@ -181,6 +181,7 @@ const PreOrder = () => {
             // Store data in session storage
             sessionStorage.setItem('salesOrderData', JSON.stringify(salesOrderData));
             sessionStorage.setItem('salesOrderDetailData', JSON.stringify(salesOrderDetailData));
+            console.log("***salesOrder Data to PayPal: " + JSON.stringify(salesOrderData));
 
             const redirectUrl = await processPaymentWithPayPal(salesOrderData);
             window.location.href = redirectUrl; // Redirect to PayPal

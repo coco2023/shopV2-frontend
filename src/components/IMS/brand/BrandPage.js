@@ -51,6 +51,10 @@ const BrandPage = () => {
   const paginatedBrands = filteredBrands.slice(offset, offset + itemsPerPage);
 
   // edit & delete
+    const handleCloseEditModal = () => {
+      setSelectedBrand(false);
+    };
+  
   const handleBrandClick = (selectedBrand) => {
     setSelectedBrand(selectedBrand);
     setBrand({ name: selectedBrand.brandName }); // Initialize the input with the selected brand's name
@@ -246,6 +250,7 @@ const BrandPage = () => {
             onChange={(e) => setBrand({ name: e.target.value })}
           />
           <button onClick={handleEditBrand}>Update</button>
+          <button onClick={handleCloseEditModal}>Cancel</button>
         </div>
       )}
 

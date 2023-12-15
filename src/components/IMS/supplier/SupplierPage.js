@@ -66,6 +66,10 @@ const SupplierPage = () => {
   );
 
   // edit & delete
+  const handleCloseEditModal = () => {
+    setSelectedSupplier(false);
+  };
+
   const handleSupplierClick = (selectedSupplier) => {
     console.log("***selectedSupplier: ", selectedSupplier);
     setSelectedSupplier(selectedSupplier);
@@ -230,6 +234,7 @@ const SupplierPage = () => {
             onChange={handleChange}
           />
           <button onClick={handleEditSupplier}>Update</button>
+          <button onClick={handleCloseEditModal}>Cancel</button>
         </div>
       )}
 
