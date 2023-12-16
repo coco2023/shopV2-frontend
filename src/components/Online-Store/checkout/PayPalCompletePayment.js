@@ -23,11 +23,17 @@ const PayPalCompletePayment = () => {
       if (paymentId && payerId) {
         try {
           const responseData = await completePayPalPayment(paymentId, payerId);
-          sessionStorage.setItem('paymentData', JSON.stringify({
+          // store the orderSn info
+          sessionStorage.setItem('orderDataInfo', JSON.stringify({
             paymentInfo: responseData,
-            orderInfo: salesOrderData,
+            salesOrderSn: salesOrderData.salesOrderSn, 
             orderDetailInfo: salesOrderDetailData,
-          }));            
+          }));
+          // sessionStorage.setItem('paymentData', JSON.stringify({
+          //   paymentInfo: responseData,
+          //   orderInfo: salesOrderData,
+          //   orderDetailInfo: salesOrderDetailData,
+          // }));            
           window.location.href = `/payment-success`;
         } catch (error) {
           // Handle the case where the parameters are not available

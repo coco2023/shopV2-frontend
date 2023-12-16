@@ -1,24 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 // import { useLocation } from "react-router-dom";
 import "./PaymentSuccessPage.css";
 
 const PaymentSuccessPage = () => {
-  const paymentData = JSON.parse(sessionStorage.getItem("paymentData"));
-  const { paymentInfo, orderInfo, orderDetailInfo } = paymentData;
+  const extractData = JSON.parse(sessionStorage.getItem("orderDataInfo"));
+  const { paymentInfo, salesOrderSn, orderDetailInfo } = extractData;
+  const [ orderInfo, setOrderInfo ] = useState(null);
+
+  // find SalesOrder Entity via salesOrderSn
+  const getSalesOrder = async (salesOrderSn) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/v1/salesOrders/salesOrderSn/${salesOrderSn}`
+      );
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      setOrderInfo(data);
+      // return data;
+    } catch (error) {
+      console.error("Error fetching sales order:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (salesOrderSn) {
+      getSalesOrder(salesOrderSn);
+    }
+  }, [salesOrderSn])
+
+  if (!orderInfo) {
+    return <div>Loading...</div>;
+  }
 
   console.log(
     "***successPage: paymentInfo: ",
     paymentInfo,
-    orderDetailInfo,
-    orderInfo
+    orderInfo,
+    orderDetailInfo
   );
 
   return (
     <div className="payment-success-container">
       <div className="order-details-header">
-        <h1>Delivered</h1>
+        <h2>Order Status: {orderInfo.orderStatus}</h2>
         <p>Order time: {orderInfo.orderDate}</p>
-        <p>Order Sn: {orderInfo.salesOrderSn}</p>
+        <p>Order Sn: {salesOrderSn}</p>
       </div>
 
       <div className="shipping-and-item-container">
@@ -77,6 +105,8 @@ const PaymentSuccessPage = () => {
 
       <div className="payment-and-method-container">
         <div className="payment-details">
+          <h2>Payment Status</h2>
+          <p> {paymentInfo.status} </p>
           <h2>Payment details</h2>
           <p>Order total: ${orderInfo.totalAmount}</p>
           {/* Include discount, subtotal, sales tax, etc. */}
@@ -84,7 +114,7 @@ const PaymentSuccessPage = () => {
 
         <div className="payment-method">
           <h2>Payment method</h2>
-          {/* <p>{paymentInfo.method}</p> */}
+          <p>PayPal</p>
           <h2>Transaction Id</h2>
           <p>{paymentInfo.transactionId}</p>
         </div>
