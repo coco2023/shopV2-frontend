@@ -25,7 +25,7 @@ const InvoicePage = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(0); // Current page for pagination
-  const itemsPerPage = 5; // Number of items to display per page
+  const itemsPerPage = 20; // Number of items to display per page
 
   useEffect(() => {
     // Fetch all Invoices when the component mounts

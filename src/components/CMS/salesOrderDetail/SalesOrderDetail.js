@@ -214,7 +214,7 @@ const SalesOrderDetailPage = () => {
                 </button>
                 <button
                   onClick={() =>
-                    handleDeleteSalesOrderDetail(salesOrderDetail.salesOrderId)
+                    handleDeleteSalesOrderDetail(salesOrderDetail.salesOrderDetailId)
                   }
                   className="button-danger"
                 >

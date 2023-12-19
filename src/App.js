@@ -32,6 +32,8 @@ import { loadStripe } from '@stripe/stripe-js';
 import PaymentSuccessPage from "./components/Online-Store/checkout/PaymentSuccessPage";
 import PayPalCompletePayment from "./components/Online-Store/checkout/PayPalCompletePayment";
 import PayPalReturnPage from "./components/Online-Store/checkout/PayPalReturnPage";
+import PaypalTransactionUploader from "./components/MonitorSys/Reconcile/PaypalTransactionUploader";
+import ErrorLog from "./components/MonitorSys/PaymentErrorLog/ErrorLog";
 
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
@@ -79,6 +81,12 @@ function App() {
         <Route path="/cancel" element={<CancelPage />} />
         <Route path="/success" element={<SuccessPage />} />
       </Routes>
+
+      <Routes>
+      <Route path="/reconcile" element={<PaypalTransactionUploader />} />
+      <Route path="/error-logs" element={<ErrorLog />} />
+      </Routes>
+
 
       <Footer />
     </Router>
