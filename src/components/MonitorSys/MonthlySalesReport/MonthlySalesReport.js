@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./MonthlySalesReport.css"
+import "./MonthlySalesReport.css";
 
 const MonthlySalesReport = () => {
   const [startDate, setStartDate] = useState("");
@@ -8,6 +8,7 @@ const MonthlySalesReport = () => {
   const [reportType, setReportType] = useState("CSV");
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState(null);
+  const [reportData, setReportData] = useState([]);
 
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
@@ -32,6 +33,7 @@ const MonthlySalesReport = () => {
     }
 
     setIsGenerating(true);
+    setReportData([]);
     setError(null);
 
     const formattedStartDate = formatDate(startDate);
@@ -53,6 +55,14 @@ const MonthlySalesReport = () => {
 
       console.log(response.data);
 
+      // Convert the object to an array of entries
+      const dataArray = Object.entries(response.data).map(([date, data]) => ({
+        date,
+        ...data,
+      }));
+      setReportData(dataArray);
+
+      if (reportType === "CSV") {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
@@ -63,6 +73,8 @@ const MonthlySalesReport = () => {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+        setReportData([]);
+      }
     } catch (err) {
       setError(
         "Failed to generate the report: " + (err.response?.data || err.message)
@@ -90,7 +102,7 @@ const MonthlySalesReport = () => {
         />
         <select value={reportType} onChange={handleReportTypeChange}>
           <option value="CSV">CSV</option>
-          <option value="JSON">JSON</option>
+          <option value="JSON">JSON Visualize</option>
           {/* Add other types as needed */}
         </select>
         <button onClick={generateReport} disabled={isGenerating}>
@@ -98,6 +110,30 @@ const MonthlySalesReport = () => {
         </button>
       </div>
       {error && <div className="error-message">Error: {error}</div>}
+      {reportData.length > 0 && (
+        <table className="results-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Payments Received</th>
+              <th>Total Amount Received</th>
+              <th>Fees</th>
+              <th>Net Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reportData.map((item, index) => (
+              <tr key={index}>
+                <td>{item.date}</td>
+                <td>{item.paymentsReceived}</td>
+                <td>${item.totalAmountReceived.toFixed(2)}</td>
+                <td>${item.fees.toFixed(2)}</td>
+                <td>${item.netAmount.toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
