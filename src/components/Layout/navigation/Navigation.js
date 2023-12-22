@@ -32,14 +32,14 @@ const Navigation = () => {
         </div> */}
 
         <div className="nav-menu">
+          <Link className="nav-link" to="/brand">
+            🏠 ERP
+          </Link>
           <Link className="nav-link" to="/error-logs">
-            ❌ Payment ErrorLogs
+            ❌ Payment Error Log
           </Link>
           <Link className="nav-link" to="/reconcile">
             ⚖️ Reconcile
-          </Link>
-          <Link className="nav-link" to="/brand">
-            🏠 ERP
           </Link>
           {/* <Link className="nav-link" to="/cancel">
             ❌ Cancel

@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
 
   // Assuming you have a way to get the discount percentage, price, etc.
   const discountPercentage = product.discount; // Placeholder for discount calculation logic
-  const salesNumber = product.sales; // Placeholder for sales number
+  const salesNumber = product.salesAmount; // Placeholder for sales number
 
   // Handler for the Buy It Now functionality
   const checkout = (event) => {
@@ -50,10 +50,11 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="product-pricing">
         <span className="product-price">${product.price}</span>
-        {discountPercentage && (
+        {/* {discountPercentage && (
           <span className="product-discount">-{discountPercentage}%</span>
-        )}
-        <span className="product-sales">{salesNumber} sold</span>
+        )} */}
+        <span className="product-sales">{salesNumber} ON SALE</span> | 
+        <span className="product-stock">{product.stockQuantity} IN_STOCK</span>
         <button className="product-add-to-cart" onClick={checkout}>
           <img
             src="https://cdn-icons-png.flaticon.com/512/5164/5164197.png" // "https://cdn-icons-png.flaticon.com/512/6313/6313421.png" //"https://cdn-icons-png.flaticon.com/512/4521/4521207.png" // "https://cdn-icons-png.flaticon.com/512/7343/7343378.png" "https://cdn-icons-png.flaticon.com/512/4521/4521207.png"

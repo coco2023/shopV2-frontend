@@ -47,6 +47,12 @@
 }
 
 .product-sales {
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.product-stock {
+  font-weight: bold;
   font-size: 0.8em;
 }
 

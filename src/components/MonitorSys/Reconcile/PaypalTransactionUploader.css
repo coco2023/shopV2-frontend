@@ -1,38 +1,38 @@
-.container-reconcile {
+.container-reconcile-content {
     margin: 1rem auto;
     padding: 20px;
     background-color: white;
     border-radius: 8px;
 }
 
-.scrollable-table {
+.reconcile-scrollable-table {
     max-height: 800px; /* Adjust this value as needed */
     overflow-y: auto;
     margin-bottom: 20px; /* Space at the bottom of the table */
   }
   
-  .table {
+  .reconcile-table {
     width: 100%;
     border-collapse: collapse;
   }
   
-  .table, .table th, .table td {
+  .reconcile-table, .reconcile-table th, .reconcile-table td {
     border: 1px solid #ddd;
   }
   
-  .table th, .table td {
+  .reconcile-table th, .reconcile-table td {
     text-align: left;
     padding: 8px;
   }
   
-  .table th {
+  .reconcile-table th {
     background-color: #f2f2f2;
     position: sticky;
     top: 0; /* Makes the header sticky */
     z-index: 10; /* Ensures the header is above the scrolled content */
   }
   
-  .table tr:nth-child(even) {
+  .reconcile-table tr:nth-child(even) {
     background-color: #f9f9f9;
   }
   
@@ -51,7 +51,7 @@
     background-color: #e2e2e2;
   }
   
-  .container-reconcile button {
+  .container-reconcile-content button {
     background-color: RGB(250, 135, 145);
     color: white;
     padding: 10px 20px;
@@ -61,11 +61,11 @@
     transition: background-color 0.3s ease;
 }
 
-.container-reconcile button:hover {
+.container-reconcile-content button:hover {
     background-color: RGB(250, 135, 145);
 }
 
-.container-reconcile button:disabled {
+.container-reconcile-content button:disabled {
     background-color: #ccc;
     cursor: default;
 }

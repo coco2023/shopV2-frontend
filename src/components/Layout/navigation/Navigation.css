@@ -141,10 +141,9 @@ input[type="text"] {
 }
 
 .nav-link {
-  text-decoration: none;
+  font-weight: bold;
   color: #fff; /* Adjusted text color for contrast */
-  font-weight: 500;
-  font-size: 1.3em;
+  font-size: 2em;
   transition: color 0.2s; /* Smooth transition for color change */
 }
 

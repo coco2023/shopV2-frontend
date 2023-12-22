@@ -1,0 +1,54 @@
+.monthly-sales-report-container {
+          max-width: 40%;
+          margin: 20px auto;
+          padding: 20px;
+          background: #fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .monthly-sales-report-container h2 {
+          color: #333;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        
+        .monthly-sales-report-container div {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          align-items: center;
+        }
+        
+        .monthly-sales-report-container input[type="date"],
+        .monthly-sales-report-container select {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          width: 100%;
+        }
+        
+        .monthly-sales-report-container button {
+          padding: 10px 20px;
+          border: none;
+          background-color: RGB(248, 130, 46);
+          color: white;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 16px;
+          transition: background-color 0.3s;
+        }
+        
+        .monthly-sales-report-container button:hover {
+          background-color: RGB(248, 130, 46);
+        }
+        
+        .monthly-sales-report-container button:disabled {
+          background-color: #cccccc;
+        }
+        
+        .error-message {
+          color: red;
+          text-align: center;
+        }
+        

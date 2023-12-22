@@ -349,6 +349,15 @@ const PreOrder = () => {
         <Elements stripe={stripePromise}>
           <StripeCheckoutForm />
         </Elements>
+
+        <p>
+          Stripe test Payment Card: 4242424242424242 <br/>
+          Stripe test Payment Card Date: 04/24 | CVC: 424 <br/>
+          PayPal test Payment Account: sb-1j09x28410285@personal.example.com <br/> 
+          PayPal test Payment Password: p76*E&a,
+
+        </p>
+
       </div>
     </div>
   );

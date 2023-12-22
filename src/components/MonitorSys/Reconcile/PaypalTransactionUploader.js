@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./PaypalTransactionUploader.css";
 import { downloadCSV } from "./downloadCsvUtils";
+import "./PaypalTransactionUploader.css"
 
 function PaypalTransactionUploader() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -35,7 +35,7 @@ function PaypalTransactionUploader() {
   };
 
   return (
-    <div className="container-reconcile">
+    <div className="container-reconcile-content">
       <div>
         <input type="file" onChange={handleFileChange} accept=".csv" />
         <button onClick={handleUpload} disabled={!selectedFile}>
@@ -54,10 +54,10 @@ function PaypalTransactionUploader() {
       <div>
         <h2>Reconcile Transaction Records Will Show Here</h2>
         <button onClick={() => downloadCSV(transactions)}>Download CSV</button>
-        <div className="scrollable-table">
-          <table className="table table-bordered">
+        <div className="reconcile-scrollable-table">
+          <table className="reconcile-table reconcile-table-bordered">
             <thead>
-              <tr className="recon-table-heading"><h3>Error Log</h3></tr>
+              <tr className="reconcile-table-heading"><h3>Error Log</h3></tr>
               <tr>
                 <th>ErrorCode</th>
                 <th>ErrorMessage</th>
@@ -95,7 +95,7 @@ function PaypalTransactionUploader() {
             </tbody>
 
             <thead>
-              <tr className="recon-table-heading">
+              <tr className="reconcile-table-heading">
                 <h3>Reconcile Transaction Records</h3>
               </tr>
               <tr>

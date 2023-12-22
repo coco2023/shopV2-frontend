@@ -34,6 +34,11 @@ import PayPalCompletePayment from "./components/Online-Store/checkout/PayPalComp
 import PayPalReturnPage from "./components/Online-Store/checkout/PayPalReturnPage";
 import PaypalTransactionUploader from "./components/MonitorSys/Reconcile/PaypalTransactionUploader";
 import ErrorLog from "./components/MonitorSys/PaymentErrorLog/ErrorLog";
+import ReconcileWithOrder from "./components/MonitorSys/ReconcileWithOrder/ReconcileWithOrder";
+import ReconcilePastDays from "./components/MonitorSys/ReconcilePastDays/ReconcilePastDays";
+import ReconcileBetweenDays from "./components/MonitorSys/ReconcileBetweenDays/ReconcileBetweenDays";
+import MonthlySalesReport from "./components/MonitorSys/MonthlySalesReport/MonthlySalesReport";
+import ReconLayout from "./components/MonitorSys/ReconcileLayout/ReconLayout";
 
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
@@ -82,8 +87,14 @@ function App() {
         <Route path="/success" element={<SuccessPage />} />
       </Routes>
 
+      {/* <ReconcileNavigationTabs /> */}
+
       <Routes>
-      <Route path="/reconcile" element={<PaypalTransactionUploader />} />
+      <Route path="/reconcile" element={<ReconLayout><PaypalTransactionUploader /></ReconLayout>} />
+      <Route path="/reconcile/salesOrderSn" element={<ReconLayout><ReconcileWithOrder /></ReconLayout>} />
+      <Route path="/reconcile/pastdays" element={<ReconLayout><ReconcilePastDays /></ReconLayout>} />
+      <Route path="/reconcile/between" element={<ReconLayout><ReconcileBetweenDays /></ReconLayout>} />
+      <Route path="/reconcile/monthly-sales-report" element={<ReconLayout><MonthlySalesReport /></ReconLayout>} />
       <Route path="/error-logs" element={<ErrorLog />} />
       </Routes>
 

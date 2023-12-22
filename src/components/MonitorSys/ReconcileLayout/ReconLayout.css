@@ -1,0 +1,26 @@
+.recon-app-container {
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .topbar {
+          display: flex;
+          justify-content: space-evenly;
+          background-color: rgb(238, 69, 94); /* Change to desired navbar color */
+          padding: 10px 0;
+        }
+        
+        .topbar a {
+          color: white;
+          text-decoration: none;
+          padding: 10px 15px;
+        }
+        
+        .topbar a.active {
+          border-bottom: 2px solid white; /* Highlight for active link */
+        }
+        
+        .recon-main-content {
+          flex-grow: 1;
+        }
+        
