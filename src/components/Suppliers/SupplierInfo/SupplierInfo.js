@@ -52,7 +52,9 @@ const SupplierInfoPage = () => {
     checkAcessTokenExit()
       .then((accessTokenExists) => {
         console.log("Access Token Exists:", accessTokenExists); // The resolved value of the Promise
-        fetchPayPalInfo();
+        if (accessTokenExists) {
+          fetchPayPalInfo();
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -61,7 +63,7 @@ const SupplierInfoPage = () => {
 
   const handleLoginWithPayPal = () => {
     // Redirect to PayPal OAuth URL
-    window.location.href = `http://localhost:9001/api/v1/suppliers/v2/authorize/${supplierId}`;
+    window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/authorize/${supplierId}`;
   };
 
   const fetchPayPalInfo = async () => {

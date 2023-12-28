@@ -35,9 +35,9 @@ const Navigation = () => {
           <Link className="nav-link" to="/reconcile">
             ⚖️ Reconcile
           </Link>
-          {/* <Link className="nav-link" to="/supplier-ims/3">
+          <Link className="nav-link" to="/supplier-ims/3">
             🏠 Supplier Auth
-          </Link> */}
+          </Link>
           <Link className="nav-link" to="/brand">
             🏠 ERP
           </Link>
