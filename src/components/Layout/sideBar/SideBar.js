@@ -13,6 +13,7 @@ const SideBar = () => {
       <NavLink to="/salesOrderDetail" activeClassName="active">Order Details</NavLink>
       <NavLink to="/payments" activeClassName="active">Payment</NavLink>
       <NavLink to="/invoices" activeClassName="active">Invoice</NavLink>
+      {/* <NavLink to="/supplier-products/3" activeClassName="active">UmiUni</NavLink> */}
 
 </div>
   );

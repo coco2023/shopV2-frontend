@@ -37,6 +37,7 @@ const PreOrder = () => {
     customerName: "tester12",
     customerEmail: "test@gmail.com",
     paymentProcessed: true,
+    supplierId: 0,
   };
 
   // Define the initial salesOrderDetail data
@@ -47,6 +48,7 @@ const PreOrder = () => {
     unitPrice: 0.0,
     lineTotal: 0.0,
     discount: 0.0,
+    supplierId: 0,
   };
 
   // Create state for preOrder data
@@ -112,6 +114,7 @@ const PreOrder = () => {
       const updatedPreOrderData = {
         ...initialPreOrderData,
         totalAmount: productInfo.price * preOrderDetailData.quantity,
+        supplierId: productInfo.supplierId,
       };
 
       const updatedSalesOrderDetailData = {
@@ -119,6 +122,7 @@ const PreOrder = () => {
         skuCode: productInfo.skuCode,
         unitPrice: productInfo.price,
         lineTotal: productInfo.price * preOrderDetailData.quantity,
+        supplierId: productInfo.supplierId,
       };
 
       setPreOrderData(updatedPreOrderData);
@@ -178,9 +182,10 @@ const PreOrder = () => {
 
         salesOrderResponse
           .then(async ({ salesOrderData, salesOrderDetailData }) => {
-            // Store data in session storage
+            // Store data in session storage; use for: PayPalCompletePayment
             sessionStorage.setItem('salesOrderData', JSON.stringify(salesOrderData));
             sessionStorage.setItem('salesOrderDetailData', JSON.stringify(salesOrderDetailData));
+            // sessionStorage.setItem('supplierId', JSON.stringify(salesOrderData.supplierId));
             console.log("***salesOrder Data to PayPal: " + JSON.stringify(salesOrderData));
 
             const redirectUrl = await processPaymentWithPayPal(salesOrderData);
@@ -227,6 +232,7 @@ const PreOrder = () => {
             <div className="product-item">
               <img src={productInfo.imageUrl} alt={productInfo.productName} />
               <div className="product-details">
+                <p>supplier Id: {productInfo.supplierId}</p>
                 <p>{productInfo.productName}</p>
                 <p>${preOrderDetailData.unitPrice}</p>
                 Qty:{" "}

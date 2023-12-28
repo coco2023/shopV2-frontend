@@ -132,10 +132,10 @@ export const processPaymentWithPayPal = async (salesOrder) => {
   }
 };
 
-export const completePayPalPayment = async (paymentId, payerId) => {
+export const completePayPalPayment = async (paymentId, payerId, supplierId) => {
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/v1/payments/paypal/complete?paymentId=${paymentId}&PayerID=${payerId}`,
+      `${process.env.REACT_APP_API_URL}/api/v1/payments/paypal/complete?paymentId=${paymentId}&PayerID=${payerId}&SupplierId=${supplierId}`,
       {
         method: "POST",
       }

@@ -47,6 +47,7 @@ const PaymentSuccessPage = () => {
         <h2>Order Status: {orderInfo.orderStatus}</h2>
         <p>Order time: {orderInfo.orderDate}</p>
         <p>Order Sn: {salesOrderSn}</p>
+        <p>Supplier Id: {orderInfo.supplierId}</p>
       </div>
 
       <div className="shipping-and-item-container">

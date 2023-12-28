@@ -39,6 +39,11 @@ import ReconcilePastDays from "./components/MonitorSys/ReconcilePastDays/Reconci
 import ReconcileBetweenDays from "./components/MonitorSys/ReconcileBetweenDays/ReconcileBetweenDays";
 import MonthlySalesReport from "./components/MonitorSys/MonthlySalesReport/MonthlySalesReport";
 import ReconLayout from "./components/MonitorSys/ReconcileLayout/ReconLayout";
+import SupplierInfoPage from "./components/Suppliers/SupplierInfo/SupplierInfo";
+import MerchantOnboardingForm from "./components/Suppliers/SupplierReferral/MerchantOnboardingForm";
+import SupplierProductPage from "./components/Suppliers/SupplierProduct/SupplierProduct";
+import SuppliersLayout from "./components/Suppliers/SuppliersLayout/SuppliersLayout";
+import SupplierSalesOrderPage from "./components/Suppliers/SupplierSalesOrder/SupplierSalesOrderPage";
 
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
@@ -78,6 +83,7 @@ function App() {
         <Route path="/productAttribute" element={<Layout><ProductAttributePage /></Layout>} />
         <Route path="/payments" element={<Layout><PaymentPage /></Layout>} />
         <Route path="/invoices" element={<Layout><InvoicePage /></Layout>} />
+        {/* <Route path="/supplier-products/:supplierId" element={<Layout><SupplierProductPage /></Layout>} /> */}
       </Routes>
 
       <Routes>
@@ -98,6 +104,14 @@ function App() {
       <Route path="/error-logs" element={<ErrorLog />} />
       </Routes>
 
+      {/* Supplier IMS */}
+      <Routes>
+      <Route path="/supplier-ims/:supplierId" element={<SuppliersLayout><SupplierInfoPage /></SuppliersLayout>} />
+      <Route path="/supplier-ims/referral" element={<SuppliersLayout><MerchantOnboardingForm /></SuppliersLayout>} />
+      <Route path="/supplier-ims/products/:supplierId" element={<SuppliersLayout><SupplierProductPage /></SuppliersLayout>} />
+      <Route path="/supplier-ims/orders/:supplierId" element={<SuppliersLayout><SupplierSalesOrderPage /></SuppliersLayout>} />
+
+      </Routes>
 
       <Footer />
     </Router>

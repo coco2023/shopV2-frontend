@@ -1,0 +1,125 @@
+/* Add this CSS to your SupplierInfo.css file or equivalent */
+.paypal-login-btn {
+  background-color: #0079c1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px; /* This creates the pill shape */
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between icon and text */
+}
+
+.paypal-login-btn img {
+  width: 20px; /* Adjust size as needed */
+}
+
+.paypal-login-btn:hover {
+  background-color: #005ea6;
+}
+
+.paypal-login-btn:active {
+  background-color: #004c8c;
+}
+
+.configform-container {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.create-configform-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px; /* Increased width for more content */
+  background-color: #fff;
+  padding: 30px; /* Increased padding for more space */
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure modal is above other content */
+  border: 1px solid #ee822e; /* Main orange color for border */
+}
+
+/* The background overlay */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Darker semi-transparent backdrop */
+  z-index: 999; /* Behind the modal, but above other content */
+}
+
+.create-configform-modal button {
+  margin-top: 15px;
+  padding: 10px 20px; /* Larger padding for bigger buttons */
+  border: none;
+  border-radius: 5px;
+  background-color: #ee822e; /* Main orange color for buttons */
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px; /* Space between buttons */
+}
+
+.create-configform-modal button:hover {
+  background-color: #d67620; /* Slightly darker orange on hover */
+}
+
+/* Cancel button with a style that distinguishes it from the Create button */
+.create-configform-modal button.cancel-button {
+  background-color: #fff;
+  color: #ee822e; /* Main orange color for text */
+  border: 1px solid #ee822e; /* Main orange color for border */
+}
+
+.create-configform-modal button.cancel-button:hover {
+  background-color: #f2f2f2; /* Light grey for hover */
+}
+
+/* Hide scrollbar when modal is open and prevent background scrolling */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Input field styles */
+.create-configform-modal input[type="text"] {
+  width: calc(100% - 20px); /* Full width minus padding */
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px; /* Space between input field and buttons */
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+}
+
+.create-configform-modal input[type="text"]:focus {
+  border-color: #ee822e; /* Main orange color for input focus */
+  outline: none; /* Remove the default focus outline */
+}
+
+.update-config-btn {
+  background-color: rgb(248, 130, 46); /* The orange background color */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 10px 20px; /* Top and bottom padding of 10px, left and right padding of 20px */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  font-size: 17px; /* Font size similar to the button in the image */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center the text inside the button */
+}
+
+.update-config-btn:hover {
+  background-color: #e66d00; /* Darker orange color on hover */
+}

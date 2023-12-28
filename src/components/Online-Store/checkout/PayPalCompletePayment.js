@@ -8,6 +8,7 @@ const PayPalCompletePayment = () => {
   const salesOrderDetailData = JSON.parse(
     sessionStorage.getItem("salesOrderDetailData")
   );
+  const supplierId = salesOrderData.supplierId; // JSON.parse(sessionStorage.getItem("supplierId"));
   console.log(
     "sessionStorage: salesOrderDetailData",
     salesOrderData,
@@ -22,7 +23,7 @@ const PayPalCompletePayment = () => {
     const processComplete = async () => {
       if (paymentId && payerId) {
         try {
-          const responseData = await completePayPalPayment(paymentId, payerId);
+          const responseData = await completePayPalPayment(paymentId, payerId, supplierId);
           // store the orderSn info
           sessionStorage.setItem('orderDataInfo', JSON.stringify({
             paymentInfo: responseData,
