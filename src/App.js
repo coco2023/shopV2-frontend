@@ -44,6 +44,8 @@ import MerchantOnboardingForm from "./components/Suppliers/SupplierReferral/Merc
 import SupplierProductPage from "./components/Suppliers/SupplierProduct/SupplierProduct";
 import SuppliersLayout from "./components/Suppliers/SuppliersLayout/SuppliersLayout";
 import SupplierSalesOrderPage from "./components/Suppliers/SupplierSalesOrder/SupplierSalesOrderPage";
+import SuppliersPayPalPayment from "./components/Suppliers/SuppliersPayPalPayment/SuppliersPayPalPayment";
+
 
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
@@ -110,7 +112,7 @@ function App() {
       <Route path="/supplier-ims/referral" element={<SuppliersLayout><MerchantOnboardingForm /></SuppliersLayout>} />
       <Route path="/supplier-ims/products/:supplierId" element={<SuppliersLayout><SupplierProductPage /></SuppliersLayout>} />
       <Route path="/supplier-ims/orders/:supplierId" element={<SuppliersLayout><SupplierSalesOrderPage /></SuppliersLayout>} />
-
+      <Route path="/supplier-ims/payments/:supplierId" element={<SuppliersLayout><SuppliersPayPalPayment /></SuppliersLayout>} />
       </Routes>
 
       <Footer />

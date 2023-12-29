@@ -432,7 +432,7 @@ const SupplierProductPage = () => {
                 id="supplierId"
                 name="supplierId"
                 placeholder="Enter Supplier ID"
-                value={product.supplierId}
+                value={supplierId}
                 onChange={handleInputChange}
               />
 

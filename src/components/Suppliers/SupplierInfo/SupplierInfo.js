@@ -9,7 +9,6 @@ const SupplierInfoPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { supplierId } = useParams();
-  const location = useLocation();
   const paypalLogo = [
     "/assets/img/paypal/PayPal_Monogram_One_Color_Transparent_RGB_White.png",
   ];
