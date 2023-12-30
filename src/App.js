@@ -45,6 +45,8 @@ import SupplierProductPage from "./components/Suppliers/SupplierProduct/Supplier
 import SuppliersLayout from "./components/Suppliers/SuppliersLayout/SuppliersLayout";
 import SupplierSalesOrderPage from "./components/Suppliers/SupplierSalesOrder/SupplierSalesOrderPage";
 import SuppliersPayPalPayment from "./components/Suppliers/SuppliersPayPalPayment/SuppliersPayPalPayment";
+import SuppliersFinance from "./components/Suppliers/SupplierFinance/SuppliersFinance";
+import SupplierFinanceLayout from "./components/Suppliers/SupplierFinance/SupplierFinanceLayout/SupplierFinanceLayout";
 
 
 // Initialize Stripe outside of the component
@@ -113,6 +115,8 @@ function App() {
       <Route path="/supplier-ims/products/:supplierId" element={<SuppliersLayout><SupplierProductPage /></SuppliersLayout>} />
       <Route path="/supplier-ims/orders/:supplierId" element={<SuppliersLayout><SupplierSalesOrderPage /></SuppliersLayout>} />
       <Route path="/supplier-ims/payments/:supplierId" element={<SuppliersLayout><SuppliersPayPalPayment /></SuppliersLayout>} />
+      <Route path="/supplier-ims/finance/:supplierId/monthly" element={<SuppliersLayout><SupplierFinanceLayout><SuppliersFinance /></SupplierFinanceLayout></SuppliersLayout>} />
+      <Route path="/supplier-ims/finance/:supplierId/yearly" element={<SuppliersLayout><SupplierFinanceLayout><SuppliersFinance /></SupplierFinanceLayout></SuppliersLayout>} />
       </Routes>
 
       <Footer />
