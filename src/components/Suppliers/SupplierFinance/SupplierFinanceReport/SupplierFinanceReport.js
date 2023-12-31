@@ -13,7 +13,9 @@ const SupplierFinanceReport = () => {
     const url = `${process.env.REACT_APP_API_URL}/api/v1/suppliers/finance/3/financial-report/get?time=${time}&type=${type}`;
     try {
       const response = await axios.get(url);
-      const sortedReports = response.data.sort((a, b) => new Date(b.reportDate) - new Date(a.reportDate));
+      const sortedReports = response.data.sort(
+        (a, b) => new Date(b.reportDate) - new Date(a.reportDate)
+      );
       setFinanceReports(sortedReports);
     } catch (error) {
       console.error("Error fetching finance reports:", error);
@@ -56,6 +58,8 @@ const SupplierFinanceReport = () => {
             showMonthYearPicker
             placeholderText="Select a month"
             className="custom-datepicker"
+            minDate={new Date('2022-01-01')}
+            maxDate={new Date()}
           />
         ) : (
           <DatePicker
@@ -65,6 +69,11 @@ const SupplierFinanceReport = () => {
             showYearPicker
             placeholderText="Select a year"
             className="custom-datepicker"
+            // Custom filter for DatePicker to limit the available years
+            filterDate={(date) => {
+              const year = date.getFullYear();
+              return year === 2022 || year === 2023;
+            }}
           />
         )}
       </div>
