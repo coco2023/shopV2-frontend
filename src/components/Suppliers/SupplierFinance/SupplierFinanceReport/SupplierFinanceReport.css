@@ -73,3 +73,12 @@
     padding: 10px;
   }
 }
+
+thead th {
+  white-space: nowrap; /* Prevent text from wrapping */
+  padding: 10px; /* Add enough padding */
+  text-align: left; /* Align text to the left */
+  background-color: #f9f9f9; /* Give a background color */
+  border-bottom: 1px solid #ddd; /* Add a border to the bottom for separation */
+  font-weight: bold; /* Make the header text bold */
+}

@@ -37,13 +37,13 @@ const SupplierFinanceReport = () => {
           className={`tab ${reportType === "monthly" ? "active" : ""}`}
           onClick={() => setReportType("monthly")}
         >
-          Monthly Financial Reports
+          Monthly Financial Reports | 日汇总
         </button>
         <button
           className={`tab ${reportType === "yearly" ? "active" : ""}`}
           onClick={() => setReportType("yearly")}
         >
-          Yearly Financial Reports
+          Yearly Financial Reports | 月汇总
         </button>
       </div>
 
@@ -84,6 +84,20 @@ const SupplierFinanceReport = () => {
             <th>Outstanding Accounts</th>
             <th>Opening Balance</th>
             <th>Closing Balance</th>
+          </tr>
+          <tr>
+            <th>日期</th>
+            <th>到账总数</th>
+            <th>税费</th>
+            <th>服务费</th>
+            <th>其他费用</th>
+            <th>净利润</th>
+            <th>到账总额</th>
+            <th>应收账款</th>
+            <th>实收账款</th>
+            <th>未结清账款</th>
+            <th>期初余额</th>
+            <th>期末余额</th>
           </tr>
         </thead>
         <tbody>
