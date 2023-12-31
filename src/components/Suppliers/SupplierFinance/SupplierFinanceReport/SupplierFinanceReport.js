@@ -104,7 +104,7 @@ const SupplierFinanceReport = () => {
           {financeReports.map((report, index) => (
             <tr key={index}>
               <td>{report.reportDate}</td>
-              <td>{report.paymentsNumReceived.toFixed(2)}</td>
+              <td>{report.paymentsNumReceived}</td>
               <td>{report.totalTax.toFixed(2)}</td>
               <td>{report.totalServiceFee.toFixed(2)}</td>
               <td>{report.otherFees.toFixed(2)}</td>
