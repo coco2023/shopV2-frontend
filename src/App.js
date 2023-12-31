@@ -45,9 +45,9 @@ import SupplierProductPage from "./components/Suppliers/SupplierProduct/Supplier
 import SuppliersLayout from "./components/Suppliers/SuppliersLayout/SuppliersLayout";
 import SupplierSalesOrderPage from "./components/Suppliers/SupplierSalesOrder/SupplierSalesOrderPage";
 import SuppliersPayPalPayment from "./components/Suppliers/SuppliersPayPalPayment/SuppliersPayPalPayment";
-import SuppliersFinance from "./components/Suppliers/SupplierFinance/SuppliersFinance";
-import SupplierFinanceLayout from "./components/Suppliers/SupplierFinance/SupplierFinanceLayout/SupplierFinanceLayout";
-
+import SuppliersFinance from "./components/Suppliers/SupplierFinance/v1/SuppliersFinance";
+import SupplierFinanceLayout from "./components/Suppliers/SupplierFinance/v1/SupplierFinanceLayout/SupplierFinanceLayout";
+import SupplierFinanceReport from "./components/Suppliers/SupplierFinance/SupplierFinanceReport/SupplierFinanceReport";
 
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
@@ -115,8 +115,9 @@ function App() {
       <Route path="/supplier-ims/products/:supplierId" element={<SuppliersLayout><SupplierProductPage /></SuppliersLayout>} />
       <Route path="/supplier-ims/orders/:supplierId" element={<SuppliersLayout><SupplierSalesOrderPage /></SuppliersLayout>} />
       <Route path="/supplier-ims/payments/:supplierId" element={<SuppliersLayout><SuppliersPayPalPayment /></SuppliersLayout>} />
-      <Route path="/supplier-ims/finance/:supplierId/monthly" element={<SuppliersLayout><SupplierFinanceLayout><SuppliersFinance /></SupplierFinanceLayout></SuppliersLayout>} />
-      <Route path="/supplier-ims/finance/:supplierId/yearly" element={<SuppliersLayout><SupplierFinanceLayout><SuppliersFinance /></SupplierFinanceLayout></SuppliersLayout>} />
+      {/* <Route path="/supplier-ims/finance/:supplierId/monthly" element={<SuppliersLayout><SupplierFinanceLayout><SuppliersFinance /></SupplierFinanceLayout></SuppliersLayout>} />
+      <Route path="/supplier-ims/finance/:supplierId/yearly" element={<SuppliersLayout><SupplierFinanceLayout><SuppliersFinance /></SupplierFinanceLayout></SuppliersLayout>} /> */}
+      <Route path="/supplier-ims/finance/:supplierId" element={<SuppliersLayout><SupplierFinanceReport /></SuppliersLayout>} />
       </Routes>
 
       <Footer />

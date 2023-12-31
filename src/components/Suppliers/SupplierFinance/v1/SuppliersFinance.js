@@ -3,31 +3,35 @@ import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./SuppliersFinance.css";
 
 const SuppliersFinance = () => {
   const { supplierId } = useParams();
   const [financeReports, setFinanceReports] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date("2023-12-01"));
+  const [startYear, setStartYear] = useState(new Date('2023-01-01'));
+  const [dateString, setDateString] = useState(null);
   const [reportType, setReportType] = useState("monthly"); // State to hold the report type
   const location = useLocation(); // Hook to access the current location
 
-  const handleMonthChange = (date) => {
-    // Set the date to the second day of the selected month
-    const secondDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 2);
-    setStartDate(secondDayOfMonth);
+  const handleMonthlyDateChange = (date) => {
+    setDateString(
+      `${startDate.getFullYear()}/${String(startDate.getMonth() + 1).padStart(2,"0")}`
+    );
   };
 
-  // Format date to 'yyyy/MM/dd'
-  const dateString = startDate.toISOString().split("T")[0].replace(/-/g, "/");
+  const handleYearlyDateChange = (date) => {
+    setDateString(`${startDate.getFullYear()}`);
+  };
 
   const fetchReports = async () => {
     console.log("date: " + dateString, "reportType: " + reportType);
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/finance/${supplierId}/financial-report`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/finance/${supplierId}/financial-report/get`,
         {
           params: {
-            date: dateString,
+            time: dateString,
             type: reportType,
           },
         }
@@ -50,28 +54,26 @@ const SuppliersFinance = () => {
   return (
     <div className="brand-container">
       <h2>Financial Reports</h2>
-
       {reportType === "monthly" && (
         <DatePicker
           selected={startDate}
-          onChange={handleMonthChange}
-          dateFormat="yyyy/MM/dd"
+          onChange={handleMonthlyDateChange}
+          dateFormat="yyyy/MM"
           showMonthYearPicker
+          picker="month"
+          value="2023/12"
           placeholderText="Select a month"
-          // Custom filter for DatePicker to limit the available years
-          filterDate={(date) => {
-            const year = date.getFullYear();
-            return year === 2022 || year === 2023;
-          }}
+          className="custom-datepicker"
         />
       )}
       {reportType === "yearly" && (
         <DatePicker
-          selected={startDate}
-          onChange={handleMonthChange}
+          selected={startYear}
+          onChange={handleYearlyDateChange}
           dateFormat="yyyy"
           showYearPicker
           placeholderText="Select a year"
+          value="2023"
           // Custom filter for DatePicker to limit the available years
           filterDate={(date) => {
             const year = date.getFullYear();
@@ -79,7 +81,6 @@ const SuppliersFinance = () => {
           }}
         />
       )}
-
       <button onClick={fetchReports}>Generate Report</button>
 
       <table className="brand-table">

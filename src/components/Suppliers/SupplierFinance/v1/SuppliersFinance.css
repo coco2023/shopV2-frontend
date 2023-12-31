@@ -1,0 +1,80 @@
+/* DatePicker Styles */
+.custom-datepicker {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.custom-datepicker:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* DatePicker Dropdown Styles */
+.react-datepicker__month-dropdown-container--select,
+.react-datepicker__year-dropdown-container--select {
+  padding: 0.5rem;
+}
+
+/* DatePicker Header Styles */
+.react-datepicker__header {
+  background-color: white;
+  border-bottom: none;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__year-read-view--down-arrow {
+  color: #333;
+  font-weight: bold;
+}
+
+/* DatePicker Navigation Styles */
+.react-datepicker__navigation {
+  top: 1.5rem;
+}
+
+/* DatePicker Month & Year Picker Styles */
+.react-datepicker__month-picker, .react-datepicker__year-picker {
+  padding: 1rem;
+}
+
+.react-datepicker__month-text, .react-datepicker__year-text {
+  display: inline-block;
+  width: 4rem;
+  margin: 0.5rem;
+  text-align: center;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.react-datepicker__month-text:hover, .react-datepicker__year-text:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+/* DatePicker Selected Month & Year Styles */
+.react-datepicker__month-text.react-datepicker__month--selected, 
+.react-datepicker__year-text.react-datepicker__year--selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.react-datepicker__month-text.react-datepicker__month--selected:hover, 
+.react-datepicker__year-text.react-datepicker__year--selected:hover {
+  background-color: #0056b3;
+}
+
+/* Custom styles for placeholder text */
+.custom-datepicker::placeholder {
+  color: #6c757d;
+  opacity: 1; /* Override Firefox's default placeholder opacity */
+}
