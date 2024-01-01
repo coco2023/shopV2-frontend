@@ -33,7 +33,7 @@ const SupplierFinanceReport = () => {
   }, [selectedDate, reportType]);
 
   return (
-    <div className="brand-container">
+    <div className="product-container">
       <div className="tab-bar">
         <button
           className={`tab ${reportType === "monthly" ? "active" : ""}`}
@@ -78,7 +78,7 @@ const SupplierFinanceReport = () => {
         )}
       </div>
 
-      <table className="salesOrder-table">
+      <table className="product-table">
         <thead>
           <tr>
             <th>Report Date</th>
