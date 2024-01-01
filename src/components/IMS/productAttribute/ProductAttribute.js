@@ -172,7 +172,7 @@ const ProductAttributePage = () => {
     };  
 
   return (
-    <div className="productAttribute-container">
+    <div className="product-container">
       <div className="header-row">
         <h1>Product-Attribute List</h1>
 
@@ -199,7 +199,7 @@ const ProductAttributePage = () => {
         <button onClick={handleShowCreateModal}>Create Product-Attribute</button>
       </div>
 
-      <table className="productAttribute-table">
+      <table className="product-table">
         <thead>
           <tr>
             <th>Attribute ID</th>

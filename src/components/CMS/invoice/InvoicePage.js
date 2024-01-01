@@ -152,7 +152,7 @@ const InvoicePage = () => {
   };
 
   return (
-    <div className="invoice-container">
+    <div className="product-container">
       <div className="header-row">
         <h1>Invoice List</h1>
 
@@ -169,7 +169,7 @@ const InvoicePage = () => {
         <button onClick={handleShowCreateModal}>Create Invoice</button>
       </div>
 
-      <table className="invoice-table">
+      <table className="product-table">
         {/* <table className="sales-order-table"> */}
         <thead>
           <tr>

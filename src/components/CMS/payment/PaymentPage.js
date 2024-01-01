@@ -148,7 +148,7 @@ const PaymentPage = () => {
   };
 
   return (
-    <div className="brand-container">
+    <div className="product-container">
       <div className="header-row">
         <h1>Payment List</h1>
 
@@ -165,7 +165,7 @@ const PaymentPage = () => {
         <button onClick={handleShowCreateModal}>Create Payment</button>
       </div>
 
-      <table className="brand-table">
+      <table className="product-table">
         {/* <table className="sales-order-table"> */}
         <thead>
           <tr>

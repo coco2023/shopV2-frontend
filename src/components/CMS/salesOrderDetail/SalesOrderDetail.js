@@ -166,7 +166,7 @@ const SalesOrderDetailPage = () => {
   };
 
   return (
-    <div className="salesOrderDetail-container">
+    <div className="product-container">
       <div className="header-row">
         <h1>SalesOrderDetails List</h1>
 
@@ -183,7 +183,7 @@ const SalesOrderDetailPage = () => {
         <button onClick={handleShowCreateModal}>Create SalesOrderDetail</button>
       </div>
 
-      <table className="salesOrderDetail-table">
+      <table className="product-table">
         {/* <table className="sales-order-table"> */}
         <thead>
           <tr>

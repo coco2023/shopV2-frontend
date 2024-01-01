@@ -161,7 +161,7 @@ const SalesOrderPage = () => {
   };
 
   return (
-    <div className="salesOrder-container">
+    <div className="product-container">
       <div className="header-row">
         <h1>SalesOrder List</h1>
 
@@ -178,7 +178,7 @@ const SalesOrderPage = () => {
         <button onClick={handleShowCreateModal}>Create SalesOrder</button>
       </div>
 
-      <table className="salesOrder-table">
+      <table className="product-table">
         {/* <table className="sales-order-table"> */}
         <thead>
           <tr>

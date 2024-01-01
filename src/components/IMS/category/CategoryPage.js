@@ -133,7 +133,7 @@ const CategoryPage = () => {
   };
 
   return (
-    <div className="category-container">
+    <div className="product-container">
       <div className="header-row">
         <h1>Category List</h1>
 
@@ -150,7 +150,7 @@ const CategoryPage = () => {
         <button onClick={handleShowCreateModal}>Create Category</button>
       </div>
       
-      <table className="category-table">
+      <table className="product-table">
         <thead>
           <tr>
             <th>Category ID</th>

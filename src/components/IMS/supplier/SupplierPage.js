@@ -147,7 +147,7 @@ const SupplierPage = () => {
   };
 
   return (
-    <div className="supplier-container">
+    <div className="product-container">
       <div className="header-row">
         <h1>Supplier List</h1>
 
@@ -164,7 +164,7 @@ const SupplierPage = () => {
         <button onClick={handleShowCreateModal}>Create Supplier</button>
       </div>
 
-      <table className="supplier-table">
+      <table className="product-table">
         <thead>
           <tr>
             <th>Supplier ID</th>

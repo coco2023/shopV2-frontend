@@ -79,7 +79,7 @@ const SuppliersPayPalPayment = () => {
   };
 
   return (
-    <div className="brand-container">
+    <div className="product-container">
       <div className="header-row">
         <h1>Payment List</h1>
 
@@ -94,12 +94,12 @@ const SuppliersPayPalPayment = () => {
         </div>
       </div>
 
-      <table className="brand-table">
+      <table className="product-table">
         <thead>
           <tr>
             <th>Payment ID</th>
             <th>PayPal Token</th>
-            <th>Invoice SN</th>
+            {/* <th>Invoice SN</th> */}
             <th>Sales Order SN</th>
             <th>Transaction ID</th>
             <th>Payment State</th>
@@ -119,7 +119,7 @@ const SuppliersPayPalPayment = () => {
             <tr key={payment.id}>
               <td>{payment.id}</td>
               <td>{payment.paypalToken}</td>
-              <td>{payment.invoiceSn}</td>
+              {/* <td>{payment.invoiceSn}</td> */}
               <td>{payment.salesOrderSn}</td>
               <td>{payment.transactionId}</td>
               <td>{payment.paymentState}</td>

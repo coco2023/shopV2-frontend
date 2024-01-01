@@ -130,7 +130,7 @@ const BrandPage = () => {
   };
 
   return (
-    <div className="brand-container">
+    <div className="product-container">
       <div className="header-row">
         <h1>Brand List</h1>
 
@@ -147,7 +147,7 @@ const BrandPage = () => {
         <button onClick={handleShowCreateModal}>Create Brand</button>
       </div>
 
-      <table className="brand-table">
+      <table className="product-table">
         <thead>
           <tr>
             <th>Brand ID</th>
