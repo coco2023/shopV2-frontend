@@ -1,0 +1,37 @@
+.supplier-login-container {
+  max-width: 300px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.supplier-input-group {
+  margin-bottom: 10px;
+}
+
+.supplier-input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.supplier-input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.supplier-button {
+  width: 100%;
+  padding: 10px;
+  background-color: RGB(248, 130, 46);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.supplier-button:hover {
+  background-color: #0056b3;
+}

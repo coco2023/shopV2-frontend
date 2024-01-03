@@ -48,6 +48,9 @@ import SuppliersPayPalPayment from "./components/Suppliers/SuppliersPayPalPaymen
 import SuppliersFinance from "./components/Suppliers/SupplierFinance/v1/SuppliersFinance";
 import SupplierFinanceLayout from "./components/Suppliers/SupplierFinance/v1/SupplierFinanceLayout/SupplierFinanceLayout";
 import SupplierFinanceReport from "./components/Suppliers/SupplierFinance/SupplierFinanceReport/SupplierFinanceReport";
+import SupplierLogin from "./components/users/SupplierLogin/SupplierLogin";
+
+
 
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
@@ -59,6 +62,8 @@ function App() {
 
       <Routes>
         {" "}
+        <Route path="/supplierLogin" element={<SupplierLogin />} />
+
         <Route path="/" element={<Navigate replace to="/index" />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />

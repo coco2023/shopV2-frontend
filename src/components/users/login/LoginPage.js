@@ -6,6 +6,15 @@ function LoginPage() {
   const [username, setUsername] = useState("test");
   const [password, setPassword] = useState("test");
 
+  const paypalLogo = [
+    "/assets/img/paypal/PayPal_Monogram_One_Color_Transparent_RGB_White.png",
+  ];
+
+  const handleLoginWithPayPal = () => {
+    // Redirect to PayPal OAuth URL
+    window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/authorize/3`; // ${supplierId}
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // Here, you can handle the login logic or API call
@@ -35,6 +44,10 @@ function LoginPage() {
         </div>
         <div>
           <button type="submit">Login</button>
+          or
+          <button className="paypal-login-btn" onClick={handleLoginWithPayPal}>
+            <img src={paypalLogo} alt="PayPal Logo" /> Log in with PayPal
+          </button>
         </div>
       </form>
     </div>

@@ -5,6 +5,7 @@ import "./SupplierInfo.css";
 
 const SupplierInfoPage = () => {
   const [supplier, setSupplier] = useState(null);
+  const [paypalInfo, setPaypalInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { supplierId } = useParams();
@@ -23,7 +24,7 @@ const SupplierInfoPage = () => {
           `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${supplierId}`
         );
         setSupplier(response.data);
-        console.log(response.data)
+
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -31,6 +32,32 @@ const SupplierInfoPage = () => {
       }
     };
     fetchSupplierInfo();
+
+    const checkAcessTokenExit = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/paypal-info/accessTokenExit/${supplierId}`
+        );
+        console.log("accessToken: " + response.data);
+        setLoading(false);
+        return response.data; // tokenExit;
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    // should use .then for the sync aims
+    checkAcessTokenExit()
+      .then((accessTokenExists) => {
+        console.log("Access Token Exists:", accessTokenExists); // The resolved value of the Promise
+        if (accessTokenExists) {
+          fetchPayPalInfo();
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }, [supplierId]);
 
   const handleLoginWithPayPal = () => {
@@ -38,6 +65,18 @@ const SupplierInfoPage = () => {
     window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/authorize/${supplierId}`;
   };
 
+  const fetchPayPalInfo = async () => {
+    try {
+      const paypalResponse = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/paypal-info/${supplierId}`
+      );
+      setPaypalInfo(paypalResponse.data);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  // create showUpdateConfigModel
   const handleShowUpdateConfigModel = () => {
     setShowUpdateConfigModel(true);
   };
@@ -79,17 +118,10 @@ const SupplierInfoPage = () => {
             <strong>Name:</strong> {supplier.supplierName}
           </p>
           <p>
-            <strong>PayPal Name:</strong> {supplier.paypalName}
-          </p>
-          <p>
-            <strong>PayPal Email:</strong> {supplier.paypalEmail}
-          </p>
-          <p>
             <strong>Contact Info:</strong> {supplier.contactInfo}
           </p>
         </div>
       )}
-
       <button
         className="update-config-btn"
         onClick={handleShowUpdateConfigModel}
@@ -125,7 +157,22 @@ const SupplierInfoPage = () => {
         </div>
       )}
 
-      <h2>Please Connect with your paypal account</h2>
+      <h2>Your PayPal Login Account Information</h2>
+      {paypalInfo ? (
+        <div>
+          <p>
+            <strong>Email:</strong> {paypalInfo.email}
+          </p>
+          <p>
+            <strong>Name:</strong> {paypalInfo.name}
+          </p>
+        </div>
+      ) : (
+        <p>
+          Please Login! Click above to log in with PayPal and view information
+        </p>
+      )}
+
       <button className="paypal-login-btn" onClick={handleLoginWithPayPal}>
         <img src={paypalLogo} alt="PayPal Logo" /> Log in with PayPal
       </button>

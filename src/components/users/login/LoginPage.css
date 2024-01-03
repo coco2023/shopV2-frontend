@@ -48,7 +48,7 @@
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #F8822E; /* Main color for button */
+    background-color: #0056b3; /* Main color for button */
     color: white;
     cursor: pointer;
     text-transform: uppercase;
@@ -59,10 +59,24 @@
   /* Button hover and focus styles */
   #login-form button:hover,
   #login-form button:focus {
-    background-color: #cc6d1f; /* A darker shade of the main color */
+    background-color: #0056b3; /* A darker shade of the main color */
     outline: none; /* Remove focus outline */
   }
 
+  .supplier-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .supplier-button:hover {
+    background-color: #0056b3;
+  }
+  
   
 /* form {
     margin: auto;

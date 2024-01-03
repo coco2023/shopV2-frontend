@@ -75,7 +75,7 @@ const Footer = () => {
 
       <div class="footer-bottom">
         <div class="footer-legal">
-          <p>© 2023 UmiUni Inc.</p>
+          <p>© 2024 UmiUni Inc.</p>
           <a href="#">Terms of use</a>
           <a href="#">Privacy policy</a>
           <a href="#">Your privacy choices</a>
