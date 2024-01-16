@@ -52,6 +52,12 @@ const SupplierProductPage = () => {
   const offset = currentPage * itemsPerPage;
   const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
 
+  const token = localStorage.getItem("token");
+  console.log("token: " + token)
+  if (!token) {
+    throw new Error("No token provided.");
+  }
+
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
@@ -86,7 +92,12 @@ const SupplierProductPage = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/products/all`
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/products/all`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          }
+        }
       );
       setProducts(response.data);
     } catch (error) {

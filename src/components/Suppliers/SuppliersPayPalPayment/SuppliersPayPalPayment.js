@@ -17,6 +17,11 @@ const SuppliersPayPalPayment = () => {
   const [currentPage, setCurrentPage] = useState(0); // Current page for pagination
   const itemsPerPage = 20; // Number of items to display per page
 
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token provided.");
+  }
+
   useEffect(() => {
     // Fetch all payments when the component mounts
     fetchPayments();
@@ -33,7 +38,12 @@ const SuppliersPayPalPayment = () => {
   const fetchPayments = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/${supplierId}/all`
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/${supplierId}/all`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          }
+        }
       );
       setPayments(response.data);
     } catch (error) {
@@ -58,7 +68,12 @@ const SuppliersPayPalPayment = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/${supplierId}/payment/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/${supplierId}/payment/${searchId}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          }
+        }
       );
       const foundPayment = response.data;
 

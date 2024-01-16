@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./SupplierInfo.css";
 
@@ -7,7 +7,15 @@ const SupplierInfoPage = () => {
   const [supplier, setSupplier] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const { supplierId } = useParams();
+  // Assuming the URL is http://localhost:3000/supplier-ims?token=jwtTokenHere
+  const queryParams = new URLSearchParams(window.location.search);
+  const token = localStorage.getItem("token");
+  console.log("token here: " + token)
+  if (!token) {
+    throw new Error("No token provided.");
+  }
   const paypalLogo = [
     "/assets/img/paypal/PayPal_Monogram_One_Color_Transparent_RGB_White.png",
   ];
@@ -17,13 +25,19 @@ const SupplierInfoPage = () => {
   const [showUpdateConfigModel, setShowUpdateConfigModel] = useState(false);
 
   useEffect(() => {
+    console.log("id: " + supplierId, "token: " + token)
     const fetchSupplierInfo = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${supplierId}`
+          `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${supplierId}`,
+          {
+            headers: {
+              Authorization: `${token}`, // Add the JWT token in the Authorization header
+            },
+          }
         );
         setSupplier(response.data);
-        console.log(response.data)
+        console.log(response.data);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -52,6 +66,9 @@ const SupplierInfoPage = () => {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/suppliers/configure-paypal/${supplierId}`,
         {
+          headers: {
+            'Authorization': `Bearer ${token}` // Add the JWT token in the Authorization header
+          },
           paypalClientId: clientId,
           paypalClientSecret: clientSecret,
         }

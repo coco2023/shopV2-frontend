@@ -18,6 +18,11 @@ const SupplierSalesOrderPage = () => {
     paymentMethod: "",
   });
 
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token provided.");
+  }
+
   const [selectedSalesOrder, setSelectedSalesOrder] = useState(null);
   const [searchId, setSearchId] = useState("");
   const [filteredSalesOrders, setFilteredSalesOrders] = useState([]);
@@ -63,7 +68,12 @@ const SupplierSalesOrderPage = () => {
   const fetchBrands = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/all`
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/all`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          }
+        }
       );
       setSalesOrders(response.data);
     } catch (error) {
@@ -98,7 +108,12 @@ const SupplierSalesOrderPage = () => {
     try {
       await axios.put(
         `${process.env.REACT_APP_API_URL}api/v1/suppliers/salesOrders/${supplierId}/${selectedSalesOrder.salesOrderId}`,
-        salesOrder
+        salesOrder,
+        {
+          headers: {
+            Authorization: `${token}`,
+          }
+        }
       );
       fetchBrands();
       setSelectedSalesOrder(null);
@@ -110,7 +125,13 @@ const SupplierSalesOrderPage = () => {
 
   const handleDeleteSalesOrder = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${id}`,
+      {
+        headers: {
+          Authorization: `${token}`,
+        }
+      }
+      );
       fetchBrands();
     } catch (error) {
       console.error("Error deleting SalesOrder:", error);
@@ -121,7 +142,12 @@ const SupplierSalesOrderPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${searchId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${searchId}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+          }
+        }
       );
       const foundSalesOrder = response.data;
 

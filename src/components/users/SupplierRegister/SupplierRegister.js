@@ -1,73 +1,66 @@
 import React, { useState } from "react";
-import "./SupplierLogin.css"; // Assuming you have a CSS file for styling
 import axios from "axios";
+import "./SupplierRegistration.css";
 import { useNavigate } from "react-router-dom"; // Import useHistory for redirection
 
-const SupplierLogin = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [requestBody, setRequestBody] = useState({
+const SupplierRegistration = () => {
+  const [formData, setFormData] = useState({
     username: "",
     password: "",
-    roleName: "SUPPLIER",
+    email: "",
+    roleName: "",
   });
+  const [message, setMessage] = useState("");
   const navigation = useNavigate(); // Initialize useHistory hook
 
   const paypalLogo = [
     "/assets/img/paypal/PayPal_Monogram_One_Color_Transparent_RGB_White.png",
   ];
 
-  const handleLoginWithPayPal = () => {
-    // Redirect to PayPal OAuth URL
-    // window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/login`; // ${supplierId}
-    window.location.href = `${process.env.REACT_APP_API_URL}/oauth2/authorization/paypal`;
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setRequestBody((prevState) => ({
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const handleLogin = async (event) => {
-    console.log("requestBody: " + requestBody.roleName);
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/user/login`,
-        `${process.env.REACT_APP_API_URL}/api/auth/login`,
-        requestBody
+        `${process.env.REACT_APP_API_URL}/api/auth/register`,
+        formData
       );
-      // Handle response, store token, redirect, etc.
-      console.log("response.data: " + response.data);
-      // Store the token in local storage or in-memory storage
-      localStorage.setItem("token", `Bearer ` + response.data.token); // Store the token
-      
-      // Extract supplier ID from the response if available or set a default
-      const supplierId = response.data.supplierId;
-
-      // Redirect to the supplier profile page
-      navigation(`/supplier/profile/${supplierId}?token=${response.data.token}`); // Redirect to the profile page
-
+      setMessage("Registration successful");
+      console.log(response.data);
+      // Redirect to login or other appropriate page
+      navigation(`/supplierLogin`)
     } catch (error) {
-      console.error("Login error", error);
-      // Handle error
+      setMessage(
+        "Registration failed: " +
+          (error.response?.data?.message || "Unknown error")
+      );
+      console.error("Error during registration:", error.response);
     }
+  };
+
+  const handleLoginWithPayPal = () => {
+    // Redirect to PayPal OAuth URL
+    window.location.href = `${process.env.REACT_APP_API_URL}/oauth2/authorization/paypal`;
   };
 
   return (
     <div className="registration-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+      <h2>Register Account</h2>
+      <form onSubmit={handleSubmit}>
         <div>
           {/* <label>Username:</label> */}
           <input
             type="text"
             name="username"
             placeholder="username"
-            value={requestBody.username}
+            value={formData.username}
             onChange={handleChange}
             required
           />
@@ -78,19 +71,30 @@ const SupplierLogin = () => {
             type="password"
             name="password"
             placeholder="password"
-            value={requestBody.password}
+            value={formData.password}
             onChange={handleChange}
             required
           />
         </div>
-        {/* <div>
+        <div>
+          {/* <label>Email:</label> */}
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
           <label>Role:</label>
           <label>
             <input
               type="radio"
               name="roleName"
               value="SUPPLIER"
-              checked={requestBody.roleName === "SUPPLIER"}
+              checked={formData.roleName === "SUPPLIER"}
               onChange={handleChange}
               required
             />
@@ -101,7 +105,7 @@ const SupplierLogin = () => {
               type="radio"
               name="roleName"
               value="CUSTOMER"
-              checked={requestBody.roleName === "CUSTOMER"}
+              checked={formData.roleName === "CUSTOMER"}
               onChange={handleChange}
             />
             Customer
@@ -111,7 +115,7 @@ const SupplierLogin = () => {
               type="radio"
               name="roleName"
               value="ADMIN"
-              checked={requestBody.roleName === "ADMIN"}
+              checked={formData.roleName === "ADMIN"}
               onChange={handleChange}
             />
             Admin
@@ -121,21 +125,22 @@ const SupplierLogin = () => {
               type="radio"
               name="roleName"
               value="TESTER"
-              checked={requestBody.roleName === "TESTER"}
+              checked={formData.roleName === "TESTER"}
               onChange={handleChange}
             />
             Tester
           </label>
-        </div> */}
+        </div>
 
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
       or
       <button className="paypal-login-btn" onClick={handleLoginWithPayPal}>
-        <img src={paypalLogo} alt="PayPal Logo" /> Log in via PayPal
+        <img src={paypalLogo} alt="PayPal Logo" /> Register with PayPal
       </button>
+      {message && <p>{message}</p>}
     </div>
   );
 };
 
-export default SupplierLogin;
+export default SupplierRegistration;

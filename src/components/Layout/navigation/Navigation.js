@@ -36,7 +36,10 @@ const Navigation = () => {
             ⚖️ Reconcile
           </Link>
           <Link className="nav-link" to="/supplierLogin">
-            🔒 SupplierLogin
+            🔒 Login
+          </Link>
+          <Link className="nav-link" to="/register">
+            🔒 Register
           </Link>
           <Link className="nav-link" to="/supplier-ims/3">
             🏠 Supplier Auth

@@ -49,7 +49,9 @@ import SuppliersFinance from "./components/Suppliers/SupplierFinance/v1/Supplier
 import SupplierFinanceLayout from "./components/Suppliers/SupplierFinance/v1/SupplierFinanceLayout/SupplierFinanceLayout";
 import SupplierFinanceReport from "./components/Suppliers/SupplierFinance/SupplierFinanceReport/SupplierFinanceReport";
 import SupplierLogin from "./components/users/SupplierLogin/SupplierLogin";
-
+import SupplierDashboard from "./components/Suppliers/SupplierDashboard/SupplierDashboard3";
+import SupplierRegistration from "./components/users/SupplierRegister/SupplierRegister";
+import LoginFailure from "./components/users/SupplierLogin/LoginFailure";
 
 
 // Initialize Stripe outside of the component
@@ -63,6 +65,9 @@ function App() {
       <Routes>
         {" "}
         <Route path="/supplierLogin" element={<SupplierLogin />} />
+        <Route path="/register" element={<SupplierRegistration />} />
+        <Route path="/supplier/profile/:supplierId" element={<SupplierDashboard />} />
+        {/* <Route path="/login-failure" element={LoginFailure} /> */}
 
         <Route path="/" element={<Navigate replace to="/index" />} />
         <Route path="/login" element={<LoginPage />} />
