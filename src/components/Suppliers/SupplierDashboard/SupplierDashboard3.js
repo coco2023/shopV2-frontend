@@ -17,12 +17,18 @@ const SupplierDashboard = () => {
   useEffect(() => {
     const fetchSupplierData = async () => {
       const queryParams = new URLSearchParams(window.location.search);
+      // // Attention: here will get the network error if use token
+      // const token = localStorage.getItem("token");
+      // console.log("***token: " + token);
+
+      console.log("this is the token: " + token)
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${supplierId}`,
+          // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${supplierId}`,
+          `${process.env.REACT_APP_API_URL}/api/v1/suppliers/auth/info`,
           {
             headers: {
-              Authorization: `Bearer ` + queryParams.get("token"),
+              Authorization: `Bearer ` + queryParams.get("token"), // token Attention: here will get the network error if use token
             },
           }
         );

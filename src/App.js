@@ -50,6 +50,7 @@ import SupplierFinanceLayout from "./components/Suppliers/SupplierFinance/v1/Sup
 import SupplierFinanceReport from "./components/Suppliers/SupplierFinance/SupplierFinanceReport/SupplierFinanceReport";
 import SupplierLogin from "./components/users/SupplierLogin/SupplierLogin";
 import SupplierDashboard from "./components/Suppliers/SupplierDashboard/SupplierDashboard3";
+import AuthMiddlewarePage from "./components/Suppliers/SupplierJWT/JWTStorage";
 import SupplierRegistration from "./components/users/SupplierRegister/SupplierRegister";
 import LoginFailure from "./components/users/SupplierLogin/LoginFailure";
 
@@ -66,7 +67,8 @@ function App() {
         {" "}
         <Route path="/supplierLogin" element={<SupplierLogin />} />
         <Route path="/register" element={<SupplierRegistration />} />
-        <Route path="/supplier/profile/:supplierId" element={<SupplierDashboard />} />
+        <Route path="/supplier/midpage" element={<AuthMiddlewarePage />} />
+        <Route path="/supplier/profile" element={<SupplierDashboard />} />
         {/* <Route path="/login-failure" element={LoginFailure} /> */}
 
         <Route path="/" element={<Navigate replace to="/index" />} />
