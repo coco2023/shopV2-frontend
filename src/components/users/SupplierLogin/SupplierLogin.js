@@ -43,7 +43,7 @@ const SupplierLogin = () => {
       // Handle response, store token, redirect, etc.
       console.log("response.data: " + response.data);
       // Store the token in local storage or in-memory storage
-      localStorage.setItem("token", `Bearer ` + response.data.token); // Store the token
+      localStorage.setItem("token", response.data.token); // Store the token: no `Bearer `
       
       // Extract supplier ID from the response if available or set a default
       const supplierId = response.data.supplierId;

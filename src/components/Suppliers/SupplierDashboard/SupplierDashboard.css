@@ -1,0 +1,69 @@
+/* SupplierDashboard.css */
+.supplier-dashboard {
+  font-family: "Arial", sans-serif;
+  color: #333;
+  background-color: #faf7f7;
+  padding: 20px;
+}
+
+.balance-info {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.balance-info span {
+  display: block;
+  color: #888;
+  font-size: 1.2rem;
+}
+
+.balance-info h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.action-panel {
+  width: 100%;
+}
+
+.temu-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.temu-logo {
+  flex: 1;
+  display: flex;
+  width: 100px;
+  height: 79px;
+  background-size: cover;
+  background-position: center;
+}
+
+.temu-button {
+  padding: 10px 20px;
+  background-color: #ff5252;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.temu-button:hover {
+  background-color: #ff6161;
+}
