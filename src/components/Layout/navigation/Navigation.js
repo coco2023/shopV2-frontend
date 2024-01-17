@@ -41,6 +41,9 @@ const Navigation = () => {
           <Link className="nav-link" to="/register">
             🔒 Register
           </Link>
+          <Link className="nav-link" to="/supplier/profile">
+            🏠 Supplier 
+          </Link>
           <Link className="nav-link" to="/supplier-ims/3">
             🏠 Supplier Auth
           </Link>

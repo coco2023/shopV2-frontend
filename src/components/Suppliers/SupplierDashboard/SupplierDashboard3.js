@@ -9,18 +9,13 @@ const SupplierDashboard = () => {
   const { supplierId } = useParams();
   const token = localStorage.getItem("token");
   console.log("***token: " + token);
-  // if (!token) {
-  //   throw new Error("No token provided.");
-  // }
-
   const [paypalToken, setPaypalToken] = useState(null);
+
   useEffect(() => {
+    
     const fetchSupplierData = async () => {
       const queryParams = new URLSearchParams(window.location.search);
       // // Attention: here will get the network error if use token
-      // const token = localStorage.getItem("token");
-      // console.log("***token: " + token);
-
       console.log("this is the token: " + token)
       try {
         const response = await axios.get(
@@ -28,7 +23,7 @@ const SupplierDashboard = () => {
           `${process.env.REACT_APP_API_URL}/api/v1/suppliers/auth/info`,
           {
             headers: {
-              Authorization: `Bearer ` + queryParams.get("token"), // token Attention: here will get the network error if use token
+              Authorization: localStorage.getItem("token") || `Bearer ${queryParams.get("token")}`, // `Bearer ${token}`, //`Bearer ` + queryParams.get("token"), // token Attention: here will get the network error if use token
             },
           }
         );
