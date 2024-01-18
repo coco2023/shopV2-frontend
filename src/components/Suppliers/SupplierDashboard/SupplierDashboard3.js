@@ -14,13 +14,11 @@ const SupplierDashboard = () => {
   const pageurl = "/assets/img/umiuni/logo/logo300x83.png";
 
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem("token");
-    console.log("***token: " + token);
   
     const fetchSupplierData = async () => {
       const queryParams = new URLSearchParams(window.location.search);
-      // // Attention: here will get the network error if use token
-      console.log("this is the token: " + token);
       try {
         const response = await axios.get(
           // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${supplierId}`,
