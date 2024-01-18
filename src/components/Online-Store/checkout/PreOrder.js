@@ -33,7 +33,7 @@ const PreOrder = () => {
     shippingAddress: "1010 W Green St",
     billingAddress: "1010 W Green St",
     orderStatus: "PENDING",
-    paymentMethod: "PayPal",
+    paymentMethod: null,
     customerName: "tester12",
     customerEmail: "test@gmail.com",
     paymentProcessed: true,
@@ -140,7 +140,7 @@ const PreOrder = () => {
         if (!stripe || !elements) {
           return;
         }
-
+        preOrderData.paymentMethod = "Stripe";
         const cardElement = elements.getElement(CardElement);
         const { error, token } = await stripe.createToken(cardElement);
 
@@ -171,7 +171,8 @@ const PreOrder = () => {
             console.error("An error occurred:", error);
           });
       } else if (preOrderData.paymentMethod === "PayPal") {
-        console.log("payPal:")
+        preOrderData.paymentMethod = "PayPal";
+
         // create SalesOrder
         const salesOrderResponse = createSalesOrder(
           preOrderData,
