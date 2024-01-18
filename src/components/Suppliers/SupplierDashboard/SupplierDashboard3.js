@@ -8,13 +8,15 @@ const SupplierDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { supplierId } = useParams();
-  const token = localStorage.getItem("token");
-  console.log("***token: " + token);
   const [paypalToken, setPaypalToken] = useState(null);
+  const navigation = useNavigate(); // Initialize useHistory hook
 
   const pageurl = "/assets/img/umiuni/logo/logo300x83.png";
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log("***token: " + token);
+  
     const fetchSupplierData = async () => {
       const queryParams = new URLSearchParams(window.location.search);
       // // Attention: here will get the network error if use token
@@ -33,7 +35,7 @@ const SupplierDashboard = () => {
         );
         setSupplierData(response.data);
       } catch (err) {
-        setError(err.message);
+        setError(err.message + ",  Please Login First!");
       } finally {
         setLoading(false);
       }
@@ -51,6 +53,10 @@ const SupplierDashboard = () => {
       localStorage.setItem("token", paypalToken);
     }
   }, []);
+
+  const redirectToIMS = () => {
+    navigation('/supplier-ims');
+  };
 
   if (loading) {
     return <div>Loading your dashboard...</div>;
@@ -83,7 +89,7 @@ const SupplierDashboard = () => {
         <div className="temu-logo">
           <img src={pageurl} alt="Logo" />
         </div>
-        <button className="temu-button">进入</button>
+        <button className="temu-button" onClick={redirectToIMS}>进入</button>
       </div>
     </div>
   );

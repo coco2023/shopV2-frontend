@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const SupplierSideBar = () => {
+const SupplierSideBar2 = () => {
   return (
     <div className="sidebar">
       <NavLink to="/supplier-ims" activeClassName="active">Authorize</NavLink>
@@ -14,4 +14,4 @@ const SupplierSideBar = () => {
   );
 };
 
-export default SupplierSideBar;
+export default SupplierSideBar2;

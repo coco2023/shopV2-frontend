@@ -68,10 +68,11 @@ const SupplierSalesOrderPage = () => {
   const fetchBrands = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/all`,
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/all`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/all`,
         {
           headers: {
-            Authorization: `${token}`,
+            Authorization: `Bearer ${token}`,
           }
         }
       );
@@ -107,11 +108,13 @@ const SupplierSalesOrderPage = () => {
   const handleEditBrand = async () => {
     try {
       await axios.put(
-        `${process.env.REACT_APP_API_URL}api/v1/suppliers/salesOrders/${supplierId}/${selectedSalesOrder.salesOrderId}`,
+        // `${process.env.REACT_APP_API_URL}api/v1/suppliers/salesOrders/${supplierId}/${selectedSalesOrder.salesOrderId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${selectedSalesOrder.salesOrderId}`,
         salesOrder,
         {
           headers: {
-            Authorization: `${token}`,
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           }
         }
       );
@@ -125,10 +128,12 @@ const SupplierSalesOrderPage = () => {
 
   const handleDeleteSalesOrder = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${id}`,
+      // await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${id}`,
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${id}`,
       {
         headers: {
-          Authorization: `${token}`,
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         }
       }
       );
@@ -142,10 +147,11 @@ const SupplierSalesOrderPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${searchId}`,
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${searchId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${searchId}`,
         {
           headers: {
-            Authorization: `${token}`,
+            Authorization: `Bearer ${token}`,
           }
         }
       );

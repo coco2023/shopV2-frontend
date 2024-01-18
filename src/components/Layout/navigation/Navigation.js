@@ -44,7 +44,7 @@ const Navigation = () => {
           <Link className="nav-link" to="/supplier/profile">
             🏠 Supplier 
           </Link>
-          <Link className="nav-link" to="/supplier-ims/3">
+          <Link className="nav-link" to="/supplier-ims/finance/3">
             🏠 Supplier Auth
           </Link>
           <Link className="nav-link" to="/brand">

@@ -38,10 +38,11 @@ const SuppliersPayPalPayment = () => {
   const fetchPayments = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/${supplierId}/all`,
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/${supplierId}/all`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/all`,
         {
           headers: {
-            Authorization: `${token}`,
+            Authorization: `Bearer ${token}`,
           }
         }
       );
@@ -68,7 +69,8 @@ const SuppliersPayPalPayment = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/${supplierId}/payment/${searchId}`,
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/${supplierId}/payment/${searchId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/payments/payment/${searchId}`,
         {
           headers: {
             Authorization: `${token}`,

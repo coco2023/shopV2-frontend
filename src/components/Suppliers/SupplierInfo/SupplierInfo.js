@@ -29,27 +29,54 @@ const SupplierInfoPage = () => {
     const fetchSupplierInfo = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${supplierId}`,
+          // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${supplierId}`,
+          `${process.env.REACT_APP_API_URL}/api/v1/suppliers`,
           {
             headers: {
-              Authorization: `${token}`, // Add the JWT token in the Authorization header
+              Authorization: `Bearer ${token}`, // Add the JWT token in the Authorization header
             },
           }
         );
         setSupplier(response.data);
-        console.log(response.data);
         setLoading(false);
       } catch (err) {
-        setError(err.message);
+        setError(err.message + ",  Please Login First!");
         setLoading(false);
       }
     };
     fetchSupplierInfo();
   }, [supplierId]);
 
-  const handleLoginWithPayPal = () => {
+  const handleLoginWithPayPal1 = () => {
     // Redirect to PayPal OAuth URL
     window.location.href = `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/authorize/${supplierId}`;
+  };
+
+  const handleLoginWithPayPal = () => {
+    // Redirect to PayPal OAuth URL
+    const url = `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/authorize`;
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Handle the data from the response
+      console.log(data);
+    })
+    .catch(error => {
+      // Handle any errors
+      console.error('There was an error with the auth request:', error);
+    });
+  
   };
 
   const handleShowUpdateConfigModel = () => {
@@ -64,7 +91,8 @@ const SupplierInfoPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/suppliers/configure-paypal/${supplierId}`,
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/suppliers/configure-paypal/${supplierId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/v2/suppliers/configure-paypal`,
         {
           headers: {
             'Authorization': `Bearer ${token}` // Add the JWT token in the Authorization header

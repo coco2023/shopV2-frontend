@@ -44,13 +44,14 @@ const SupplierLogin = () => {
       console.log("response.data: " + response.data);
       // Store the token in local storage or in-memory storage
       localStorage.setItem("token", response.data.token); // Store the token: no `Bearer `
-      
+
       // Extract supplier ID from the response if available or set a default
       const supplierId = response.data.supplierId;
 
       // Redirect to the supplier profile page
-      navigation(`/supplier/profile/${supplierId}?token=${response.data.token}`); // Redirect to the profile page
-
+      navigation(
+        `/supplier/profile/${supplierId}?token=${response.data.token}`
+      ); // Redirect to the profile page
     } catch (error) {
       console.error("Login error", error);
       // Handle error
@@ -134,6 +135,11 @@ const SupplierLogin = () => {
       <button className="paypal-login-btn" onClick={handleLoginWithPayPal}>
         <img src={paypalLogo} alt="PayPal Logo" /> Log in via PayPal
       </button>
+      <p>
+        PayPal Test Account: <br />
+        email:sb-z9ugk28934884@business.example.com <br />
+        password:A,wq0(1#
+      </p>
     </div>
   );
 };
