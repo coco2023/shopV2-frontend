@@ -49,7 +49,7 @@ import SuppliersFinance from "./components/Suppliers/SupplierFinance/v1/Supplier
 import SupplierFinanceLayout from "./components/Suppliers/SupplierFinance/v1/SupplierFinanceLayout/SupplierFinanceLayout";
 import SupplierFinanceReport from "./components/Suppliers/SupplierFinance/SupplierFinanceReport/SupplierFinanceReport";
 import SupplierLogin from "./components/users/SupplierLogin/SupplierLogin";
-import SupplierDashboard from "./components/Suppliers/SupplierDashboard/SupplierDashboard3";
+import SupplierDashboard from "./components/Suppliers/SupplierDashboard/SupplierDashboard";
 import AuthMiddlewarePage from "./components/Suppliers/SupplierJWT/JWTStorage";
 import SupplierRegistration from "./components/users/SupplierRegister/SupplierRegister";
 import LoginFailure from "./components/users/SupplierLogin/LoginFailure";

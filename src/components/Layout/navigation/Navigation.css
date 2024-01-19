@@ -234,10 +234,41 @@ input[type="text"] {
 .dropdown-link {
   display: block;
   padding: 8px 16px;
-  color: #333; /* Example color */
+  color: #3b3939; /* Example color */
   text-decoration: none;
 }
 
 .dropdown-link:hover {
   background-color: #eaeaea; /* Example hover background color */
+}
+
+.github-project a {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 0 8px;
+  background-color: #333; /* GitHub's color */
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.github-project a:hover,
+.github-project a:focus {
+  background-color: #545151; /* A lighter GitHub color for hover state */
+  color: #fff;
+  text-decoration: none; /* Ensures the text isn't underlined when hovered */
+}
+
+.github-project img {
+  vertical-align: middle; /* Aligns the icon with the text */
+  margin-right: 8px; /* Spacing between the icon and the text */
+}
+
+.github-logo {
+  width: 40px; /* Adjust the size as needed */
+  height: auto; /* This will maintain the aspect ratio */
+  vertical-align: middle; /* To align the image with the text */
 }

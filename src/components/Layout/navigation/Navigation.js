@@ -46,6 +46,18 @@ const Navigation = () => {
           UmiUni
         </div>
 
+        <div className="github-project">
+          <img src="/assets/img/PaymentCheckout/github-mark.svg" alt="GitHub" class="github-logo" />
+          <a href="https://github.com/coco2023/shopV2-backend" target="_blank" rel="noopener noreferrer">
+            [backend]
+          </a>
+          | 
+          <a href="https://github.com/coco2023/shopV2-frontend" target="_blank" rel="noopener noreferrer">
+              [frontend]
+          </a>
+          | View On Github
+        </div>
+
         {/* <div className="nav-search">
           <input className="search-input" type="text" placeholder="Search..." />
           <button className="search-button">🔍</button>
@@ -55,6 +67,9 @@ const Navigation = () => {
         <div className="nav-menu">
           <Link className="nav-link" to="/reconcile">
             ⚖️ Reconcile
+          </Link>
+          <Link className="nav-link" to="/supplier-ims/finance/3">
+            💰 Finance
           </Link>
 
           {/* Drop button to show user selections */}
@@ -102,8 +117,8 @@ const Navigation = () => {
           <Link className="nav-link" to="/brand">
             🏠 ERP
           </Link>
-          <Link className="nav-link" to="/supplier-ims/finance/3">
-            💰 Finance
+          <Link className="nav-link" to="/Register">
+            🔒 Register
           </Link>
           <Link className="nav-link" to="/error-logs">
             ❌ Payment Error Log

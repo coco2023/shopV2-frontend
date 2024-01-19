@@ -33,7 +33,7 @@ const PreOrder = () => {
     shippingAddress: "1010 W Green St",
     billingAddress: "1010 W Green St",
     orderStatus: "PENDING",
-    paymentMethod: null,
+    paymentMethod: "PayPal",
     customerName: "tester12",
     customerEmail: "test@gmail.com",
     paymentProcessed: true,
@@ -186,7 +186,6 @@ const PreOrder = () => {
             // Store data in session storage; use for: PayPalCompletePayment
             sessionStorage.setItem('salesOrderData', JSON.stringify(salesOrderData));
             sessionStorage.setItem('salesOrderDetailData', JSON.stringify(salesOrderDetailData));
-            // sessionStorage.setItem('supplierId', JSON.stringify(salesOrderData.supplierId));
             console.log("***salesOrder Data to PayPal: " + JSON.stringify(salesOrderData));
 
             const redirectUrl = await processPaymentWithPayPal(salesOrderData);
@@ -291,7 +290,7 @@ const PreOrder = () => {
             value={preOrderData.billingAddress}
             onChange={handleInputPreOrderChange}
           />
-          Payment Method:
+          {/* Payment Method:
           <select
             id="paymentMethod"
             name="paymentMethod"
@@ -304,8 +303,7 @@ const PreOrder = () => {
             <option value="PNC">PNC</option>
             <option value="AliPay">AliPay</option>
             <option value="WeChatPay">WeChatPay</option>
-            {/* Add more payment methods as needed */}
-          </select>
+          </select> */}
         </div>
       </div>
 
@@ -353,6 +351,25 @@ const PreOrder = () => {
             We invite you to plant a tree for $0.25
           </label>
         </div>
+
+        <div className="order-summary">
+          <br />
+        <h3>Select Your Payment Method</h3>
+
+          {/* <select
+            id="paymentMethod"
+            name="paymentMethod"
+            value={preOrderData.paymentMethod}
+            onChange={handleInputPreOrderChange}
+          >
+            <option value="Credit Card">Credit Card</option>
+            <option value="Stripe">Stripe</option>
+            <option value="PayPal">PayPal</option>
+            <option value="PNC">PNC</option>
+            <option value="AliPay">AliPay</option>
+            <option value="WeChatPay">WeChatPay</option>
+          </select> */}
+        
         <Elements stripe={stripePromise}>
           <StripeCheckoutForm />
         </Elements>
@@ -365,6 +382,82 @@ const PreOrder = () => {
 
         </p>
 
+          <div className="payment-methods">
+
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="PayPal"
+              checked={preOrderData.paymentMethod === "PayPal"}
+              onChange={handleInputPreOrderChange}
+            />
+            <img src="/assets/img/PaymentCheckout/paypal.svg" alt="PayPal" />
+          </label>
+          <br />
+          <br />
+
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="Stripe"
+              checked={preOrderData.paymentMethod === "Stripe"}
+              onChange={handleInputPreOrderChange}
+            />
+            <img src="/assets/img/PaymentCheckout/stripe2.svg" alt="Stripe" />
+            Credit Card
+          </label>
+          <br />
+          <br />
+
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="AliPay"
+              checked={preOrderData.paymentMethod === "AliPay"}
+              onChange={handleInputPreOrderChange}
+              disabled 
+            />
+            <img className="payment-logo" src="/assets/img/PaymentCheckout/alipay.png" alt="AliPay" />
+            AliPay (Coming Soon!)
+          </label>
+          <br />
+          <br />
+
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="Klarna"
+              checked={preOrderData.paymentMethod === "Klarna"}
+              onChange={handleInputPreOrderChange}
+              disabled 
+            />
+            <img className="payment-logo" src="/assets/img/PaymentCheckout/klarna.svg" alt="Klarna" />
+            Klarna (Coming Soon!)
+          </label>
+          <br />
+          <br />
+
+          <label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="WeChatPay"
+              checked={preOrderData.paymentMethod === "WeChatPay"}
+              onChange={handleInputPreOrderChange}
+              disabled 
+            />
+            <img className="payment-logo" src="/assets/img/PaymentCheckout/wechat.png" alt="WeChat Pay" />
+            WeChat Pay (Coming Soon!)
+          </label>
+          <br />
+          <br />
+
+        </div>
+        </div>
       </div>
     </div>
   );
