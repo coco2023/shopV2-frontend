@@ -9,7 +9,7 @@ const SupplierLogin = () => {
   const [requestBody, setRequestBody] = useState({
     username: "",
     password: "",
-    roleName: "SUPPLIER",
+    roleName: "",
   });
   const navigation = useNavigate(); // Initialize useHistory hook
 
@@ -23,6 +23,10 @@ const SupplierLogin = () => {
     window.location.href = `${process.env.REACT_APP_API_URL}/oauth2/authorization/paypal`;
   };
 
+  const redirectToRegisterPage = () => {
+    navigation("/register")
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRequestBody((prevState) => ({
@@ -32,7 +36,6 @@ const SupplierLogin = () => {
   };
 
   const handleLogin = async (event) => {
-    console.log("requestBody: " + requestBody.roleName);
     event.preventDefault();
     try {
       const response = await axios.post(
@@ -45,14 +48,17 @@ const SupplierLogin = () => {
       // Store the token in local storage or in-memory storage
       localStorage.setItem("token", response.data.token); // Store the token: no `Bearer `
 
-      // Extract supplier ID from the response if available or set a default
-      const supplierId = response.data.supplierId;
-
+    console.log(requestBody.roleName)
+    if (requestBody.roleName === "SUPPLIER") {
       // Redirect to the supplier profile page
-      navigation(
-        `/supplier/profile/${supplierId}?token=${response.data.token}`
-      ); // Redirect to the profile page
-    } catch (error) {
+      navigation(`/supplier/profile?token=${response.data.token}`);
+    } 
+    
+    if (requestBody.roleName === "CUSTOMER") {
+      navigation(`/index`);
+    }
+
+     } catch (error) {
       console.error("Login error", error);
       // Handle error
     }
@@ -84,7 +90,7 @@ const SupplierLogin = () => {
             required
           />
         </div>
-        {/* <div>
+        <div>
           <label>Role:</label>
           <label>
             <input
@@ -107,7 +113,7 @@ const SupplierLogin = () => {
             />
             Customer
           </label>
-          <label>
+          {/* <label>
             <input
               type="radio"
               name="roleName"
@@ -126,20 +132,22 @@ const SupplierLogin = () => {
               onChange={handleChange}
             />
             Tester
-          </label>
-        </div> */}
+          </label> */}
+        </div>
 
         <button type="submit">Login</button>
       </form>
       or
       <button className="paypal-login-btn" onClick={handleLoginWithPayPal}>
-        <img src={paypalLogo} alt="PayPal Logo" /> Log in via PayPal
+        <img src={paypalLogo} alt="PayPal Logo" /> Login via PayPal
       </button>
       <p>
         PayPal Test Account: <br />
         email:sb-z9ugk28934884@business.example.com <br />
         password:A,wq0(1#
       </p>
+
+      <button className="paypal-login-btn" onClick={redirectToRegisterPage}>Haven't had an Account? Click to Register</button>
     </div>
   );
 };

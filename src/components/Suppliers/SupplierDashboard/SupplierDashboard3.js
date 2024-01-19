@@ -76,8 +76,8 @@ const SupplierDashboard = () => {
       </header>
 
       <div className="balance-info">
-        <span>账户余额(余额)</span>
-        <h1>¥ 0.00</h1>
+        <span>账户余额(余额) | Account Balance (Balance)</span>
+        <h1>¥ 1000.00</h1>
         {/* // Add any buttons or links that are necessary */}
       </div>
       <div className="action-panel">
@@ -87,7 +87,7 @@ const SupplierDashboard = () => {
         <div className="temu-logo">
           <img src={pageurl} alt="Logo" />
         </div>
-        <button className="temu-button" onClick={redirectToIMS}>进入</button>
+        <button className="temu-button" onClick={redirectToIMS}>进入 | Enter Main Page</button>
       </div>
     </div>
   );

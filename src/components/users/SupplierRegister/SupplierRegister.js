@@ -50,6 +50,10 @@ const SupplierRegistration = () => {
     window.location.href = `${process.env.REACT_APP_API_URL}/oauth2/authorization/paypal`;
   };
 
+  const redirectToLoginPage = () => {
+    navigation("/supplierLogin")
+  }
+
   return (
     <div className="registration-container">
       <h2>Register Account</h2>
@@ -110,7 +114,7 @@ const SupplierRegistration = () => {
             />
             Customer
           </label>
-          <label>
+          {/* <label>
             <input
               type="radio"
               name="roleName"
@@ -129,16 +133,19 @@ const SupplierRegistration = () => {
               onChange={handleChange}
             />
             Tester
-          </label>
+          </label> */}
         </div>
 
         <button type="submit">Register</button>
       </form>
       or
       <button className="paypal-login-btn" onClick={handleLoginWithPayPal}>
-        <img src={paypalLogo} alt="PayPal Logo" /> Register with PayPal
+        <img src={paypalLogo} alt="PayPal Logo" /> Register via PayPal
       </button>
       {message && <p>{message}</p>}
+
+      <br />
+      <button className="paypal-login-btn" onClick={redirectToLoginPage}>Already have an account? Click to Login</button>
     </div>
   );
 };

@@ -59,12 +59,12 @@ const Navigation = () => {
 
           {/* Drop button to show user selections */}
           <div className="nav-item">
-            <span className="dropbtn" onClick={toggleDropdown}>🏠 User Center</span>
+            <span className="dropbtn" onClick={toggleDropdown}>🏠 Supplier Center</span>
             {isDropdownOpen && (
               <div className="dropdown-content" ref={dropdownRef}>
                 <div className="user-info">
                   <img className="avatar" src="path_to_avatar_image" alt="User Avatar" />
-                  <span className="username">ha***_h</span>
+                  <span className="username">hankeyu***_hky</span>
                 </div>
                 <div className="notification">
                   <p>UmiUni does not ask customers for additional fees via SMS or email.</p>
@@ -101,6 +101,9 @@ const Navigation = () => {
 
           <Link className="nav-link" to="/brand">
             🏠 ERP
+          </Link>
+          <Link className="nav-link" to="/supplier-ims/finance/3">
+            💰 Finance
           </Link>
           <Link className="nav-link" to="/error-logs">
             ❌ Payment Error Log
