@@ -1,4 +1,4 @@
-# QuickStore
+# Umi-Store
 
 > npx create-react-app frontend
 
