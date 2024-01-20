@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Navigation.css"; // Assuming you have a separate CSS file for navigation
@@ -14,6 +14,27 @@ const Navigation = () => {
     navigate("/index");
   };
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null); // 创建一个ref来引用dropdown的DOM元素
+  // 切换下拉菜单的显示状态
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  // 点击页面其他部分时关闭下拉菜单
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    // 绑定事件监听器
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // 移除事件监听器
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
   return (
     <div className="top-bar">
       <div className="coupon-message" data-content={couponMessage}>
@@ -23,6 +44,18 @@ const Navigation = () => {
       <div className="nav-container">
         <div className="nav-logo" onClick={redirectToIndex}>
           UmiUni
+        </div>
+
+        <div className="github-project">
+          <img src="/assets/img/PaymentCheckout/github-mark.svg" alt="GitHub" class="github-logo" />
+          <a href="https://github.com/coco2023/shopV2-backend" target="_blank" rel="noopener noreferrer">
+            [backend]
+          </a>
+          | 
+          <a href="https://github.com/coco2023/shopV2-frontend" target="_blank" rel="noopener noreferrer">
+              [frontend]
+          </a>
+          | View On Github
         </div>
 
         {/* <div className="nav-search">
@@ -35,21 +68,62 @@ const Navigation = () => {
           <Link className="nav-link" to="/reconcile">
             ⚖️ Reconcile
           </Link>
-          <Link className="nav-link" to="/supplierLogin">
-            🔒 SupplierLogin
+          <Link className="nav-link" to="/supplier-ims/finance/3">
+            💰 Finance
           </Link>
-          <Link className="nav-link" to="/supplier-ims/3">
-            🏠 Supplier Auth
-          </Link>
+
+          {/* Drop button to show user selections */}
+          <div className="nav-item">
+            <span className="dropbtn" onClick={toggleDropdown}>🏠 Supplier Center</span>
+            {isDropdownOpen && (
+              <div className="dropdown-content" ref={dropdownRef}>
+                <div className="user-info">
+                  <img className="avatar" src="path_to_avatar_image" alt="User Avatar" />
+                  <span className="username">hankeyu***_hky</span>
+                </div>
+                <div className="notification">
+                  <p>UmiUni does not ask customers for additional fees via SMS or email.</p>
+                  <button className="view-button">View</button>
+                </div>
+                <Link className="dropdown-link" to="/supplierLogin">
+                  🔒 Login
+                </Link>
+                <Link className="dropdown-link" to="/register">
+                  🔒 Register
+                </Link>
+                <Link className="dropdown-link" to="/supplier/profile">
+                  🏠 Dashboard
+                </Link>
+                <Link className="dropdown-link" to="/supplier-ims/finance/3">
+                  💰 Finance
+                </Link>
+                <Link className="dropdown-link" to="/reconcile">
+                  ⚖️ Reconcile
+                </Link>
+                <Link className="dropdown-link" to="/supplier-ims/orders">
+                  📦 Orders
+                </Link>
+                <Link className="dropdown-link" to="/supplier-ims/products">
+                  🛍️ Products
+                </Link>
+                <Link className="dropdown-link" to="/supplier-ims/payments">
+                  💳 Payments
+                </Link>
+
+              </div>
+            )}
+          </div>
+
           <Link className="nav-link" to="/brand">
             🏠 ERP
+          </Link>
+          <Link className="nav-link" to="/Register">
+            🔒 Register
           </Link>
           <Link className="nav-link" to="/error-logs">
             ❌ Payment Error Log
           </Link>
-          {/* <Link className="nav-link" to="/cancel">
-            ❌ Cancel
-          </Link> */}
+
         </div>
       </div>
     </div>

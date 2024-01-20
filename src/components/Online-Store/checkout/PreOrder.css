@@ -325,3 +325,9 @@ body {
     }
   }
   
+  .payment-logo {
+    width: 50px; /* Or any size that fits well in your UI */
+    height: auto; /* To keep the aspect ratio of the image */
+    vertical-align: middle; /* To align with the text */
+  }
+  

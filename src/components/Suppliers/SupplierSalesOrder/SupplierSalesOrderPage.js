@@ -18,6 +18,11 @@ const SupplierSalesOrderPage = () => {
     paymentMethod: "",
   });
 
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token provided.");
+  }
+
   const [selectedSalesOrder, setSelectedSalesOrder] = useState(null);
   const [searchId, setSearchId] = useState("");
   const [filteredSalesOrders, setFilteredSalesOrders] = useState([]);
@@ -63,7 +68,13 @@ const SupplierSalesOrderPage = () => {
   const fetchBrands = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/all`
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/all`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/all`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
       );
       setSalesOrders(response.data);
     } catch (error) {
@@ -97,8 +108,15 @@ const SupplierSalesOrderPage = () => {
   const handleEditBrand = async () => {
     try {
       await axios.put(
-        `${process.env.REACT_APP_API_URL}api/v1/suppliers/salesOrders/${supplierId}/${selectedSalesOrder.salesOrderId}`,
-        salesOrder
+        // `${process.env.REACT_APP_API_URL}api/v1/suppliers/salesOrders/${supplierId}/${selectedSalesOrder.salesOrderId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${selectedSalesOrder.salesOrderId}`,
+        salesOrder,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          }
+        }
       );
       fetchBrands();
       setSelectedSalesOrder(null);
@@ -110,7 +128,15 @@ const SupplierSalesOrderPage = () => {
 
   const handleDeleteSalesOrder = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${id}`);
+      // await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${id}`,
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${id}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }
+      }
+      );
       fetchBrands();
     } catch (error) {
       console.error("Error deleting SalesOrder:", error);
@@ -121,7 +147,13 @@ const SupplierSalesOrderPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${searchId}`
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${supplierId}/${searchId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/salesOrders/${searchId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
       );
       const foundSalesOrder = response.data;
 

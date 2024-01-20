@@ -82,11 +82,17 @@ export const processPaymentWithStripe = async (stripeToken, salesOrder, salesOrd
     if (responseData.status == "succeeded") {
       console.log("Payment successful:", responseData);
       // Handle successful payment (e.g., navigate to a success page, update UI)
-      sessionStorage.setItem('paymentData', JSON.stringify({
+      sessionStorage.setItem('orderDataInfo', JSON.stringify({
         paymentInfo: responseData,
-        orderInfo: salesOrder,
+        salesOrderSn: salesOrder.salesOrderSn, 
         orderDetailInfo: salesOrderDetailData,
-      }));            
+      }));
+
+      // sessionStorage.setItem('paymentData', JSON.stringify({
+      //   paymentInfo: responseData,
+      //   orderInfo: salesOrder,
+      //   orderDetailInfo: salesOrderDetailData,
+      // }));            
       window.location.href = "/payment-success";
 
     } else {

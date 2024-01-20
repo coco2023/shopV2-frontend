@@ -151,3 +151,124 @@ input[type="text"] {
   color: #f2f2f2; /* Adjusted hover color for visibility */
   text-shadow: 0 0 5px #fff; /* Optional: Adds a glow effect on hover */
 }
+
+.nav-item {
+  position: relative; /* This ensures that the dropdown is positioned relative to the nav-item */
+  display: inline-block; /* or your preferred display type */
+}
+
+.dropbtn {
+  /* Style for your dropdown button */
+  cursor: pointer;
+  /* ... additional styles ... */
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%; /* Below the nav-item */
+  left: 0;
+  background-color: #ffffff; /* Based on your image, it looks like a white background */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Just an example for shadow */
+  border-radius: 4px; /* Based on your image */
+  width: 300px; /* Set a width for your dropdown */
+  z-index: 100;
+  display: none; /* Hide by default */
+}
+
+.nav-item:hover .dropdown-content {
+  display: block; /* Show on hover or click */
+}
+
+.user-info {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  /* Add more styles here */
+}
+
+.avatar {
+  border-radius: 50%; /* If you want a round avatar */
+  margin-right: 8px;
+  /* Set size of the avatar */
+}
+
+.username {
+  font-weight: bold;
+  /* Additional styles */
+}
+
+.notification {
+  padding: 16px;
+  background-color: #f3f4f6; /* Example color */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view-button {
+  padding: 10px 20px; /* Adds space inside the button */
+  background-color: #ffa500; /* Orange background color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  font-weight: bold; /* Makes the text bold */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  text-transform: uppercase; /* Uppercase text */
+  font-size: 14px; /* Adjust font size as needed */
+  letter-spacing: 1px; /* Spacing between letters */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  outline: none; /* Remove outline */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow */
+}
+
+.view-button:hover,
+.view-button:focus {
+  background-color: #e69500; /* Darker orange on hover/focus */
+}
+
+.view-button:active {
+  background-color: #cc8400; /* Even darker orange when the button is clicked */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Optional: makes the shadow smaller on click */
+}
+
+.dropdown-link {
+  display: block;
+  padding: 8px 16px;
+  color: #3b3939; /* Example color */
+  text-decoration: none;
+}
+
+.dropdown-link:hover {
+  background-color: #eaeaea; /* Example hover background color */
+}
+
+.github-project a {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 0 8px;
+  background-color: #333; /* GitHub's color */
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.github-project a:hover,
+.github-project a:focus {
+  background-color: #545151; /* A lighter GitHub color for hover state */
+  color: #fff;
+  text-decoration: none; /* Ensures the text isn't underlined when hovered */
+}
+
+.github-project img {
+  vertical-align: middle; /* Aligns the icon with the text */
+  margin-right: 8px; /* Spacing between the icon and the text */
+}
+
+.github-logo {
+  width: 40px; /* Adjust the size as needed */
+  height: auto; /* This will maintain the aspect ratio */
+  vertical-align: middle; /* To align the image with the text */
+}

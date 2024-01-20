@@ -115,7 +115,7 @@ const PaymentSuccessPage = () => {
 
         <div className="payment-method">
           <h2>Payment method</h2>
-          <p>PayPal</p>
+          <p>{orderInfo.paymentMethod}</p>
           <h2>Transaction Id</h2>
           <p>{paymentInfo.transactionId}</p>
         </div>

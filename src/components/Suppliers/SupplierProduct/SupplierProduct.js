@@ -52,6 +52,12 @@ const SupplierProductPage = () => {
   const offset = currentPage * itemsPerPage;
   const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
 
+  const token = localStorage.getItem("token");
+  console.log("token: " + token)
+  if (!token) {
+    throw new Error("No token provided.");
+  }
+
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
@@ -86,7 +92,13 @@ const SupplierProductPage = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/products/all`
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/products/all`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/all`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
       );
       setProducts(response.data);
     } catch (error) {
@@ -109,8 +121,14 @@ const SupplierProductPage = () => {
     console.log("***update: ", product);
     try {
       await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/product/${selectedProduct.productId}`,
-        product
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/product/${selectedProduct.productId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/product/${selectedProduct.productId}`,
+        product,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
       );
       fetchProducts();
       setSelectedProduct(null);
@@ -124,7 +142,13 @@ const SupplierProductPage = () => {
   const handleDeleteProduct = async (id) => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/product/${id}`
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/product/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/product/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
       );
       fetchProducts();
     } catch (error) {
@@ -148,8 +172,14 @@ const SupplierProductPage = () => {
     console.log("***Create product: ", product);
     try {
       await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/product`,
-        product
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/product`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/product`,
+        product,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
       );
       fetchProducts();
       setProduct({});
@@ -163,7 +193,13 @@ const SupplierProductPage = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/product/${searchId}`
+        // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/${supplierId}/product/${searchId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/product/${searchId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
       );
       const foundProduct = response.data;
 

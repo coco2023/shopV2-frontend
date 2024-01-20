@@ -49,8 +49,12 @@ import SuppliersFinance from "./components/Suppliers/SupplierFinance/v1/Supplier
 import SupplierFinanceLayout from "./components/Suppliers/SupplierFinance/v1/SupplierFinanceLayout/SupplierFinanceLayout";
 import SupplierFinanceReport from "./components/Suppliers/SupplierFinance/SupplierFinanceReport/SupplierFinanceReport";
 import SupplierLogin from "./components/users/SupplierLogin/SupplierLogin";
+import SupplierDashboard from "./components/Suppliers/SupplierDashboard/SupplierDashboard";
+import AuthMiddlewarePage from "./components/Suppliers/SupplierJWT/JWTStorage";
+import SupplierRegistration from "./components/users/SupplierRegister/SupplierRegister";
+import LoginFailure from "./components/users/SupplierLogin/LoginFailure";
 
-
+import SuppliersLayout2 from "./components/Suppliers/SuppliersLayout2/SuppliersLayout";
 
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
@@ -63,6 +67,16 @@ function App() {
       <Routes>
         {" "}
         <Route path="/supplierLogin" element={<SupplierLogin />} />
+        <Route path="/register" element={<SupplierRegistration />} />
+        <Route path="/supplier/midpage" element={<AuthMiddlewarePage />} />
+        <Route path="/supplier/profile" element={<SupplierDashboard />} />
+        <Route path="/supplier-ims" element={<SuppliersLayout><SupplierInfoPage /></SuppliersLayout>} />
+        <Route path="/supplier-ims/products" element={<SuppliersLayout><SupplierProductPage /></SuppliersLayout>} />
+        <Route path="/supplier-ims/orders" element={<SuppliersLayout><SupplierSalesOrderPage /></SuppliersLayout>} />
+        <Route path="/supplier-ims/payments" element={<SuppliersLayout><SuppliersPayPalPayment /></SuppliersLayout>} />
+        <Route path="/supplier-ims/finance/:supplierId" element={<SuppliersLayout><SupplierFinanceReport /></SuppliersLayout>} />
+
+        {/* <Route path="/login-failure" element={LoginFailure} /> */}
 
         <Route path="/" element={<Navigate replace to="/index" />} />
         <Route path="/login" element={<LoginPage />} />
@@ -114,17 +128,16 @@ function App() {
       </Routes>
 
       {/* Supplier IMS */}
-      <Routes>
-      <Route path="/supplier-ims/:supplierId" element={<SuppliersLayout><SupplierInfoPage /></SuppliersLayout>} />
-      <Route path="/supplier-ims/referral" element={<SuppliersLayout><MerchantOnboardingForm /></SuppliersLayout>} />
-      <Route path="/supplier-ims/products/:supplierId" element={<SuppliersLayout><SupplierProductPage /></SuppliersLayout>} />
-      <Route path="/supplier-ims/orders/:supplierId" element={<SuppliersLayout><SupplierSalesOrderPage /></SuppliersLayout>} />
-      <Route path="/supplier-ims/payments/:supplierId" element={<SuppliersLayout><SuppliersPayPalPayment /></SuppliersLayout>} />
+      {/* <Routes>
+      <Route path="/supplier-ims/:productId" element={<SuppliersLayout2><SupplierInfoPage /></SuppliersLayout2>} />
+      <Route path="/supplier-ims/referral" element={<SuppliersLayout2><MerchantOnboardingForm /></SuppliersLayout2>} />
+      <Route path="/supplier-ims/products/:productId" element={<SuppliersLayout2><SupplierProductPage /></SuppliersLayout2>} />
+      <Route path="/supplier-ims/orders/:productId" element={<SuppliersLayout2><SupplierSalesOrderPage /></SuppliersLayout2>} />
+      <Route path="/supplier-ims/payments/:productId" element={<SuppliersLayout2><SuppliersPayPalPayment /></SuppliersLayout2>} />
+      <Route path="/supplier-ims/finance/:supplierId" element={<SuppliersLayout2><SupplierFinanceReport /></SuppliersLayout2>} />
+      </Routes> */}
       {/* <Route path="/supplier-ims/finance/:supplierId/monthly" element={<SuppliersLayout><SupplierFinanceLayout><SuppliersFinance /></SupplierFinanceLayout></SuppliersLayout>} />
       <Route path="/supplier-ims/finance/:supplierId/yearly" element={<SuppliersLayout><SupplierFinanceLayout><SuppliersFinance /></SupplierFinanceLayout></SuppliersLayout>} /> */}
-      <Route path="/supplier-ims/finance/:supplierId" element={<SuppliersLayout><SupplierFinanceReport /></SuppliersLayout>} />
-      </Routes>
-
       <Footer />
     </Router>
   );
