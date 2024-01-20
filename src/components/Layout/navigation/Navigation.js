@@ -74,7 +74,7 @@ const Navigation = () => {
 
           {/* Drop button to show user selections */}
           <div className="nav-item">
-            <span className="dropbtn" onClick={toggleDropdown}>🏠 Supplier Center</span>
+            <span className="dropbtn" onClick={toggleDropdown}>🏠 User Center</span>
             {isDropdownOpen && (
               <div className="dropdown-content" ref={dropdownRef}>
                 <div className="user-info">
