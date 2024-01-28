@@ -56,6 +56,10 @@ import LoginFailure from "./components/users/SupplierLogin/LoginFailure";
 
 import SuppliersLayout2 from "./components/Suppliers/SuppliersLayout2/SuppliersLayout";
 
+import CustomerDashboard from "./components/Customers/CustomerInfo/CustomerDashboard";
+import CustomerSalesOrderPage from "./components/Customers/CustomerSalesOrder/CustomerSalesOrderPage";
+import CustomerLayout from "./components/Customers/CustomerLayout/CustomerLayout";
+
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
 
@@ -93,6 +97,13 @@ function App() {
         <Route path="/payment-success" element={<PaymentSuccessPage />} />
         <Route path="/paypal-success" element={<PayPalCompletePayment />} />
         <Route path="/paypal-return" element={<PayPalReturnPage />} />
+      </Routes>
+
+      {/* Customer */}
+      <Routes>
+        {" "}
+        <Route path="/customer/info" element={<CustomerLayout><CustomerDashboard /></CustomerLayout>} />
+        <Route path="/customer/main" element={<CustomerLayout><CustomerSalesOrderPage /></CustomerLayout>} />
       </Routes>
 
       {/* IMS */}
