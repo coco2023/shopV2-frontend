@@ -74,7 +74,7 @@ const Navigation = () => {
 
           {/* Drop button to show user selections */}
           <div className="nav-item">
-            <span className="dropbtn" onClick={toggleDropdown}>🏠 User Center</span>
+            <span className="dropbtn" onClick={toggleDropdown}>🏠 Supplier Center</span>
             {isDropdownOpen && (
               <div className="dropdown-content" ref={dropdownRef}>
                 <div className="user-info">
@@ -113,6 +113,10 @@ const Navigation = () => {
               </div>
             )}
           </div>
+
+          <Link className="nav-link" to="/customer/info">
+            🏠 Customer Center
+          </Link>
 
           <Link className="nav-link" to="/brand">
             🏠 ERP

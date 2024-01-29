@@ -4,7 +4,22 @@ import "./ProductCard.css"; // Make sure to update the CSS file accordingly
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
+  const images = [
+    "/assets/img/img_overview/img_overview_1.png",
 
+  ]
+
+  // Function to construct the image URL from the first image ID
+  const getImageUrl = () => {
+    // Check if productImageIds is defined and has at least one ID
+    if (product.productImageIds && product.productImageIds.length > 0) {
+      // Construct the URL for the first image ID
+      return `${process.env.REACT_APP_API_URL}/api/v1/products/${product.productId}/images/${product.productImageIds[0]}`;
+    }
+    // Fallback image URL if no IDs are available
+    return images; // Update this path to your actual default image location
+  };
+  
   // Helper function to limit the description to a certain length
   const truncateDescription = (description, length = 50) => {
     return description.length > length
@@ -41,10 +56,11 @@ const ProductCard = ({ product }) => {
   return (
     <div className="product-card" onClick={redirectToDetails}>
       <img
-        src={product.imageUrl}
+        src={getImageUrl()} // Use the getImageUrl function to set the src
         alt={product.productName}
         className="product-image"
       />
+
       <div className="product-description">
         {truncateDescription(product.description)}
       </div>

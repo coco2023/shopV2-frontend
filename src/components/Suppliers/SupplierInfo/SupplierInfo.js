@@ -30,7 +30,7 @@ const SupplierInfoPage = () => {
       try {
         const response = await axios.get(
           // `${process.env.REACT_APP_API_URL}/api/v1/suppliers/${supplierId}`,
-          `${process.env.REACT_APP_API_URL}/api/v1/suppliers`,
+          `${process.env.REACT_APP_API_URL}/api/v1/suppliers/auth/info`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Add the JWT token in the Authorization header
