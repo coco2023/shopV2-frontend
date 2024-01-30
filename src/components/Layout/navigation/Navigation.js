@@ -74,7 +74,7 @@ const Navigation = () => {
 
           {/* Drop button to show user selections */}
           <div className="nav-item">
-            <span className="dropbtn" onClick={toggleDropdown}>🏠 Supplier Center</span>
+            <span className="dropbtn" onClick={toggleDropdown}>🏠 Supplier</span>
             {isDropdownOpen && (
               <div className="dropdown-content" ref={dropdownRef}>
                 <div className="user-info">
@@ -115,7 +115,7 @@ const Navigation = () => {
           </div>
 
           <Link className="nav-link" to="/customer/info">
-            🏠 Customer Center
+            🏠 Customer
           </Link>
 
           <Link className="nav-link" to="/products">

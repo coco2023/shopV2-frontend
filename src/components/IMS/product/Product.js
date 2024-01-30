@@ -85,7 +85,7 @@ const ProductPage = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/products/all`
+        `${process.env.REACT_APP_API_URL}/api/v1/products/main/all`
       );
       setProducts(response.data);
     } catch (error) {
@@ -137,7 +137,7 @@ const ProductPage = () => {
   // fetch product images
   const fetchProductImage = async (productId, imageId) => {
     // Construct the URL to fetch the image
-    const getImageUrl = `${process.env.REACT_APP_API_URL}/api/v1/products/${productId}/images/${imageId}`;
+    const getImageUrl = `${process.env.REACT_APP_API_URL}/api/v1/products/${productId}/images/main/img/${imageId}`;
     return getImageUrl; // Directly use the URL as image source in <img> tags
   };
     
@@ -490,7 +490,6 @@ const ProductPage = () => {
             <div className="column">
 
               <div>
-                <h2>Images</h2>
                 <div className="product-images">
                   {selectedProductImages.map((getImageUrls, index) => (
                     <img key={index} src={getImageUrls} alt={`Product ${index}`} className="product-image-thumbnail" />

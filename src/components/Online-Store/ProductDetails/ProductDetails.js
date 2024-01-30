@@ -47,7 +47,8 @@ const ProductDetails = () => {
   // fetch product images
   const fetchProductImage = async (productId, imageId) => {
     // Construct the URL to fetch the image
-    const getImageUrl = `${process.env.REACT_APP_API_URL}/api/v1/products/${productId}/images/${imageId}`;
+    // const getImageUrl = `${process.env.REACT_APP_API_URL}/api/v1/products/${productId}/images/${imageId}`;
+    const getImageUrl = `${process.env.REACT_APP_API_URL}/api/v1/products/${productId}/images/main/img/${imageId}`;
     return getImageUrl; // Directly use the URL as image source in <img> tags
   };
 

@@ -14,7 +14,8 @@ const ProductCard = ({ product }) => {
     // Check if productImageIds is defined and has at least one ID
     if (product.productImageIds && product.productImageIds.length > 0) {
       // Construct the URL for the first image ID
-      return `${process.env.REACT_APP_API_URL}/api/v1/products/${product.productId}/images/${product.productImageIds[0]}`;
+      // return `${process.env.REACT_APP_API_URL}/api/v1/products/${product.productId}/images/${product.productImageIds[0]}`;
+      return `${process.env.REACT_APP_API_URL}/api/v1/products/${product.productId}/images/main/img/${product.productImageIds[0]}`;
     }
     // Fallback image URL if no IDs are available
     return images; // Update this path to your actual default image location
@@ -49,6 +50,7 @@ const ProductCard = ({ product }) => {
 
   // Handler to navigate to ProductDetailsPage
   const redirectToDetails = () => {
+    console.log(product)
     // navigate(`/details/${product.productId}`);
     window.open(`/details/${product.productId}`, "_blank");
   };
