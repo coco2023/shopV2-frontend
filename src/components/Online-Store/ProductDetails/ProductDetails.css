@@ -1,64 +1,147 @@
-.product-details-container {
+.product-details-container-1 {
   display: flex;
   max-width: 1200px;
   margin: auto;
-  padding: 20px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .image-gallery {
-  width: 50%;
-  padding: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  margin-right: 20px;
 }
 
-.image-gallery img {
-  width: 100%;
-  border-radius: 5px;
+.product-image-small {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column; /* Stack thumbnails vertically */
+  gap: 5px; /* Space between thumbnails */
+  margin-top: 5px; /* Space above the thumbnails */
+  overflow-y: auto; /* Vertical scrolling */
+  overflow-x: hidden; /* No horizontal scrolling */
+  width: 60px; /* Width of thumbnails */
+  max-height: calc(100vh - 100px); /* Adjusted max height */
+  scrollbar-width: thin;
+}
+
+.product-image-small img {
+  width: 60px; /* Fixed width for thumbnails */
+  height: 60px; /* Fixed height for thumbnails */
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, border 0.3s ease;
+  border: 2px solid transparent; /* Placeholder border */
+}
+
+.product-image-small img.active {
+  opacity: 1;
+  border-color: #FF4500; /* Highlight color for the active thumbnail */
+}
+
+.product-image-overview-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center; /* Center arrows vertically */
+  justify-content: center; /* Center the main image horizontally */
+  width: 100%; /* Full width of the parent container */
+}
+
+.product-image-overview {
+  width: 100%; /* Allow the main image to fill the space */
+  display: flex;
+  justify-content: center; /* Center the main image */
+}
+
+.product-image-overview img {
+  max-width: 100%; /* Ensure the image is not larger than its container */
+  max-height: 400px; /* Set a max-height for the main image */
+  object-fit: contain; /* Ensure the image is fully visible */
+}
+
+.arrow-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.arrow-button:hover {
+  background-color: #eaeaea;
+}
+
+.left-arrow {
+  left: -15px;
+}
+
+.right-arrow {
+  right: -15px;
 }
 
 .product-info {
   width: 50%;
-  padding: 10px;
+  padding-left: 20px;
 }
 
 .product-info h1 {
-  color: #333;
-  font-size: 24px;
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }
 
-.product-info p {
-  margin: 5px 0;
-  color: #555;
+.product-info .sku-code,
+.product-info .price,
+.product-info .stock-quantity,
+.product-info .stock-status,
+.product-info .category-name,
+.product-info .brand-name,
+.product-info .supplier-name,
+.product-info .description,
+.product-info .shipping-info {
+  margin-bottom: 5px;
 }
 
-/* Style for the Add to Cart button */
-.checkout-btn {
-  background-color: #e55a00; /* Green background */
-  color: white; /* White text */
-  border: none;
-  padding: 10px 20px;
-  margin-top: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.product-info .attribute {
+  margin-bottom: 5px;
 }
 
-.checkout-btn:hover {
-  background-color: #e55a00; /* Darker shade of green on hover */
-}
-
-/* Style for the Buy It button */
 .add-to-cart-btn {
-  background-color: #e55a00; /* Blue background */
-  color: white; /* White text */
-  border: none;
+  background-color: #ff4500;
+  color: white;
   padding: 10px 20px;
-  margin-top: 10px;
-  margin-left: 10px; /* Space between buttons */
+  border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
 .add-to-cart-btn:hover {
-  background-color: #e55a00; /* Darker shade of blue on hover */
+  background-color: #e03e00;
+}
+
+@media (max-width: 768px) {
+  .product-details-container {
+    flex-direction: column;
+  }
+
+  .image-gallery,
+  .product-info {
+    width: 100%;
+    padding: 0;
+  }
+
+  .arrow-button.left-arrow,
+  .arrow-button.right-arrow {
+    display: none;
+  }
 }

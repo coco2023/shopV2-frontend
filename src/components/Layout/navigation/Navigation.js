@@ -118,7 +118,7 @@ const Navigation = () => {
             🏠 Customer Center
           </Link>
 
-          <Link className="nav-link" to="/brand">
+          <Link className="nav-link" to="/products">
             🏠 ERP
           </Link>
           <Link className="nav-link" to="/Register">

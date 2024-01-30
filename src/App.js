@@ -108,13 +108,13 @@ function App() {
 
       {/* IMS */}
       <Routes>
+        <Route path="/products" element={<Layout><ProductPage /></Layout>} />
+        <Route path="/productAttribute" element={<Layout><ProductAttributePage /></Layout>} />
         <Route path="/brand" element={<Layout><BrandPage /></Layout>} />
         <Route path="/category" element={<Layout><CategoryPage /></Layout>} />
         <Route path="/supplier" element={<Layout><SupplierPage /></Layout>} />
         <Route path="/salesOrders" element={<Layout><SalesOrderPage /></Layout>} />
         <Route path="/salesOrderDetail" element={<Layout><SalesOrderDetailPage /></Layout>} />
-        <Route path="/products" element={<Layout><ProductPage /></Layout>} />
-        <Route path="/productAttribute" element={<Layout><ProductAttributePage /></Layout>} />
         <Route path="/payments" element={<Layout><PaymentPage /></Layout>} />
         <Route path="/invoices" element={<Layout><InvoicePage /></Layout>} />
         {/* <Route path="/supplier-products/:supplierId" element={<Layout><SupplierProductPage /></Layout>} /> */}

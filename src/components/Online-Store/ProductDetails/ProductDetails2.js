@@ -7,49 +7,6 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [productAttributes, setProductAttributes] = useState([]);
   const { productId } = useParams();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const leftArrowIcon = "/assets/img/svg/leftArrowIcon.svg";
-  const rightArrowIcon = "/assets/img/svg/rightArrowIcon.svg";
-  const [selectedProductImages, setSelectedProductImages] = useState([]);
-
-  // Function to change the active image index
-  const changeImage = (index) => {
-    if (index >= 0 && index < selectedProductImages.length) {
-      setActiveIndex(index);
-    }
-  };
-
-  // Function to go to the previous image
-  const goPrev = () => {
-    setActiveIndex((prevIndex) =>
-      prevIndex === 0 ? selectedProductImages.length - 1 : prevIndex - 1
-    );
-  };
-
-  // Function to go to the next image
-  const goNext = () => {
-    setActiveIndex((prevIndex) =>
-      prevIndex === selectedProductImages.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-  
-  //   const images = [
-  //   "/assets/img/img_overview/img_overview_3.png",
-  //   "/assets/img/img_slider/20230129183716.jpg",
-  //   "/assets/img/img_slider/test-product01.jpg",
-  //   "/assets/img/img_overview/img_overview_2.png",
-  //   "/assets/img/img_slider/20230129183716.jpg",
-  //   "/assets/img/img_overview/1.jpg",
-  //   "/assets/img/img_slider/test-product01.jpg",
-  //   "/assets/img/img_overview/img_overview_1.png",
-  // ];
-
-  // fetch product images
-  const fetchProductImage = async (productId, imageId) => {
-    // Construct the URL to fetch the image
-    const getImageUrl = `${process.env.REACT_APP_API_URL}/api/v1/products/${productId}/images/${imageId}`;
-    return getImageUrl; // Directly use the URL as image source in <img> tags
-  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -58,12 +15,7 @@ const ProductDetails = () => {
           `${process.env.REACT_APP_API_URL}/api/v1/products/${productId}`
         );
         setProduct(productRes.data);
-        console.log("***Product: " + productRes.data.productImageIds);
-        const getImageUrls = await Promise.all(productRes.data.productImageIds.map(id => 
-          fetchProductImage(productRes.data.productId, id)
-        ));
-        setSelectedProductImages(getImageUrls);
-        console.log("selectedProductImages: " + selectedProductImages)
+        console.log("***Product: " + productRes);
       } catch (error) {
         console.error("Error fetching product details:", error);
         // Handle error
@@ -120,37 +72,11 @@ const ProductDetails = () => {
     };
 
   return (
-    <div className="product-details-container-1">
+    <div className="product-details-container">
       <div className="image-gallery">
-          <div className="product-image-small">
-            {selectedProductImages.map((src, index) => (
-              <img
-                key={src}
-                src={src}
-                alt="Small Product"
-                className={activeIndex === index ? "active" : ""}
-                onClick={() => changeImage(index)}
-              />
-            ))}
-          </div>
-
-          <div className="product-image-overview-wrapper">
-            {/* Left arrow */}
-            <button onClick={goPrev} className="arrow-button left-arrow">
-              <img src={leftArrowIcon} alt="Previous" />
-            </button>
-
-            <div className="product-image-overview">
-              <img src={selectedProductImages[activeIndex]} alt="Product Overview" />
-            </div>
-
-            {/* Right arrow */}
-            <button onClick={goNext} className="arrow-button right-arrow">
-              <img src={rightArrowIcon} alt="Next" />
-            </button>
-        </div>
+        <img src={product.imageUrl} alt={product.productName} />
+        {/* Additional images could be listed here */}
       </div>
-
       <div className="product-info">
         <h1>{product.productName}</h1>
         <p className="sku-code">SKU: {product.skuCode}</p>

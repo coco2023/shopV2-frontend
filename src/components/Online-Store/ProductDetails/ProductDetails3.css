@@ -1,0 +1,115 @@
+.product-details-container {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.image-gallery {
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-image-small {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.image-gallery img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.product-image-small img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 5px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.product-image-small img.active {
+  opacity: 1;
+  border: 2px solid #000; /* Highlight the active thumbnail */
+}
+
+.product-image-overview-wrapper {
+  position: relative;
+}
+
+.product-image-overview img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.arrow-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
+
+.product-info {
+  width: 50%;
+  padding: 10px;
+}
+
+.product-info h1 {
+  color: #333;
+  font-size: 24px;
+}
+
+.product-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Style for the Add to Cart button */
+.checkout-btn {
+  background-color: #e55a00; /* Green background */
+  color: white; /* White text */
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #e55a00; /* Darker shade of green on hover */
+}
+
+/* Style for the Buy It button */
+.add-to-cart-btn {
+  background-color: #e55a00; /* Blue background */
+  color: white; /* White text */
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-left: 10px; /* Space between buttons */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #e55a00; /* Darker shade of blue on hover */
+}
