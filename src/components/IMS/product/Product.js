@@ -45,20 +45,27 @@ const ProductPage = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(0); // Current page for pagination
+  const [productsPerPage, setProductsPerPage] = useState(6); // 每页显示的产品数量
+  const [pageCount, setPageCount] = useState(1); // 初始总页数设为1
   const itemsPerPage = 6; // Number of items to display per page
+  const [totalPages, setTotalPages] = useState(0); // 用于存储后端返回的总页数
 
-  // Pagination logic
-  const offset = currentPage * itemsPerPage;
-  const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
+  // // Pagination logic
+  // const offset = currentPage * itemsPerPage;
+  // const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
 
-  const paginatedProducts = filteredProducts.slice(
-    offset,
-    offset + itemsPerPage
-  );
+  // const handlePageChange = (event, value) => {
+  //   setCurrentPage(value - 1); // Adjust for zero-based page index if necessary
+  // };
+  
+  // const paginatedProducts = filteredProducts.slice(
+  //   offset,
+  //   offset + itemsPerPage
+  // );
     
   useEffect(() => {
     // Fetch all products when the component mounts
@@ -84,15 +91,31 @@ const ProductPage = () => {
   // get all
   const fetchProducts = async () => {
     try {
+      const params = {
+        page: currentPage, // 使用当前页码
+        size: itemsPerPage, // 使用每页的项目数
+      };  
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/products/main/all`
+        `${process.env.REACT_APP_API_URL}/api/v1/products/main/all`,
+        { params }
       );
-      setProducts(response.data);
+      setProducts(response.data.content);
+      setPageCount(response.data.totalPages); // 更新总页数
+      console.log("Params:", params);
+      console.log("Response data:", response.data);
+      console.log("Total pages set to:", response.data.totalPages);
+      setTotalPages(response.data.totalPages); // 更新总页数
+
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
 
+  // 当组件挂载或currentPage/itemsPerPage更改时，获取产品
+  useEffect(() => {
+    fetchProducts();
+  }, [currentPage, itemsPerPage]); // 当currentPage或itemsPerPage变化时重新获取产品
+  
   const [selectedFiles, setSelectedFiles] = useState(null);
 
   const handleFileSelect = (e) => {
@@ -171,6 +194,7 @@ const ProductPage = () => {
     product.productImageIds = selectedProduct.productImageIds;
     const productDetails = JSON.stringify(product);
     formData.append('product', productDetails);
+    console.log('product: ' + productDetails)
   
     // Append new images to formData if selectedFiles is not null
     if (selectedFiles) {
@@ -412,7 +436,7 @@ const ProductPage = () => {
         </thead>
         <tbody>
           
-          {paginatedProducts.map((product) => (
+          {products.map((product) => (
             <tr key={product.productId} onClick={() => handleProductClick(product)}> {/* show edit product when clicking the rows */}
               <td>{product.productId}</td>
               <td>{product.productName}</td>
@@ -471,6 +495,7 @@ const ProductPage = () => {
           previousLabel={"Previous"}
           nextLabel={"Next"}
           pageCount={pageCount}
+          // count={totalPages} page={currentPage + 1}
           onPageChange={handlePageChange}
           containerClassName={"pagination"}
           previousLinkClassName={"page-link"}
