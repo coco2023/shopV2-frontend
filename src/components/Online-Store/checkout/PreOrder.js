@@ -178,8 +178,8 @@ const PreOrder = () => {
           preOrderData,
           preOrderDetailData
         );
-        console.log("salesOrder: ", salesOrderResponse);
-        console.log("SalesOrder and SalesOrderDetail created successfully.");
+        console.log("success - salesOrder: ", salesOrderResponse);
+        console.log("success - SalesOrder and SalesOrderDetail created successfully.");
 
         salesOrderResponse
           .then(async ({ salesOrderData, salesOrderDetailData }) => {

@@ -121,7 +121,6 @@ export const processPaymentWithPayPal = async (salesOrder) => {
       }
     );
 
-    console.log("salesOrder: ", salesOrder)
     const responseData = await response.json();
     console.log("PayPal create - responseData: " + JSON.stringify(responseData));
 

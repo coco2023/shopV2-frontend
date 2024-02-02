@@ -50,22 +50,9 @@ const ProductPage = () => {
   const itemsPerPage = 6; // Number of items to display per page
   const [totalPages, setTotalPages] = useState(0); // 用于存储后端返回的总页数
 
-  // // Pagination logic
-  // const offset = currentPage * itemsPerPage;
-  // const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
-
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-
-  // const handlePageChange = (event, value) => {
-  //   setCurrentPage(value - 1); // Adjust for zero-based page index if necessary
-  // };
-  
-  // const paginatedProducts = filteredProducts.slice(
-  //   offset,
-  //   offset + itemsPerPage
-  // );
     
   useEffect(() => {
     // Fetch all products when the component mounts
@@ -101,9 +88,9 @@ const ProductPage = () => {
       );
       setProducts(response.data.content);
       setPageCount(response.data.totalPages); // 更新总页数
-      console.log("Params:", params);
-      console.log("Response data:", response.data);
-      console.log("Total pages set to:", response.data.totalPages);
+      // console.log("Params:", params);
+      // console.log("Response data:", response.data);
+      // console.log("Total pages set to:", response.data.totalPages);
       setTotalPages(response.data.totalPages); // 更新总页数
 
     } catch (error) {
