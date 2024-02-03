@@ -110,6 +110,7 @@ export const processPaymentWithStripe = async (stripeToken, salesOrder, salesOrd
 
 export const processPaymentWithPayPal = async (salesOrder) => {
   try {
+    console.log(salesOrder)
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/api/v1/payments/paypal/create`,
       {
@@ -162,3 +163,18 @@ export const completePayPalPayment = async (paymentId, payerId, supplierId) => {
     console.error("Error completing PayPal payment:", error);
   }
 };
+
+export const checkOrderStatus = async (orderSn) =>{
+  try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/payments/paypal/${orderSn}/status`);
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      const paymentResponse = await response.json();  // 解析JSON
+      console.log("Payment response:", paymentResponse);
+      return paymentResponse;  // 返回解析后的对象
+  } catch (error) {
+      console.error('Failed to fetch order status:', error);
+      throw error;  // 将错误向上抛出，以便调用者处理
+  }
+}
