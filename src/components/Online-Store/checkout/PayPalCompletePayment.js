@@ -8,6 +8,7 @@ const PayPalCompletePayment = () => {
   const salesOrderDetailData = JSON.parse(
     sessionStorage.getItem("salesOrderDetailData")
   );
+  console.log("salesOrderData: " + salesOrderData)
   const supplierId = salesOrderData.supplierId; // JSON.parse(sessionStorage.getItem("supplierId"));
   console.log(
     "sessionStorage: salesOrderDetailData",

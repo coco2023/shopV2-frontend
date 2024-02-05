@@ -213,15 +213,16 @@ const PreOrder = () => {
             const intervalId = setInterval(async () => {
               try {
                 const statusResponse = await checkOrderStatus(salesOrderData.salesOrderSn);
-                console.log("statusResponse:", statusResponse);
+                console.log("statusResponse:", statusResponse.approvalUrl);
         
-                if (statusResponse && statusResponse.status === "CREATED") {
+                if (statusResponse) { //  && statusResponse.status === "CREATED"
+                  console.log("create success!")
                   clearInterval(intervalId);  // 停止轮询
                   setIsProcessingOrder(false);  // 隐藏加载状态
                   window.location.href = statusResponse.approvalUrl;  // 重定向到支付页面
                   setIsPlacingOrder(false);  // 标记支付流程结束
                 } 
-                else if (statusResponse && statusResponse.status !== 'PROCESSING') {
+                else if (statusResponse) { //  && statusResponse.status !== 'PROCESSING'
                   clearInterval(intervalId);  // 停止轮询
                   setIsProcessingOrder(false);  // 隐藏加载状态
                   // 可以在这里处理订单非处理中状态，例如显示错误或状态消息
@@ -234,7 +235,7 @@ const PreOrder = () => {
                 setIsProcessingOrder(false);  // 隐藏加载状态
                 // 可以在这里处理错误情况
               }
-            }, 5000);  // 每5秒轮询一次
+            }, 1000);  // 每5秒轮询一次
           })
           .catch((error) => {
             console.error("An error occurred:", error);

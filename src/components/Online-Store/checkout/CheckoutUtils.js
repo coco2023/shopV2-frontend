@@ -168,7 +168,11 @@ export const checkOrderStatus = async (orderSn) =>{
   try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/payments/paypal/${orderSn}/status`);
       if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error('Order not found');
+        } else {
           throw new Error('Network response was not ok');
+        }
       }
       const paymentResponse = await response.json();  // 解析JSON
       console.log("Payment response:", paymentResponse);
