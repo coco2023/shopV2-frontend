@@ -6,6 +6,7 @@ import "./ProductMainPage.css"; // Importing CSS for the main page layout
 const ProductMainPage = () => {
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(1);
   const productsPerPage = 20; // 4 columns * 6 rows
 
   useEffect(() => {
@@ -33,8 +34,13 @@ const ProductMainPage = () => {
       setCurrentPage(prevPage => prevPage + 1); // 更新当前页码，为下一次加载做准备
       // Update state with the new current page, but ensure not to exceed totalPages
       // This assumes the API returns the current page index in 'number' field and total pages in 'totalPages'
+      // const newPage = response.data.number + 1;
+      setTotalPage(response.data.totalPages)
       const newPage = response.data.number + 1;
-      setCurrentPage(newPage < response.data.totalPages ? newPage : currentPage);
+      if (newPage >= response.data.totalPages) {
+        console.log("reach to the end!!")
+      }
+      // setCurrentPage(newPage < response.data.totalPages ? newPage : currentPage);
 
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -48,11 +54,13 @@ const ProductMainPage = () => {
           <ProductCard key={product.productId} product={product} />
         ))}
       </div>
+      {currentPage < totalPage && ( // Only show the "Load More" button if there are more pages to load
       <div className="load-more-container">
         <button className="load-more-btn" onClick={loadMoreProducts}>
           Load More
         </button>
       </div>
+      )}
     </div>
   );
 };

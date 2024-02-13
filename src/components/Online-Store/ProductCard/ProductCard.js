@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
     if (product.productImageIds && product.productImageIds.length > 0) {
       // Construct the URL for the first image ID
       // return `${process.env.REACT_APP_API_URL}/api/v1/products/${product.productId}/images/${product.productImageIds[0]}`;
-      return `${process.env.REACT_APP_API_URL}/api/v1/products/${product.productId}/images/main/img/${product.productImageIds[0]}`;
+      return `${process.env.REACT_APP_API_URL}/api/v1/products/${product.productId}/images/main/s3/img/${product.productImageIds[0]}`;
     }
     // Fallback image URL if no IDs are available
     return images; // Update this path to your actual default image location
