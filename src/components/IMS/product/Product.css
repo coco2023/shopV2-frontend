@@ -252,17 +252,18 @@
 }
 
 .create-product-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%; 
-  background-color: #fff;
-  padding: 30px; /* Increased padding for more space */
-  border-radius: 10px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  z-index: 1000; /* Ensure modal is above other content */
-  border: 1px solid #ee822e; /* Main orange color for border */
+  max-width: 90%; /* Adjust based on your preference */
+  max-height: 90vh; /* 90% of the viewport height */
+  overflow: auto; /* Adds scrollbars when content overflows */
+  background: #fff; /* Background color */
+  padding: 20px; /* Padding inside the modal */
+  border-radius: 8px; /* Optional: for rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: for shadow effect */
+  position: fixed; /* Fixed position to stay in place when scrolling the page */
+  top: 50%; /* Center the modal vertically */
+  left: 50%; /* Center the modal horizontally */
+  transform: translate(-50%, -50%); /* Adjust position to truly center the modal */
+  z-index: 1000; /* Ensure it's above other content */
 }
 
 /* The background overlay */
@@ -339,4 +340,20 @@ body.modal-open {
 
 .td-button {
   white-space: nowrap; /* Prevents wrapping of contents */
+}
+
+.product-image-thumbnail {
+  max-width: 100px; /* Adjust the width as needed */
+  max-height: 100px; /* Adjust the height as needed */
+  margin: 5px; /* Adds some space around the images */
+  object-fit: cover; /* This will cover the area of the box without stretching the image */
+  border-radius: 5px; /* Optional: Adds rounded corners to your images */
+}
+
+.product-images {
+  display: flex; /* Align images in a row */
+  flex-wrap: nowrap; /* Prevent wrapping to a new line */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  gap: 10px; /* Space between images */
+  margin-bottom: 20px; /* Space below the image container */
 }

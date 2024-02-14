@@ -55,7 +55,7 @@ const SupplierLogin = () => {
     } 
     
     if (requestBody.roleName === "CUSTOMER") {
-      navigation(`/index`);
+      navigation(`/customer/main?token=${response.data.token}`);
     }
 
      } catch (error) {

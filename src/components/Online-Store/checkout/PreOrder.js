@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { createSalesOrder } from "./CheckoutUtils.js";
 import { processPaymentWithStripe } from "./CheckoutUtils.js";
 import { processPaymentWithPayPal } from "./CheckoutUtils.js";
+import { checkOrderStatus } from "./CheckoutUtils.js"
 import "./PreOrder.css";
 import { useRef } from "react";
 import { loadStripe } from "@stripe/stripe-js";
@@ -58,6 +59,14 @@ const PreOrder = () => {
   const [preOrderDetailData, setPreOrderDetailData] = useState(
     initialSalesOrderDetailData
   );
+
+  // isProcessingOrder 跟踪订单是否正在处理中
+  const [isProcessingOrder, setIsProcessingOrder] = useState(false);
+
+  // 设置一个状态标志来控制支付按钮的可用性, 防止用户在第一次点击支付按钮开始轮询时多次点击支付按钮导致重复创建订单。
+  // 这个状态标志可以在用户首次点击支付按钮时设置为 true，以表示一个支付流程已经开始，直到这个支付流程结束（无论是成功、失败还是取消），这个状态标志才被重置为 false。同时，这个状态标志可以用来控制支付按钮的禁用状态以及显示一个加载提示给用户，表明订单正在处理中。
+  // isPlacingOrder: 支付流程是否已经开始
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
   // Define a function to handle user input changes
   const handleInputPreOrderChange = (e) => {
@@ -136,6 +145,13 @@ const PreOrder = () => {
 
     // Function to create a SalesOrder and SalesOrderDetail based on productInfo
     const handlePlaceOrder = async () => {
+      if (isPlacingOrder) {
+        // 如果已经在下单支付中，则直接返回，防止重复操作
+        return;
+      }
+    
+      setIsPlacingOrder(true);  // 标记支付流程开始
+
       if (preOrderData.paymentMethod === "Stripe") {
         if (!stripe || !elements) {
           return;
@@ -171,6 +187,9 @@ const PreOrder = () => {
             console.error("An error occurred:", error);
           });
       } else if (preOrderData.paymentMethod === "PayPal") {
+
+        setIsProcessingOrder(true);  // 开始处理订单，显示加载界面
+
         preOrderData.paymentMethod = "PayPal";
 
         // create SalesOrder
@@ -178,8 +197,8 @@ const PreOrder = () => {
           preOrderData,
           preOrderDetailData
         );
-        console.log("salesOrder: ", salesOrderResponse);
-        console.log("SalesOrder and SalesOrderDetail created successfully.");
+        console.log("success - salesOrder: ", salesOrderResponse);
+        console.log("success - SalesOrder and SalesOrderDetail created successfully.");
 
         salesOrderResponse
           .then(async ({ salesOrderData, salesOrderDetailData }) => {
@@ -189,8 +208,34 @@ const PreOrder = () => {
             console.log("***salesOrder Data to PayPal: " + JSON.stringify(salesOrderData));
 
             const redirectUrl = await processPaymentWithPayPal(salesOrderData);
-            window.location.href = redirectUrl; // Redirect to PayPal
 
+            // 开始轮询订单状态
+            const intervalId = setInterval(async () => {
+              try {
+                const statusResponse = await checkOrderStatus(salesOrderData.salesOrderSn);
+                console.log("statusResponse:", statusResponse.approvalUrl);
+        
+                if (statusResponse) { //  && statusResponse.status === "CREATED"
+                  console.log("create success!")
+                  clearInterval(intervalId);  // 停止轮询
+                  setIsProcessingOrder(false);  // 隐藏加载状态
+                  window.location.href = statusResponse.approvalUrl;  // 重定向到支付页面
+                  setIsPlacingOrder(false);  // 标记支付流程结束
+                } 
+                else if (statusResponse) { //  && statusResponse.status !== 'PROCESSING'
+                  clearInterval(intervalId);  // 停止轮询
+                  setIsProcessingOrder(false);  // 隐藏加载状态
+                  // 可以在这里处理订单非处理中状态，例如显示错误或状态消息
+                  setIsPlacingOrder(false);  // 出错时也要重置标志
+                }
+                // 如果订单状态仍然是PROCESSING，则轮询将继续
+              } catch (error) {
+                console.error("Error fetching order status:", error);
+                clearInterval(intervalId);  // 出错时停止轮询
+                setIsProcessingOrder(false);  // 隐藏加载状态
+                // 可以在这里处理错误情况
+              }
+            }, 1000);  // 每5秒轮询一次
           })
           .catch((error) => {
             console.error("An error occurred:", error);
@@ -200,6 +245,12 @@ const PreOrder = () => {
 
     return (
       <div className="info-section">
+        {isProcessingOrder && (
+          <div className="loading-overlay">
+            <div className="loading-message">Your order is being processed. Please wait...</div>
+          </div>
+        )}
+
         {preOrderData.paymentMethod === "Stripe" && <CardElement />}
         <button onClick={handlePlaceOrder}>Place Order</button>
       </div>

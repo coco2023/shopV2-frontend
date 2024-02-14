@@ -56,6 +56,10 @@ import LoginFailure from "./components/users/SupplierLogin/LoginFailure";
 
 import SuppliersLayout2 from "./components/Suppliers/SuppliersLayout2/SuppliersLayout";
 
+import CustomerDashboard from "./components/Customers/CustomerInfo/CustomerDashboard";
+import CustomerSalesOrderPage from "./components/Customers/CustomerSalesOrder/CustomerSalesOrderPage";
+import CustomerLayout from "./components/Customers/CustomerLayout/CustomerLayout";
+
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
 
@@ -95,15 +99,22 @@ function App() {
         <Route path="/paypal-return" element={<PayPalReturnPage />} />
       </Routes>
 
+      {/* Customer */}
+      <Routes>
+        {" "}
+        <Route path="/customer/info" element={<CustomerLayout><CustomerDashboard /></CustomerLayout>} />
+        <Route path="/customer/main" element={<CustomerLayout><CustomerSalesOrderPage /></CustomerLayout>} />
+      </Routes>
+
       {/* IMS */}
       <Routes>
+        <Route path="/products" element={<Layout><ProductPage /></Layout>} />
+        <Route path="/productAttribute" element={<Layout><ProductAttributePage /></Layout>} />
         <Route path="/brand" element={<Layout><BrandPage /></Layout>} />
         <Route path="/category" element={<Layout><CategoryPage /></Layout>} />
         <Route path="/supplier" element={<Layout><SupplierPage /></Layout>} />
         <Route path="/salesOrders" element={<Layout><SalesOrderPage /></Layout>} />
         <Route path="/salesOrderDetail" element={<Layout><SalesOrderDetailPage /></Layout>} />
-        <Route path="/products" element={<Layout><ProductPage /></Layout>} />
-        <Route path="/productAttribute" element={<Layout><ProductAttributePage /></Layout>} />
         <Route path="/payments" element={<Layout><PaymentPage /></Layout>} />
         <Route path="/invoices" element={<Layout><InvoicePage /></Layout>} />
         {/* <Route path="/supplier-products/:supplierId" element={<Layout><SupplierProductPage /></Layout>} /> */}

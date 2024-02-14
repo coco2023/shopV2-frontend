@@ -96,7 +96,7 @@ const SupplierProductPage = () => {
         `${process.env.REACT_APP_API_URL}/api/v1/suppliers/products/all`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ` + localStorage.getItem("token"),
           }
         }
       );

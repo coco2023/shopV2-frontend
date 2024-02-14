@@ -27,6 +27,7 @@ const ProductPage = () => {
     stockStatus: "IN_STOCK", // Replace with the initial status value
     shippingInfo: "",
     lastStockUpdate: new Date(),
+    productImageIds: null
   });
   const [productAttribute, setProductAttribute] = useState({
     productId: null, 
@@ -36,6 +37,7 @@ const ProductPage = () => {
   });
   const [showAttributeCreateModal, setShowAttributeCreateModal] = useState(false);
 
+  const [selectedProductImages, setSelectedProductImages] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [searchId, setSearchId] = useState("");
@@ -43,20 +45,14 @@ const ProductPage = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(0); // Current page for pagination
-  const itemsPerPage = 20; // Number of items to display per page
-
-  // Pagination logic
-  const offset = currentPage * itemsPerPage;
-  const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
+  const [productsPerPage, setProductsPerPage] = useState(6); // 每页显示的产品数量
+  const [pageCount, setPageCount] = useState(1); // 初始总页数设为1
+  const itemsPerPage = 6; // Number of items to display per page
+  const [totalPages, setTotalPages] = useState(0); // 用于存储后端返回的总页数
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-
-  const paginatedProducts = filteredProducts.slice(
-    offset,
-    offset + itemsPerPage
-  );
     
   useEffect(() => {
     // Fetch all products when the component mounts
@@ -82,25 +78,142 @@ const ProductPage = () => {
   // get all
   const fetchProducts = async () => {
     try {
+      const params = {
+        page: currentPage, // 使用当前页码
+        size: itemsPerPage, // 使用每页的项目数
+      };  
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/v1/products/all`
+        `${process.env.REACT_APP_API_URL}/api/v1/products/main/all`,
+        { params }
       );
-      setProducts(response.data);
+      setProducts(response.data.content);
+      setPageCount(response.data.totalPages); // 更新总页数
+      // console.log("Params:", params);
+      // console.log("Response data:", response.data);
+      // console.log("Total pages set to:", response.data.totalPages);
+      setTotalPages(response.data.totalPages); // 更新总页数
+
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
 
+  // 当组件挂载或currentPage/itemsPerPage更改时，获取产品
+  useEffect(() => {
+    fetchProducts();
+  }, [currentPage, itemsPerPage]); // 当currentPage或itemsPerPage变化时重新获取产品
+  
+  const [selectedFiles, setSelectedFiles] = useState(null);
+
+  const handleFileSelect = (e) => {
+    setSelectedFiles(e.target.files);
+  };
+
+  const handleImageUpload = async (e) => {
+    if (!selectedFiles) {
+      console.error('No files selected');
+      return;
+    }
+
+    const formData = new FormData();
+    // Construct product details JSON string
+    const productDetails = JSON.stringify(product);
+    console.log("productDetails: " + productDetails)
+
+    // Append product details to formData
+    formData.append('product', productDetails);
+    // Append selected files to formData
+    for (let file of selectedFiles) {
+      formData.append('newImages', file);
+    }
+
+    try {
+      await axios.patch(`${process.env.REACT_APP_API_URL}/api/v1/products/${selectedProduct.productId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      // Reset states
+      setSelectedFiles(null);
+      setSelectedProduct(null);
+      fetchProducts();
+
+    } catch (error) {
+      console.error('Error uploading images:', error);
+    }
+  };
+
+  // fetch product images
+  const fetchProductImage = async (productId, imageId) => {
+    // Construct the URL to fetch the image
+    const getImageUrl = `${process.env.REACT_APP_API_URL}/api/v1/products/${productId}/images/main/s3/img/${imageId}`;
+    return getImageUrl; // Directly use the URL as image source in <img> tags
+  };
+    
+  const handleProductClick = async (selectedProduct) => {
+    setSelectedProduct(selectedProduct);
+    setProduct(selectedProduct);
+    const getImageUrls = await Promise.all(selectedProduct.productImageIds.map(id => 
+      fetchProductImage(product.productId, id)
+    ));
+    setSelectedProductImages(getImageUrls);
+  };
+
+  useEffect(() => {
+    console.log("SelectedProductImages: " + selectedProductImages); // Log to verify the update
+  }, [selectedProductImages]); // This effect runs whenever selectedProductImages changes
+  
   // edit & delete
   const handleCloseEditModal = () => {
     setSelectedProduct(false);
   };
 
-  const handleProductClick = (selectedProduct) => {
-    setSelectedProduct(selectedProduct);
-    setProduct(selectedProduct);
-  };
+  const handleEditProductWithImages = async (e) => {
+    if (!selectedProduct) {
+      console.error("No product selected");
+      return;
+    }
+  
+    const formData = new FormData();
+  
+    // Add product details to formData as a JSON string
+    product.productImageIds = selectedProduct.productImageIds;
+    const productDetails = JSON.stringify(product);
+    formData.append('product', productDetails);
+    console.log('product: ' + productDetails)
+  
+    // Append new images to formData if selectedFiles is not null
+    if (selectedFiles) {
+      for (let file of selectedFiles) {
+        formData.append('newImages', file);
+      }
+    }
+  
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/v1/products/${selectedProduct.productId}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+  
+      // Log response or handle success (e.g., clear selected files, update UI, close modal)
+      console.log("Product updated successfully:", response.data);      
+  
+      // Reset states
+      setSelectedFiles(null);
+      setSelectedProduct(null);
+      fetchProducts();
 
+    } catch (error) {
+      console.error("Error updating product with images:", error);
+    }
+  };
+  
   const handleEditProduct = async () => {
     console.log("***update: ", product);
     try {
@@ -136,6 +249,39 @@ const ProductPage = () => {
     setShowAttributeCreateModal(false);
   };
 
+  const handleCreateProductWithImages = async (e) => {
+    const formData = new FormData();
+
+    // Convert product details object to a JSON string and append to formData
+    const productDetails = JSON.stringify(product); // Assuming `product` state contains all the necessary product fields
+    formData.append('product', productDetails);
+    console.log(productDetails, product)
+  
+    // Append images to formData if any are selected
+    if (selectedFiles) {
+      Array.from(selectedFiles).forEach(file => {
+        formData.append('images', file);
+      });
+    }
+  
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/products`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+  
+      // Log the response or handle it as needed
+      console.log("Product created successfully:", response.data);
+  
+      fetchProducts();
+      setProduct({});
+      setSelectedFiles(null);
+  
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }  
+  }
   const handleCreateProduct = async () => {
     console.log("***Create product: ", product);
     try {
@@ -272,12 +418,13 @@ const ProductPage = () => {
             <th>Stock Status</th>
             <th>Shipping Info</th>
             <th>Last Stock Update</th>
-            <th>Actions</th>
+            {/* <th>Actions</th> */}
           </tr>
         </thead>
         <tbody>
-          {paginatedProducts.map((product) => (
-            <tr key={product.productId}>
+          
+          {products.map((product) => (
+            <tr key={product.productId} onClick={() => handleProductClick(product)}> {/* show edit product when clicking the rows */}
               <td>{product.productId}</td>
               <td>{product.productName}</td>
               <td>{product.skuCode}</td>
@@ -310,20 +457,20 @@ const ProductPage = () => {
               <td>{product.stockStatus}</td>
               <td>{product.shippingInfo}</td>
               <td>{product.lastStockUpdate}</td>
-              <td className="td-button">
+              {/* <td className="td-button">
                 <button
                   onClick={() => handleProductClick(product)}
                   className="button-secondary"
                 >
                   Edit
-                </button>
+                </button> 
                 <button
                   onClick={() => handleDeleteProduct(product.productId)}
                   className="button-danger"
                 >
                   Delete
-                </button>
-              </td>
+                </button> 
+              </td>*/}
             </tr>
           ))}
         </tbody>
@@ -335,6 +482,7 @@ const ProductPage = () => {
           previousLabel={"Previous"}
           nextLabel={"Next"}
           pageCount={pageCount}
+          // count={totalPages} page={currentPage + 1}
           onPageChange={handlePageChange}
           containerClassName={"pagination"}
           previousLinkClassName={"page-link"}
@@ -352,6 +500,17 @@ const ProductPage = () => {
           </div>
           <div className="input-columns">
             <div className="column">
+
+              <div>
+                <div className="product-images">
+                  {selectedProductImages.map((getImageUrls, index) => (
+                    <img key={index} src={getImageUrls} alt={`Product ${index}`} className="product-image-thumbnail" />
+                  ))}
+                </div>
+                <input type="file" multiple onChange={handleFileSelect} />
+                <button onClick={() => handleEditProductWithImages(selectedProduct.productId)}>Upload</button>
+              </div>
+
               <input
                 type="text"
                 id="productName"
@@ -366,7 +525,7 @@ const ProductPage = () => {
                 id="skuCode"
                 name="skuCode"
                 placeholder="Enter SKU Code"
-                value={product.skuCode}
+                value={product.skuCode || ""}
                 onChange={handleInputChange}
               />
 
@@ -375,7 +534,7 @@ const ProductPage = () => {
                 id="categoryId"
                 name="categoryId"
                 placeholder="Enter Category ID"
-                value={product.categoryId}
+                value={product.categoryId  || ""}
                 onChange={handleInputChange}
               />
 
@@ -384,7 +543,7 @@ const ProductPage = () => {
                 id="categoryName"
                 name="categoryName"
                 placeholder="Enter Category Name"
-                value={product.categoryName}
+                value={product.categoryName  || ""}
                 onChange={handleInputChange}
               />
 
@@ -393,7 +552,7 @@ const ProductPage = () => {
                 id="brandId"
                 name="brandId"
                 placeholder="Enter Brand ID"
-                value={product.brandId}
+                value={product.brandId  || ""}
                 onChange={handleInputChange}
               />
 
@@ -402,7 +561,7 @@ const ProductPage = () => {
                 id="brandName"
                 name="brandName"
                 placeholder="Enter Brand Name"
-                value={product.brandName}
+                value={product.brandName  || ""}
                 onChange={handleInputChange}
               />
 
@@ -411,7 +570,7 @@ const ProductPage = () => {
                 id="supplierId"
                 name="supplierId"
                 placeholder="Enter Supplier ID"
-                value={product.supplierId}
+                value={product.supplierId  || ""}
                 onChange={handleInputChange}
               />
 
@@ -420,7 +579,7 @@ const ProductPage = () => {
                 id="supplierName"
                 name="supplierName"
                 placeholder="Enter Supplier Name"
-                value={product.supplierName}
+                value={product.supplierName  || ""}
                 onChange={handleInputChange}
               />
 
@@ -429,7 +588,7 @@ const ProductPage = () => {
                 id="description"
                 name="description"
                 placeholder="Enter Description"
-                value={product.description}
+                value={product.description  || ""}
                 onChange={handleInputChange}
               />
 
@@ -438,7 +597,7 @@ const ProductPage = () => {
                 id="price"
                 name="price"
                 placeholder="Enter Price"
-                value={product.price}
+                value={product.price  || ""}
                 onChange={handleInputChange}
               />
             </div>
@@ -449,7 +608,7 @@ const ProductPage = () => {
                 id="discount"
                 name="discount"
                 placeholder="Enter discount"
-                value={product.discount}
+                value={product.discount  || ""}
                 onChange={handleInputChange}
               />
 
@@ -458,7 +617,7 @@ const ProductPage = () => {
                 id="finalPrice"
                 name="finalPrice"
                 placeholder="Enter final Price"
-                value={product.finalPrice}
+                value={product.finalPrice  || ""}
                 onChange={handleInputChange}
               />
 
@@ -467,7 +626,7 @@ const ProductPage = () => {
                 id="rating"
                 name="rating"
                 placeholder="Enter rating"
-                value={product.rating}
+                value={product.rating  || ""}
                 onChange={handleInputChange}
               />
 
@@ -476,7 +635,7 @@ const ProductPage = () => {
                 id="salesAmount"
                 name="salesAmount"
                 placeholder="Enter salesAmount"
-                value={product.salesAmount}
+                value={product.salesAmount  || ""}
                 onChange={handleInputChange}
               />
 
@@ -485,7 +644,7 @@ const ProductPage = () => {
                 id="imageUrl"
                 name="imageUrl"
                 placeholder="Enter Image URL"
-                value={product.imageUrl}
+                value={product.imageUrl  || ""}
                 onChange={handleInputChange}
               />
 
@@ -494,7 +653,7 @@ const ProductPage = () => {
                 id="stockQuantity"
                 name="stockQuantity"
                 placeholder="Enter Stock Quantity"
-                value={product.stockQuantity}
+                value={product.stockQuantity  || ""}
                 onChange={handleInputChange}
               />
 
@@ -503,7 +662,7 @@ const ProductPage = () => {
                 id="stockStatus"
                 name="stockStatus"
                 placeholder="Enter Stock Status"
-                value={product.stockStatus}
+                value={product.stockStatus  || ""}
                 onChange={handleInputChange}
               />
 
@@ -512,7 +671,7 @@ const ProductPage = () => {
                 id="shippingInfo"
                 name="shippingInfo"
                 placeholder="Enter Shipping Info"
-                value={product.shippingInfo}
+                value={product.shippingInfo  || ""}
                 onChange={handleInputChange}
               />
 
@@ -521,14 +680,20 @@ const ProductPage = () => {
                 id="lastStockUpdate"
                 name="lastStockUpdate"
                 placeholder="Enter Last Stock Update"
-                value={product.lastStockUpdate}
+                value={product.lastStockUpdate  || ""}
                 onChange={handleInputChange}
               />
             </div>
           </div>
 
           <div>
-            <button onClick={handleEditProduct}>Update</button>
+            <button onClick={handleEditProductWithImages}>Update</button>
+            <button
+                  onClick={() => handleDeleteProduct(product.productId)}
+                  className="button-danger"
+                >
+                  Delete
+            </button>
             <button onClick={handleCloseEditModal}>Cancel</button>
           </div>
         </div>
@@ -537,6 +702,12 @@ const ProductPage = () => {
       {/* create */}
       {showCreateModal && (
         <div className="create-product-modal">
+          <div>
+            <h2>Add Images</h2>
+            <input type="file" multiple onChange={handleFileSelect} />
+            {/* <button onClick={() => handleEditProductWithImages()}>Upload</button> */}
+          </div>
+
           <h2>Create Product</h2>
           <div className="input-columns">
             <div className="column">
@@ -714,7 +885,7 @@ const ProductPage = () => {
               />
             </div>
           </div>
-          <button onClick={handleCreateProduct}>Create</button>
+          <button onClick={handleCreateProductWithImages}>Create</button>
           <button onClick={handleCloseCreateModal}>Cancel</button>
         </div>
       )}
