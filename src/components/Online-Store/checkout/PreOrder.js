@@ -153,6 +153,8 @@ const PreOrder = () => {
       setIsPlacingOrder(true);  // 标记支付流程开始
 
       if (preOrderData.paymentMethod === "Stripe") {
+        setIsProcessingOrder(true);  // 开始处理订单，显示加载界面
+
         if (!stripe || !elements) {
           return;
         }
@@ -182,10 +184,14 @@ const PreOrder = () => {
 
             // Process payment with Stripe using finalSalesOrder
             processPaymentWithStripe(token.id, salesOrderData, salesOrderDetailData);
+            setIsProcessingOrder(false);  // 隐藏加载状态
+
           })
           .catch((error) => {
             console.error("An error occurred:", error);
+            setIsProcessingOrder(false);  // 隐藏加载状态
           });
+      console.log("finish!")
       } else if (preOrderData.paymentMethod === "PayPal") {
 
         setIsProcessingOrder(true);  // 开始处理订单，显示加载界面
@@ -213,7 +219,7 @@ const PreOrder = () => {
             const intervalId = setInterval(async () => {
               try {
                 const statusResponse = await checkOrderStatus(salesOrderData.salesOrderSn);
-                console.log("statusResponse:", statusResponse.approvalUrl);
+                console.log("statusResponse:", statusResponse);
         
                 if (statusResponse) { //  && statusResponse.status === "CREATED"
                   console.log("create success!")
@@ -222,12 +228,12 @@ const PreOrder = () => {
                   window.location.href = statusResponse.approvalUrl;  // 重定向到支付页面
                   setIsPlacingOrder(false);  // 标记支付流程结束
                 } 
-                else if (statusResponse) { //  && statusResponse.status !== 'PROCESSING'
-                  clearInterval(intervalId);  // 停止轮询
-                  setIsProcessingOrder(false);  // 隐藏加载状态
-                  // 可以在这里处理订单非处理中状态，例如显示错误或状态消息
-                  setIsPlacingOrder(false);  // 出错时也要重置标志
-                }
+                // else if (statusResponse) { //  && statusResponse.status !== 'PROCESSING'
+                //   clearInterval(intervalId);  // 停止轮询
+                //   setIsProcessingOrder(false);  // 隐藏加载状态
+                //   // 可以在这里处理订单非处理中状态，例如显示错误或状态消息
+                //   setIsPlacingOrder(false);  // 出错时也要重置标志
+                // }
                 // 如果订单状态仍然是PROCESSING，则轮询将继续
               } catch (error) {
                 console.error("Error fetching order status:", error);
@@ -235,13 +241,15 @@ const PreOrder = () => {
                 setIsProcessingOrder(false);  // 隐藏加载状态
                 // 可以在这里处理错误情况
               }
-            }, 1000);  // 每5秒轮询一次
+            }, 3000);  // 每5秒轮询一次
           })
           .catch((error) => {
             console.error("An error occurred:", error);
           });
       }
+      console.log("finish!")
     };
+  
 
     return (
       <div className="info-section">
