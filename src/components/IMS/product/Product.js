@@ -375,6 +375,29 @@ const ProductPage = () => {
       console.error("Error creating ProductAttribute:", error);
     }
   };
+
+  const deleteProductImage = async (productId, imageIndex) => {
+    const imageId = selectedProduct.productImageIds[imageIndex];
+    
+    try {
+      // Call the backend to delete the image
+      // await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/products/${productId}/images/${imageId}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/products/${productId}/img/${imageId}`);
+
+      // Remove the image from the state
+      const updatedImageIds = selectedProduct.productImageIds.filter((id, index) => index !== imageIndex);
+      setSelectedProduct({ ...selectedProduct, productImageIds: updatedImageIds });
+      
+      // Update the images displayed
+      const getImageUrls = await Promise.all(updatedImageIds.map(id => 
+        fetchProductImage(productId, id)
+      ));
+      setSelectedProductImages(getImageUrls);
+    
+    } catch (error) {
+      console.error("Error deleting product image:", error);
+    }
+  }
   
   return (
     <div className="product-container">
@@ -504,7 +527,10 @@ const ProductPage = () => {
               <div>
                 <div className="product-images">
                   {selectedProductImages.map((getImageUrls, index) => (
+                    <div key={index} className="product-image-container">
                     <img key={index} src={getImageUrls} alt={`Product ${index}`} className="product-image-thumbnail" />
+                    <button onClick={() => deleteProductImage(selectedProduct.productId, index)} className="delete-image-button">X</button>
+                    </div>
                   ))}
                 </div>
                 <input type="file" multiple onChange={handleFileSelect} />
