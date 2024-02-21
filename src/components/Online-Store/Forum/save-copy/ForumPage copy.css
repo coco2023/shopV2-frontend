@@ -1,0 +1,46 @@
+/* ForumPage.css */
+.forum-container {
+  background-color: #f8f8f8; /* Or any color matching your UI theme */
+  padding: 20px;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab {
+  margin-right: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.tab.active {
+  font-weight: bold;
+  border-bottom: 2px solid #000; /* Or any color indicating active state */
+}
+
+.thread-item {
+  background-color: #fff;
+  padding: 15px;
+  border-bottom: 1px solid #ddd; /* for separation */
+}
+
+.thread-title {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.thread-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 5px;
+}
+
+.thread-details > span {
+  margin-right: 10px;
+}
+
+/* Add additional styling as needed */

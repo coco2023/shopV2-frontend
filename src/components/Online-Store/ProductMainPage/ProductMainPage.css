@@ -1,7 +1,7 @@
 .product-main-page {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 5px;
   justify-content: center;
   padding: 20px;
 }
@@ -34,4 +34,30 @@
 
 .load-more-btn:active {
   transform: translateY(2px); /* Slight push effect when clicked */
+}
+
+.tab-container {
+  display: flex;
+  justify-content: start;
+  border-bottom: 2px solid #ccc;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.tab-btn:hover {
+  background-color: #e2e2e2;
+}
+
+.tab-btn.active {
+  border-bottom-color: #ff0000; /* Active tab indicator color */
+  font-weight: bold;
+  background-color: white;
 }

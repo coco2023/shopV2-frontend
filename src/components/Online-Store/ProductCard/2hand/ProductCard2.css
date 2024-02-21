@@ -1,0 +1,85 @@
+.product-card-2 {
+  width: 350px;
+  border: 1px solid #eee;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  overflow: hidden; /* To make sure nothing overflows the card */
+  background: #fff; /* Background color for the card */
+  position: relative; /* For absolute positioning of the image container */
+}
+
+.product-image-container-2 {
+  width: 100%; /* Adjust if needed */
+  height: 350px; /* Fixed height for the image container */
+  margin: 0 auto 3px; /* Center the container horizontally */
+  position: relative; /* For absolute positioning of the image */
+}
+
+.product-image-product-card-2 {
+  max-width: 100%; /* Image will fill the width of its container */
+  max-height: 100%; /* Image will fill the height of its container */
+  object-fit: contain; /* Ensures the image is fully visible and retains aspect ratio */
+  position: absolute; /* Absolute position */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the image */
+}
+
+.product-details-container-2 {
+  flex-shrink: 0; /* Prevents the details section from shrinking */
+  margin-top: 10px; /* Add space between image and details */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-description-2 {
+  font-size: 0.9em; /* Adjust font size as needed */
+  margin-bottom: 0.5em; /* Adjust spacing as needed */
+  color: #333; /* Standard text color, not bold */
+  height: 3em; /* Set a fixed height for uniformity */
+  overflow: hidden; /* Hide overflow */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Show ellipsis after 2 lines */
+}
+
+.product-pricing-2 {
+  font-size: 1.2em; /* Larger font size for price */
+  font-weight: bold; /* Make the price bold */
+  color: #E44D26; /* Price color can be adjusted as needed */
+  margin-bottom: 0.5em; /* Adjust spacing as needed */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* This will space out the items if there's enough space */
+  margin-right: 10px; /* Add space to the right of the price */
+}
+
+.product-price-2 {
+  font-size: 1.2em; /* Larger font size for the price */
+  font-weight: bold;
+  margin-right: 10px; /* Add space to the right of the price */
+}
+
+.product-sales-2 {
+  font-weight: bold;
+  color: #E44D26; /* Highlight color for sales */
+  margin-right: 10px; /* Add space to the right of the sales info */
+}
+
+.product-add-to-cart-2 {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.cart-icon-2 {
+  width: 24px;
+  height: 24px;
+}

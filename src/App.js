@@ -60,6 +60,8 @@ import CustomerDashboard from "./components/Customers/CustomerInfo/CustomerDashb
 import CustomerSalesOrderPage from "./components/Customers/CustomerSalesOrder/CustomerSalesOrderPage";
 import CustomerLayout from "./components/Customers/CustomerLayout/CustomerLayout";
 
+import ForumPage from "./components/Online-Store/Forum/ForumPage";
+
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
 
@@ -86,6 +88,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/user" element={<UserIndexPage />} />
+
+        {/* Online Store */}
         <Route path="/index" element={<ProductMainPage />} />
         <Route path="/details/:productId" element={<ProductDetailsPage />} />
         {/* <Route path="/preOrder/:productSkuCode" element={<PreOrder />} /> */}
@@ -97,6 +101,9 @@ function App() {
         <Route path="/payment-success" element={<PaymentSuccessPage />} />
         <Route path="/paypal-success" element={<PayPalCompletePayment />} />
         <Route path="/paypal-return" element={<PayPalReturnPage />} />
+
+        <Route path="/forum" element={<ForumPage />} />
+
       </Routes>
 
       {/* Customer */}

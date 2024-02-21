@@ -153,7 +153,7 @@ const PreOrder = () => {
       setIsPlacingOrder(true);  // 标记支付流程开始
 
       if (preOrderData.paymentMethod === "Stripe") {
-        setIsProcessingOrder(true);  // 开始处理订单，显示加载界面
+        setIsProcessingOrder(false);  // 开始处理订单，显示加载界面
 
         if (!stripe || !elements) {
           return;

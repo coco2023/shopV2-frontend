@@ -1,0 +1,126 @@
+/* ForumPage.css */
+.forum-container {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.forum-post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.post-content {
+  flex: 1; /* Allows this element to grow and fill the space */
+  font-size: 1rem;
+  color: #333;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.post-timestamp {
+  white-space: nowrap; /* Ensures the timestamp stays on one line */
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab {
+  margin-right: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.tab.active {
+  font-weight: bold;
+  border-bottom: 2px solid #000; /* Or any color indicating active state */
+}
+
+.forum-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.forum-table th,
+.forum-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.forum-table thead {
+  background-color: #f4f4f4;
+}
+
+/* Specific column widths */
+.column-content {
+  width: 60%;
+}
+
+.column-other {
+  width: 10%;
+}
+
+/* Responsive table */
+@media screen and (max-width: 600px) {
+  .forum-table th,
+  .forum-table td {
+    display: block;
+    width: 100%;
+  }
+  .forum-table thead {
+    display: none;
+  }
+  .forum-table,
+  .forum-table tbody,
+  .forum-table tr {
+    display: block;
+    width: 100%;
+  }
+  .forum-table tr {
+    margin-bottom: 15px;
+  }
+  .forum-table td {
+    text-align: right;
+    padding-left: 50%; /* Adjust as per content */
+    text-align: right;
+    position: relative;
+  }
+  .forum-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+
+.forum-table th:nth-child(1) {
+  width: 60%;
+}
+.forum-table th:nth-child(2) {
+  width: 10%;
+}
+.forum-table th:nth-child(3) {
+  width: 10%;
+}
+.forum-table th:nth-child(4) {
+  width: 10%;
+}
+.forum-table th:nth-child(5) {
+  width: 10%;
+}
