@@ -55,7 +55,10 @@ const Navigation = () => {
           <a href="https://github.com/coco2023/shopV2-frontend" target="_blank" rel="noopener noreferrer">
               [frontend]
           </a>
-          | View On Github
+          |
+          <a href="https://www.yuque.com/u1090931/atruez/ld1t8k67bie5lqro?singleDoc=" target="_blank" rel="noopener noreferrer">
+              [DOC文档]
+          </a>
         </div>
 
         {/* <div className="nav-search">
