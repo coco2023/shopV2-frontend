@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:9001",
   "dependencies": {
+    "@stomp/stompjs": "^6.0.0",
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.2.0",
     "@testing-library/jest-dom": "^5.17.0",
@@ -20,8 +21,8 @@
     "react-paginate": "^8.2.0",
     "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
+    "react-use-intercom": "^5.3.0",
     "sockjs-client": "^1.6.1",
-    "stompjs": "^2.3.3",
     "stream-http": "^3.2.0",
     "swiper": "^11.0.3",
     "url": "^0.11.3",

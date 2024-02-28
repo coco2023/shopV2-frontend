@@ -62,10 +62,10 @@ const ForumPage = () => {
         <thead>
           <tr>
             <th style={{ width: "60%" }}>Content</th>
+            <th style={{ width: "10%" }}>Topic</th>
             <th style={{ width: "10%" }}>Author</th>
-            <th style={{ width: "10%" }}>Reply</th>
-            <th style={{ width: "10%" }}>View</th>
-            <th style={{ width: "10%" }}>Last post</th>
+            <th style={{ width: "10%" }}>Floor</th>
+            <th style={{ width: "10%" }}>Lastest post</th>
           </tr>
         </thead>
         <tbody>

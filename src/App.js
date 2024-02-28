@@ -62,6 +62,11 @@ import CustomerLayout from "./components/Customers/CustomerLayout/CustomerLayout
 
 import ForumPage from "./components/Online-Store/Forum/ForumPage";
 
+import Chatroom from "./components/Assist/chatroom/Chatroom";
+import IntercomChat from "./components/Assist/intercom/IntercomChat";
+import HelpPage from "./components/Assist/chatroom/HelpPage";
+
+
 // Initialize Stripe outside of the component
 const stripePromise = loadStripe('pk_test_51O3s0OFiZR4PbrrIwdG0F0rZm8zShUKCvofRtT6VEYFVLL9bJg32JNWj6BTJ49IYJYcMgr269VwlASt7ctPmnatd002qbeH7Bm');
 
@@ -69,9 +74,11 @@ function App() {
   return (
     <Router>
       <Navigation />
-
       <Routes>
         {" "}
+        {/* <Route path="/chat" element={<Chatroom />} /> */}
+        <Route path="/help" element={<HelpPage />} />
+
         <Route path="/supplierLogin" element={<SupplierLogin />} />
         <Route path="/register" element={<SupplierRegistration />} />
         <Route path="/supplier/midpage" element={<AuthMiddlewarePage />} />

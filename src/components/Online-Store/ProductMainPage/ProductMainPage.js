@@ -4,6 +4,7 @@ import ProductCard from "../ProductCard/ProductCard"; // Importing the ProductCa
 import ProductCard2 from "../ProductCard/2hand/ProductCard2"; // Importing the ProductCard component
 import ForumPage from "../Forum/ForumPage";
 import "./ProductMainPage.css"; // Importing CSS for the main page layout
+import IntercomChat from "../../Assist/intercom/IntercomChat";
 
 const ProductMainPage = () => {
   const [visibleProducts, setVisibleProducts] = useState([]);
@@ -66,6 +67,7 @@ const ProductMainPage = () => {
                 <button className="load-more-btn" onClick={loadMoreProducts}>
                   Load More
                 </button>
+                <IntercomChat/>
               </div>
             )}
           </div>
@@ -81,6 +83,7 @@ const ProductMainPage = () => {
                 <button className="load-more-btn" onClick={loadMoreProducts}>
                   Load More
                 </button>
+                <IntercomChat/>
               </div>
             )}
           </div>
@@ -89,6 +92,7 @@ const ProductMainPage = () => {
           return (
             <div>
               <ForumPage />
+              <IntercomChat/>
             </div>
           );  
       default:

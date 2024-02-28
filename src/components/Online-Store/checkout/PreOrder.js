@@ -13,6 +13,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import IntercomChat from "../../Assist/intercom/IntercomChat.js";
 
 const PreOrder = () => {
 
@@ -518,6 +519,8 @@ const PreOrder = () => {
         </div>
         </div>
       </div>
+
+      <IntercomChat/>
     </div>
   );
 };
