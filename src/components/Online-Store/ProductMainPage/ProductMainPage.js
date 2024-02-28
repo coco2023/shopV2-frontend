@@ -92,7 +92,6 @@ const ProductMainPage = () => {
           return (
             <div>
               <ForumPage />
-              <IntercomChat/>
             </div>
           );  
       default:

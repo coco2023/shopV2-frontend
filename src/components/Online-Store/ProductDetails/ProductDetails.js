@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./ProductDetails.css";
+import IntercomChat from "../../Assist/intercom/IntercomChat";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
@@ -183,6 +184,9 @@ const ProductDetails = () => {
           Buy It
         </button>
       </div>
+
+      <IntercomChat/>
+
     </div>
   );
 };

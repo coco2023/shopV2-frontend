@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { useLocation } from "react-router-dom";
 import "./PaymentSuccessPage.css";
+import IntercomChat from '../../Assist/intercom/IntercomChat';
 
 const PaymentSuccessPage = () => {
   const extractData = JSON.parse(sessionStorage.getItem("orderDataInfo"));
@@ -120,6 +121,9 @@ const PaymentSuccessPage = () => {
           <p>{paymentInfo.transactionId}</p>
         </div>
       </div>
+
+      <IntercomChat/>
+
     </div>
   );
 };
