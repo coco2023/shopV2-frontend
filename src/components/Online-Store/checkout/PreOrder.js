@@ -144,6 +144,13 @@ const PreOrder = () => {
     const stripe = useStripe();
     const elements = useElements();
 
+    useEffect(() => {
+      // Logic here will run when the component mounts and whenever `stripe` or `elements` changes
+      if (stripe && elements) {
+        // You can interact with Stripe elements here
+      }
+    }, [stripe, elements]); // Empty array ensures this only runs on mount and unmount
+
     // Function to create a SalesOrder and SalesOrderDetail based on productInfo
     const handlePlaceOrder = async () => {
       if (isPlacingOrder) {
@@ -151,20 +158,43 @@ const PreOrder = () => {
         return;
       }
     
-      setIsPlacingOrder(true);  // 标记支付流程开始
+      setIsPlacingOrder(false);
 
       if (preOrderData.paymentMethod === "Stripe") {
-        setIsProcessingOrder(false);  // 开始处理订单，显示加载界面
+        console.log("start stripe");
 
         if (!stripe || !elements) {
+          console.error("Stripe or Elements is not initialized");
+          setIsProcessingOrder(false);
           return;
         }
+
         preOrderData.paymentMethod = "Stripe";
+
         const cardElement = elements.getElement(CardElement);
+        // Check if CardElement is available
+        if (!cardElement) {
+          console.error("CardElement is not mounted or available");
+          // setIsProcessingOrder(false); // Stop processing as CardElement is not available
+          return;
+        }
+        if (cardElement) {
+          const { error, token } = await stripe.createToken(cardElement);
+          if (error) {
+            console.error('Error in token creation:', error);
+          } else {
+            // Process the token...
+            console.log("token: " + token)
+          }
+        } else {
+          console.error('CardElement is not available');
+        }
+    
         const { error, token } = await stripe.createToken(cardElement);
 
         if (error) {
           console.log("Error:", error);
+          // setIsProcessingOrder(false); // Stop processing due to error
           return;
         }
 
@@ -185,14 +215,14 @@ const PreOrder = () => {
 
             // Process payment with Stripe using finalSalesOrder
             processPaymentWithStripe(token.id, salesOrderData, salesOrderDetailData);
-            setIsProcessingOrder(false);  // 隐藏加载状态
+            // setIsProcessingOrder(false);  // 隐藏加载状态
 
           })
           .catch((error) => {
             console.error("An error occurred:", error);
-            setIsProcessingOrder(false);  // 隐藏加载状态
+            // setIsProcessingOrder(false);  // 隐藏加载状态
           });
-      console.log("finish!")
+      
       } else if (preOrderData.paymentMethod === "PayPal") {
 
         setIsProcessingOrder(true);  // 开始处理订单，显示加载界面
@@ -227,7 +257,6 @@ const PreOrder = () => {
                   clearInterval(intervalId);  // 停止轮询
                   setIsProcessingOrder(false);  // 隐藏加载状态
                   window.location.href = statusResponse.approvalUrl;  // 重定向到支付页面
-                  setIsPlacingOrder(false);  // 标记支付流程结束
                 } 
                 // else if (statusResponse) { //  && statusResponse.status !== 'PROCESSING'
                 //   clearInterval(intervalId);  // 停止轮询
