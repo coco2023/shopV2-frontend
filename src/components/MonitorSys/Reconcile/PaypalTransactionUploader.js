@@ -43,7 +43,7 @@ function PaypalTransactionUploader() {
         </button>
 
         <a
-          href="assets/csv/Download_sample.csv"
+          href={`/assets/csv/Download_sample.csv`}
           download="Sample_Transactions.csv"
           className="download-sample"
         >
