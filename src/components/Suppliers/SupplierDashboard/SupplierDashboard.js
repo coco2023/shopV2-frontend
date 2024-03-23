@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./SupplierDashboard.css";
-// import { Client } from "@stomp/stompjs";
-// import Stomp from '@stomp/stompjs';
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
 
 const SupplierDashboard = () => {
   const [supplierData, setSupplierData] = useState({});
@@ -40,82 +40,8 @@ const SupplierDashboard = () => {
     };
 
     fetchSupplierData();
-
-    // // WebSocket connection setup
-    // const client = new Stomp.Client({
-    //   brokerURL: `${process.env.REACT_APP_API_URL.replace('http', 'ws')}/ws`,
-    //   onConnect: () => {
-    //     client.subscribe('/user/queue/notifications', (message) => {
-    //       const notification = JSON.parse(message.body);
-    //       setNotifications((prevNotifications) => [...prevNotifications, notification]);
-    //       console.log(notification)
-    //     });
-    //   },
-    //   // Add other necessary configuration options
-    // });
-
-    // client.activate();
-
-    // return () => client.deactivate();
   }, []);
 
-  // // Set up WebSocket connection
-  // useEffect(() => {
-  //   const stompClient = new Client({
-  //     brokerURL: `${process.env.REACT_APP_API_URL.replace('http', 'ws')}/ws`,
-  //     connectHeaders: {
-  //       login: "guest",
-  //       passcode: "guest",
-  //     },
-  //     debug: function (str) {
-  //       console.log("STOMP: " + str);
-  //     },
-  //     reconnectDelay: 5000,
-  //     heartbeatIncoming: 4000,
-  //     heartbeatOutgoing: 4000,
-  //   });
-
-  //   stompClient.onConnect = function (frame) {
-  //     // Subscribe to the notifications topic
-  //     stompClient.subscribe(
-  //       `/queue/notifications-${supplierId}`,
-  //       function (message) {
-  //         if (message.body) {
-  //           const newNotification = JSON.parse(message.body);
-  //           setNotifications((prevNotifications) => [
-  //             ...prevNotifications,
-  //             newNotification,
-  //           ]);
-  //         }
-  //       }
-  //     );
-  //   };
-
-  //   stompClient.onStompError = function (frame) {
-  //     console.error("Broker reported error: " + frame.headers["message"]);
-  //     console.error("Additional details: " + frame.body);
-  //   };
-
-  //   stompClient.activate();
-  //   setClient(stompClient);
-
-  //   // Disconnect the client when the component unmounts
-  //   return () => {
-  //     if (client) {
-  //       client.deactivate();
-  //     }
-  //   };
-  // }, [supplierId]); // Reconnect if supplierId changes
-
-  // // Render notification messages
-  // const renderNotifications = () => {
-  //   return notifications.map((notification, index) => (
-  //     <div key={index}>
-  //       {notification.skuCode}: {notification.quantity}
-  //     </div>
-  //   ));
-  // };
-  
   // Retrieve and store the PayPal token when the component mounts
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -125,6 +51,42 @@ const SupplierDashboard = () => {
       localStorage.setItem("token", paypalToken);
     }
   }, []);
+
+  // WebSocket connection and subscription
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // || queryParams.get("token");
+    const socket = new SockJS(`http://localhost:9001/ws?token=Bearer ${token}`);
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({'Authorization': `Bearer ${token}`}, () => {
+      console.log("WebSocket connection established");
+
+      // Subscribe to the supplier-specific notification queue
+      stompClient.subscribe("/user/queue/inventoryReduction", (message) => {
+        console.log("Received message:", message);
+        const notification = JSON.parse(message.body);
+        setNotifications((prevNotifications) => [
+          ...prevNotifications,
+          notification,
+        ]);
+      });
+    });
+
+    stompClient.onDisconnect = () => {
+      console.log("WebSocket disconnected");
+    };
+
+    stompClient.onError = (error) => {
+      console.log("WebSocket error:", error);
+    };
+
+    return () => {
+      console.log("stompClient: " + stompClient);
+      if (stompClient && stompClient.connected) {
+        stompClient.disconnect();
+      }
+    };
+  }, []); // Dependency array is empty to ensure this effect runs only once on mount
 
   const redirectToIMS = () => {
     navigation("/supplier-ims");
@@ -156,6 +118,17 @@ const SupplierDashboard = () => {
       </div>
       <div className="action-panel">
         {/* // Add any specific actions or display elements here */}
+        <div className="notifications">
+          <h3>Inventory Reduction Notifications</h3>
+          {notifications.map((notification, index) => (
+            <div key={index} className="notification">
+              <p>
+              supplierId: {notification.supplierId}, SKU: {notification.skuCode}, Quantity Reduced:{" "}
+                {notification.quantity}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="temu-area">
         <div className="temu-logo">
@@ -165,10 +138,6 @@ const SupplierDashboard = () => {
           进入 | Enter Main Page
         </button>
       </div>
-      {/* <div className="notifications">
-        <h2>Notifications</h2>
-        {renderNotifications()}
-      </div> */}
     </div>
   );
 };

@@ -50,6 +50,9 @@ import SupplierFinanceLayout from "./components/Suppliers/SupplierFinance/v1/Sup
 import SupplierFinanceReport from "./components/Suppliers/SupplierFinance/SupplierFinanceReport/SupplierFinanceReport";
 import SupplierLogin from "./components/users/SupplierLogin/SupplierLogin";
 import SupplierDashboard from "./components/Suppliers/SupplierDashboard/SupplierDashboard";
+import SupplierDashboard3 from "./components/Suppliers/SupplierDashboard/SupplierDashboard3";
+import SupplierDashboard4 from "./components/Suppliers/SupplierDashboard/SupplierDashboard4";
+
 import AuthMiddlewarePage from "./components/Suppliers/SupplierJWT/JWTStorage";
 import SupplierRegistration from "./components/users/SupplierRegister/SupplierRegister";
 import LoginFailure from "./components/users/SupplierLogin/LoginFailure";
@@ -83,6 +86,9 @@ function App() {
         <Route path="/register" element={<SupplierRegistration />} />
         <Route path="/supplier/midpage" element={<AuthMiddlewarePage />} />
         <Route path="/supplier/profile" element={<SupplierDashboard />} />
+        <Route path="/supplier/profile2" element={<SupplierDashboard3 />} />
+        <Route path="/supplier/profile3" element={<SupplierDashboard4 />} />
+
         <Route path="/supplier-ims" element={<SuppliersLayout><SupplierInfoPage /></SuppliersLayout>} />
         <Route path="/supplier-ims/products" element={<SuppliersLayout><SupplierProductPage /></SuppliersLayout>} />
         <Route path="/supplier-ims/orders" element={<SuppliersLayout><SupplierSalesOrderPage /></SuppliersLayout>} />
