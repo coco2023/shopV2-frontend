@@ -29,7 +29,38 @@
 }
 
 .action-panel {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between sections */
+}
+
+.notifications {
+  background-color: #f9f9f9; /* Light background for each section */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
+}
+
+.notification-list {
+  margin-top: 15px;
+}
+
+.notification-item {
+  background-color: #ffffff; /* White background for individual items */
+  padding: 10px;
+  margin-bottom: 10px; /* Space between items */
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Soft shadow for items */
+}
+
+.notification-item p {
+  margin: 5px 0; /* Spacing between lines */
+  color: #333; /* Dark text for readability */
+}
+
+h3 {
+  color: rgb(248, 130, 46); /* A blue color for headings */
+  margin-bottom: 10px; /* Space below heading */
 }
 
 .temu-area {
