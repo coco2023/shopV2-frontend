@@ -152,6 +152,9 @@ function App() {
       <Route path="/error-logs" element={<ErrorLog />} />
       </Routes>
 
+      <Routes>
+        <Route path="/supplier-ims/referral" element={<SuppliersLayout2><MerchantOnboardingForm /></SuppliersLayout2>} />
+      </Routes>
       {/* Supplier IMS */}
       {/* <Routes>
       <Route path="/supplier-ims/:productId" element={<SuppliersLayout2><SupplierInfoPage /></SuppliersLayout2>} />
